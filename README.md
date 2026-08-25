@@ -54,6 +54,8 @@ src/
 
 SQLite 文件位于 `data/explorer-grid.db`（本地生成，不入库）。
 
+底图默认使用国土地理院 pale **栅格**（`/geo/raster-basemap.json`），放大到街道级仍可见。OpenFreeMap / MapTiler 可通过 `.env.local` 的 `NEXT_PUBLIC_MAP_STYLE_URL` 切换。对照页：`/map-debug`。
+
 ## MVP 范围
 
 已实现：日本范围地图工作空间、Region 自动识别、Region Summary、Place Quick Panel、Explore View、访问/评分/感想、图鉴页。

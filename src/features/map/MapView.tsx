@@ -12,12 +12,17 @@ import {
 import { applyExplorerMapStyle } from "@/features/map/applyExplorerStyle";
 import { createPlaceMarkerElement } from "@/features/map/createPlaceMarker";
 import {
+  getMapMaxZoom,
+  getMapStyleUrl,
+  isMapDebugEnabled,
+  shouldApplyExplorerStyleMute,
+} from "@/lib/map/config";
+import { attachMapDebugListeners } from "@/lib/map/debug";
+import {
   JAPAN_CENTER,
   JAPAN_DEFAULT_ZOOM,
 } from "@/lib/geo/regions";
 import type { MapPlaceMarker } from "@/types/explore";
-
-const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
 
 export interface MapCameraState {
   lng: number;
@@ -67,14 +72,21 @@ export function MapView({
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
+    const styleUrl = getMapStyleUrl();
+    const maxZoom = getMapMaxZoom();
+    const initialZoom = Math.min(
+      initialCamera?.zoom ?? JAPAN_DEFAULT_ZOOM,
+      maxZoom
+    );
+
     const map = new Map({
       container: containerRef.current,
-      style: STYLE_URL,
+      style: styleUrl,
       center: [
         initialCamera?.lng ?? JAPAN_CENTER[0],
         initialCamera?.lat ?? JAPAN_CENTER[1],
       ],
-      zoom: initialCamera?.zoom ?? JAPAN_DEFAULT_ZOOM,
+      zoom: initialZoom,
       attributionControl: { compact: true },
       pitchWithRotate: false,
       touchPitch: false,
@@ -83,10 +95,33 @@ export function MapView({
         [154, 48],
       ],
       minZoom: 4,
-      maxZoom: 18,
+      // OpenFreeMap planet tiles end at z14; z15+ returns HTTP 200 with empty body.
+      maxZoom,
+      // Disable v6 overscale window so coveringTiles uses full source.maxzoom.
+      zoomLevelsToOverscale: undefined,
+      // Keep in-flight tiles while the user zooms past natural_earth (z≤7).
+      cancelPendingTileRequestsWhileZooming: false,
+      collectResourceTiming: isMapDebugEnabled(),
+      fadeDuration: 0,
     });
 
+    // Belt-and-suspenders: defaults merge can leave overscale=4 if undefined is dropped.
+    (map as unknown as { _zoomLevelsToOverscale?: number })._zoomLevelsToOverscale =
+      undefined;
+
     map.addControl(new NavigationControl({ showCompass: false }), "top-right");
+
+    const detachDebug = attachMapDebugListeners(map);
+
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => {
+            map.resize();
+          })
+        : null;
+    if (containerRef.current && resizeObserver) {
+      resizeObserver.observe(containerRef.current);
+    }
 
     const handleError = (event: { error?: Error | { message?: string } }) => {
       const message =
@@ -100,10 +135,29 @@ export function MapView({
     map.on("error", handleError);
 
     map.on("load", () => {
-      applyExplorerMapStyle(map);
+      (map as unknown as { _zoomLevelsToOverscale?: number })._zoomLevelsToOverscale =
+        undefined;
+      if (shouldApplyExplorerStyleMute(styleUrl)) {
+        applyExplorerMapStyle(map);
+      }
       setStyleReady(true);
       setMapError(null);
+      map.resize();
       onMapReady?.(map);
+
+      if (isMapDebugEnabled()) {
+        const sources = map.getStyle()?.sources ?? {};
+        for (const [id, source] of Object.entries(sources)) {
+          if (source && source.type === "vector") {
+            console.info("[ExplorerGrid map] vector source", {
+              id,
+              maxzoom: "maxzoom" in source ? source.maxzoom : undefined,
+              tiles: "tiles" in source ? source.tiles : undefined,
+              url: "url" in source ? source.url : undefined,
+            });
+          }
+        }
+      }
     });
 
     let moveTimer: ReturnType<typeof setTimeout> | null = null;
@@ -122,11 +176,11 @@ export function MapView({
     });
 
     mapRef.current = map;
-
-    // Ensure canvas has size after layout.
     requestAnimationFrame(() => map.resize());
 
     return () => {
+      detachDebug();
+      resizeObserver?.disconnect();
       if (moveTimer) clearTimeout(moveTimer);
       markersRef.current.forEach((marker) => marker.remove());
       markersRef.current = [];
@@ -147,7 +201,10 @@ export function MapView({
     map.fitBounds(bounds, {
       padding: { top: 100, bottom: 180, left: 40, right: 320 },
       duration: 900,
-      maxZoom: flyToBounds[2] - flyToBounds[0] > 8 ? 5.5 : 12.5,
+      maxZoom: Math.min(
+        map.getMaxZoom(),
+        flyToBounds[2] - flyToBounds[0] > 8 ? 5.5 : 12.5
+      ),
     });
   }, [flyToBounds, flyKey]);
 
@@ -199,7 +256,8 @@ export function MapView({
           <div className="font-medium">Map failed to load</div>
           <div className="mt-1 opacity-90">{mapError}</div>
           <div className="mt-2 text-xs opacity-75">
-            Check console for style / tile / WebGL errors.
+            Check console for style / tile / WebGL errors. Open{" "}
+            <code>/map-debug</code> for a minimal basemap harness.
           </div>
         </div>
       )}

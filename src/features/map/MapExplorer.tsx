@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { LayerSwitcher } from "@/features/explore/LayerSwitcher";
 import { MapView, type MapCameraState } from "@/features/map/MapView";
 import { PlaceQuickPanel } from "@/features/map/PlaceQuickPanel";
@@ -34,18 +34,20 @@ function regionQuery(region: Region) {
 }
 
 export function MapExplorer() {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const initialCamera = useMemo<Partial<MapCameraState>>(() => {
-    const lat = Number(searchParams.get("lat"));
-    const lng = Number(searchParams.get("lng"));
-    const zoom = Number(searchParams.get("zoom"));
+    const latRaw = searchParams.get("lat");
+    const lngRaw = searchParams.get("lng");
+    const zoomRaw = searchParams.get("zoom");
+    const lat = latRaw != null ? Number(latRaw) : NaN;
+    const lng = lngRaw != null ? Number(lngRaw) : NaN;
+    const zoom = zoomRaw != null ? Number(zoomRaw) : NaN;
     return {
       lat: Number.isFinite(lat) ? lat : JAPAN_CENTER[1],
       lng: Number.isFinite(lng) ? lng : JAPAN_CENTER[0],
-      zoom: Number.isFinite(zoom) ? zoom : JAPAN_DEFAULT_ZOOM,
+      zoom: Number.isFinite(zoom) && zoom > 0 ? zoom : JAPAN_DEFAULT_ZOOM,
     };
   }, [searchParams]);
 
@@ -151,17 +153,22 @@ export function MapExplorer() {
   useEffect(() => {
     if (urlTimerRef.current) clearTimeout(urlTimerRef.current);
     urlTimerRef.current = setTimeout(() => {
+      // Avoid Next.js router.replace during pan/zoom — it can re-render the
+      // App Router tree and interrupt MapLibre tile loading.
       const params = new URLSearchParams();
       params.set("lat", camera.lat.toFixed(5));
       params.set("lng", camera.lng.toFixed(5));
       params.set("zoom", camera.zoom.toFixed(2));
       params.set("view", activeLayerId);
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      const next = `${pathname}?${params.toString()}`;
+      if (typeof window !== "undefined") {
+        window.history.replaceState(window.history.state, "", next);
+      }
     }, 350);
     return () => {
       if (urlTimerRef.current) clearTimeout(urlTimerRef.current);
     };
-  }, [camera, activeLayerId, pathname, router]);
+  }, [camera, activeLayerId, pathname]);
 
   useEffect(() => {
     let cancelled = false;
@@ -297,8 +304,6 @@ export function MapExplorer() {
         flyToBounds={flyToBounds}
         flyKey={flyKey}
       />
-
-      <div className="eg-map-veil pointer-events-none absolute inset-0 z-[1]" />
 
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 px-4 pt-[4.75rem] sm:px-6">
         <div className="pointer-events-auto inline-flex max-w-[min(92vw,420px)] rounded-sm border border-[var(--line)] bg-[var(--panel)] px-3 py-2 shadow-sm backdrop-blur-md">

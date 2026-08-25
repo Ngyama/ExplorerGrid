@@ -46,16 +46,19 @@ a {
   text-decoration: none;
 }
 
-.eg-map-canvas .maplibregl-canvas {
-  /* Keep canvas readable; avoid washing tiles into the page background. */
-  filter: saturate(0.88) contrast(1.02);
+.eg-map-canvas,
+.eg-map-canvas .maplibregl-canvas,
+.eg-map-canvas .maplibregl-canvas-container {
+  /* Never put CSS filter on the WebGL canvas — it blanks vector tiles on Chromium. */
+  filter: none !important;
 }
 
 .eg-map-veil {
+  /* Soft vignette only; keep center fully transparent so basemap stays visible. */
   background: radial-gradient(
     ellipse at center,
-    transparent 58%,
-    rgba(43, 38, 32, 0.08) 100%
+    transparent 70%,
+    rgba(43, 38, 32, 0.05) 100%
   );
   z-index: 1;
 }
