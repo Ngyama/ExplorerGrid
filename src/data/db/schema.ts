@@ -8,6 +8,9 @@ export const places = sqliteTable("places", {
   longitude: real("longitude").notNull(),
   category: text("category").notNull(),
   image: text("image").notNull(),
+  regionId: text("region_id"),
+  importance: integer("importance").notNull().default(3),
+  minZoom: real("min_zoom").notNull().default(10),
 });
 
 export const exploreLayers = sqliteTable("explore_layers", {
@@ -15,6 +18,7 @@ export const exploreLayers = sqliteTable("explore_layers", {
   name: text("name").notNull(),
   description: text("description").notNull(),
   coverImage: text("cover_image").notNull(),
+  regionId: text("region_id"),
 });
 
 export const exploreLayerPlaces = sqliteTable(

@@ -18,7 +18,7 @@ export function LayerSwitcher({
   if (!active) return null;
 
   return (
-    <div className="pointer-events-auto absolute bottom-3 left-1/2 z-20 w-[min(94vw,560px)] -translate-x-1/2 pb-[env(safe-area-inset-bottom)] sm:bottom-5">
+    <div className="pointer-events-auto absolute bottom-3 left-1/2 z-30 w-[min(94vw,560px)] -translate-x-1/2 pb-[env(safe-area-inset-bottom)] sm:bottom-5">
       <div className="rounded-sm border border-[var(--line)] bg-[var(--panel)] px-3 py-2.5 shadow-lg backdrop-blur-md sm:px-4 sm:py-3">
         <div className="mb-2 flex items-end justify-between gap-3">
           <div className="min-w-0">

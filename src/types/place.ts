@@ -20,6 +20,9 @@ export interface Place {
   longitude: number;
   category: PlaceCategory;
   image: string;
+  regionId: string | null;
+  importance: number;
+  minZoom: number;
 }
 
 export interface ExploreLayerSummary {

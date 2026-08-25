@@ -6,6 +6,7 @@ export interface ExploreLayer {
   name: string;
   description: string;
   coverImage: string;
+  regionId: string | null;
   placeCount: number;
   visitedCount: number;
 }
@@ -24,4 +25,7 @@ export interface MapPlaceMarker {
   longitude: number;
   category: PlaceCategory;
   status: UserPlaceStatus | null;
+  regionId: string | null;
+  importance: number;
+  minZoom: number;
 }

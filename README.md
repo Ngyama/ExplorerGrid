@@ -20,12 +20,14 @@ npm run dev
 
 打开 [http://localhost:3000](http://localhost:3000)
 
+地图是主工作空间：自由缩放日本、识别当前地区、在地图上用 Quick Panel 记录地点。图鉴页用于回顾收藏。
+
 ### 常用命令
 
 | 命令 | 说明 |
 |------|------|
 | `npm run dev` | 启动开发服务器 |
-| `npm run db:seed` | 写入东京地点与 Explore Layer |
+| `npm run db:seed` | 同步地点与 Explore View |
 | `npm run db:reset` | 清空用户访问状态后保留地点数据 |
 | `npm run build` | 生产构建 |
 
@@ -54,6 +56,6 @@ SQLite 文件位于 `data/explorer-grid.db`（本地生成，不入库）。
 
 ## MVP 范围
 
-已实现：地图、Explore Layer、地点详情、用户状态、Bangumi 式图鉴。
+已实现：日本范围地图工作空间、Region 自动识别、Region Summary、Place Quick Panel、Explore View、访问/评分/感想、图鉴页。
 
-未实现：登录、社交、推荐、GPS、支付、管理后台。
+未实现：登录、社交、推荐、GPS 打卡、完整日本 POI 导入、PostGIS、管理后台。

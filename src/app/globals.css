@@ -47,20 +47,29 @@ a {
 }
 
 .eg-map-canvas .maplibregl-canvas {
-  filter: saturate(0.62) sepia(0.2) contrast(0.92) brightness(1.03);
+  /* Keep canvas readable; avoid washing tiles into the page background. */
+  filter: saturate(0.88) contrast(1.02);
 }
 
 .eg-map-veil {
   background: radial-gradient(
     ellipse at center,
-    transparent 46%,
-    rgba(43, 38, 32, 0.14) 100%
+    transparent 58%,
+    rgba(43, 38, 32, 0.08) 100%
   );
+  z-index: 1;
 }
 
 .maplibregl-ctrl-top-right {
   top: 5.5rem;
   right: 0.75rem;
+  z-index: 5;
+}
+
+@media (min-width: 640px) {
+  .maplibregl-ctrl-top-right {
+    right: 22rem;
+  }
 }
 
 .maplibregl-ctrl-group {
@@ -155,6 +164,33 @@ a {
   box-shadow:
     0 0 0 3px rgba(196, 92, 38, 0.2),
     0 4px 14px rgba(196, 92, 38, 0.28);
+}
+
+.eg-node.is-highlighted .eg-node__core {
+  box-shadow:
+    0 0 0 4px rgba(47, 93, 80, 0.35),
+    0 4px 14px rgba(28, 25, 21, 0.2);
+  transform: scale(1.12);
+}
+
+.eg-node.is-dimmed {
+  opacity: 0.28;
+}
+
+.eg-node.is-selected .eg-node__core {
+  box-shadow:
+    0 0 0 4px rgba(196, 92, 38, 0.35),
+    0 4px 16px rgba(28, 25, 21, 0.22);
+}
+
+.eg-side-panel {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .eg-side-panel {
+    width: min(92vw, 320px);
+  }
 }
 
 .eg-grid-card {

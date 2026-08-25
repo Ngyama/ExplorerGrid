@@ -10,7 +10,7 @@ export function AppNav() {
         <div className="font-[family-name:var(--font-display)] text-lg tracking-wide">
           Explorer Grid
         </div>
-        <div className="text-xs text-[var(--muted)]">东京探索原型</div>
+        <div className="text-xs text-[var(--muted)]">日本探索地图</div>
       </Link>
 
       <nav className="pointer-events-auto flex gap-2 rounded-sm bg-[var(--panel)] p-1 backdrop-blur-sm">

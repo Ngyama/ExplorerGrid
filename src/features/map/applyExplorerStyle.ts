@@ -1,6 +1,11 @@
 import type { Map as MapLibreMap } from "maplibre-gl";
 
+/** Hide commercial/label noise on OpenFreeMap Liberty without washing out the basemap. */
 const HIDDEN_LAYERS = [
+  "poi_r20",
+  "poi_r7",
+  "poi_r1",
+  "poi_transit",
   "highway-name-path",
   "highway-name-minor",
   "highway-shield-non-us",
@@ -9,10 +14,12 @@ const HIDDEN_LAYERS = [
   "airport",
   "label_other",
   "label_village",
-  "aeroway-taxiway",
-  "aeroway-runway-casing",
-  "aeroway-area",
-  "aeroway-runway",
+  "aeroway_fill",
+  "aeroway_runway",
+  "aeroway_taxiway",
+  "building-3d",
+  "road_one_way_arrow",
+  "road_one_way_arrow_opposite",
 ];
 
 const MUTED_LABELS = [
@@ -46,24 +53,30 @@ export function applyExplorerMapStyle(map: MapLibreMap) {
     map.setLayoutProperty(layerId, "visibility", "none");
   }
 
-  setPaint(map, "background", "background-color", "#e4dfd2");
-  setPaint(map, "park", "fill-color", "#d4ddd0");
-  setPaint(map, "landcover_wood", "fill-color", "#cfd8ca");
-  setPaint(map, "water", "fill-color", "#c5d0cb");
-  setPaint(map, "landuse_residential", "fill-color", "#e7e2d5");
-  setPaint(map, "building", "fill-color", "#d8d1c3");
-  setPaint(map, "building", "fill-opacity", 0.4);
-  setPaint(map, "highway_path", "line-color", "#d5cfc2");
-  setPaint(map, "highway_minor", "line-color", "#d0cabd");
-  setPaint(map, "highway_major_casing", "line-color", "#cfc8ba");
-  setPaint(map, "highway_major_inner", "line-color", "#e6e0d3");
-  setPaint(map, "highway_major_subtle", "line-color", "#ddd6c8");
+  // Soft editorial wash — keep enough contrast to read roads / water / land.
+  setPaint(map, "background", "background-color", "#ebe6db");
+  setPaint(map, "park", "fill-color", "#d5e0d4");
+  setPaint(map, "landcover_wood", "fill-color", "#c9d6c4");
+  setPaint(map, "landcover_grass", "fill-color", "#d8e2d0");
+  setPaint(map, "water", "fill-color", "#b7c8c8");
+  setPaint(map, "landuse_residential", "fill-color", "#e8e2d6");
+  setPaint(map, "building", "fill-color", "#d4cdc0");
+  setPaint(map, "building", "fill-opacity", 0.55);
+
+  setPaint(map, "road_minor", "line-color", "#cfc6b6");
+  setPaint(map, "road_secondary_tertiary", "line-color", "#c4bba9");
+  setPaint(map, "road_trunk_primary", "line-color", "#b8ae9b");
+  setPaint(map, "road_motorway", "line-color", "#a89c88");
 
   for (const layerId of MUTED_LABELS) {
-    setPaint(map, layerId, "text-color", "#6e675c");
-    setPaint(map, layerId, "text-halo-color", "#e4dfd2");
-    setPaint(map, layerId, "text-halo-width", 1.2);
-    setPaint(map, layerId, "text-opacity", layerId.startsWith("label_city") ? 0.78 : 0.48);
-    setPaint(map, layerId, "icon-opacity", 0.35);
+    setPaint(map, layerId, "text-color", "#5f584e");
+    setPaint(map, layerId, "text-halo-color", "#ebe6db");
+    setPaint(map, layerId, "text-halo-width", 1.4);
+    setPaint(
+      map,
+      layerId,
+      "text-opacity",
+      layerId.startsWith("label_city") || layerId === "label_state" ? 0.85 : 0.55
+    );
   }
 }

@@ -7,6 +7,28 @@ import * as schema from "./schema";
 const DATA_DIR = path.join(process.cwd(), "data");
 const DB_PATH = path.join(DATA_DIR, "explorer-grid.db");
 
+function columnExists(
+  sqlite: Database.Database,
+  table: string,
+  column: string
+) {
+  const rows = sqlite.prepare(`PRAGMA table_info(${table})`).all() as Array<{
+    name: string;
+  }>;
+  return rows.some((row) => row.name === column);
+}
+
+function ensureColumn(
+  sqlite: Database.Database,
+  table: string,
+  column: string,
+  definition: string
+) {
+  if (!columnExists(sqlite, table, column)) {
+    sqlite.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+  }
+}
+
 function ensureDatabase() {
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -24,14 +46,18 @@ function ensureDatabase() {
       latitude REAL NOT NULL,
       longitude REAL NOT NULL,
       category TEXT NOT NULL,
-      image TEXT NOT NULL
+      image TEXT NOT NULL,
+      region_id TEXT,
+      importance INTEGER NOT NULL DEFAULT 3,
+      min_zoom REAL NOT NULL DEFAULT 10
     );
 
     CREATE TABLE IF NOT EXISTS explore_layers (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
       description TEXT NOT NULL,
-      cover_image TEXT NOT NULL
+      cover_image TEXT NOT NULL,
+      region_id TEXT
     );
 
     CREATE TABLE IF NOT EXISTS explore_layer_places (
@@ -68,6 +94,12 @@ function ensureDatabase() {
       created_at TEXT NOT NULL
     );
   `);
+
+  // Migrate older local DBs created before region/importance columns.
+  ensureColumn(sqlite, "places", "region_id", "TEXT");
+  ensureColumn(sqlite, "places", "importance", "INTEGER NOT NULL DEFAULT 3");
+  ensureColumn(sqlite, "places", "min_zoom", "REAL NOT NULL DEFAULT 10");
+  ensureColumn(sqlite, "explore_layers", "region_id", "TEXT");
 
   return sqlite;
 }
