@@ -3,6 +3,7 @@ import { PlaceDetail } from "@/features/places/PlaceDetail";
 import { getPlaceById } from "@/lib/repositories/places";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export default async function PlacePage({
   params,

@@ -7,8 +7,10 @@ import {
   userPlaces,
 } from "@/data/db/schema";
 import { seedDatabase } from "@/data/db/seed";
+import { isPlaceCategory } from "@/lib/categories";
+import { getPlaceRecord } from "@/lib/repositories/userPlaces";
 import type { ExploreLayer, MapPlaceMarker } from "@/types/explore";
-import type { PlaceWithStatus } from "@/types/place";
+import type { PlaceCategory, PlaceWithStatus } from "@/types/place";
 import type { GridLayerGroup } from "@/types/user";
 import { LOCAL_USER_ID, type UserPlaceStatus } from "@/types/user";
 
@@ -16,18 +18,45 @@ function ensureSeeded() {
   seedDatabase();
 }
 
-export function listLayers(): ExploreLayer[] {
+function asCategory(value: string): PlaceCategory {
+  return isPlaceCategory(value) ? value : "landmark";
+}
+
+export function listLayers(
+  userId: string = LOCAL_USER_ID
+): ExploreLayer[] {
   ensureSeeded();
+
   return db
     .select()
     .from(exploreLayers)
     .all()
-    .map((row) => ({
-      id: row.id,
-      name: row.name,
-      description: row.description,
-      coverImage: row.coverImage,
-    }));
+    .map((layer) => {
+      const rows = db
+        .select({
+          placeId: exploreLayerPlaces.placeId,
+          status: userPlaces.status,
+        })
+        .from(exploreLayerPlaces)
+        .leftJoin(
+          userPlaces,
+          and(
+            eq(userPlaces.placeId, exploreLayerPlaces.placeId),
+            eq(userPlaces.userId, userId)
+          )
+        )
+        .where(eq(exploreLayerPlaces.layerId, layer.id))
+        .all();
+
+      return {
+        id: layer.id,
+        name: layer.name,
+        description: layer.description,
+        coverImage: layer.coverImage,
+        placeCount: rows.length,
+        visitedCount: rows.filter((row) => row.status === "visited").length,
+      };
+    });
 }
 
 export function getLayerPlaces(
@@ -61,7 +90,7 @@ export function getLayerPlaces(
     name: row.name,
     latitude: row.latitude,
     longitude: row.longitude,
-    category: row.category,
+    category: asCategory(row.category),
     status: (row.status as UserPlaceStatus | null) ?? null,
   }));
 }
@@ -74,14 +103,6 @@ export function getPlaceById(
 
   const place = db.select().from(places).where(eq(places.id, placeId)).get();
   if (!place) return null;
-
-  const statusRow = db
-    .select()
-    .from(userPlaces)
-    .where(
-      and(eq(userPlaces.placeId, placeId), eq(userPlaces.userId, userId))
-    )
-    .get();
 
   const layers = db
     .select({
@@ -96,29 +117,33 @@ export function getPlaceById(
     .where(eq(exploreLayerPlaces.placeId, placeId))
     .all();
 
+  const record = getPlaceRecord(placeId, userId);
+
   return {
     id: place.id,
     name: place.name,
     description: place.description,
     latitude: place.latitude,
     longitude: place.longitude,
-    category: place.category as PlaceWithStatus["category"],
+    category: asCategory(place.category),
     image: place.image,
-    status: (statusRow?.status as UserPlaceStatus | null) ?? null,
     layers,
+    ...record,
   };
 }
 
 export function getGrid(userId: string = LOCAL_USER_ID): GridLayerGroup[] {
   ensureSeeded();
 
-  const layers = listLayers();
+  const layers = listLayers(userId);
 
   return layers.map((layer) => {
     const rows = db
       .select({
         id: places.id,
         name: places.name,
+        image: places.image,
+        category: places.category,
         status: userPlaces.status,
         order: exploreLayerPlaces.order,
       })
@@ -138,6 +163,8 @@ export function getGrid(userId: string = LOCAL_USER_ID): GridLayerGroup[] {
       places: rows.map((row) => ({
         id: row.id,
         name: row.name,
+        image: row.image,
+        category: asCategory(row.category),
         status: (row.status as UserPlaceStatus | null) ?? null,
       })),
     };

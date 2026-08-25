@@ -78,9 +78,12 @@ export function MapExplorer() {
     [router]
   );
 
+  const activeLayer = layers.find((layer) => layer.id === activeLayerId);
+
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden">
       <MapView places={places} onPlaceClick={handlePlaceClick} />
+      <div className="eg-map-veil pointer-events-none absolute inset-0 z-10" />
 
       <LayerSwitcher
         layers={layers}
@@ -93,7 +96,9 @@ export function MapExplorer() {
           {error ? (
             <span className="text-red-700">{error}</span>
           ) : (
-            <span className="text-[var(--muted)]">加载地点中…</span>
+            <span className="text-[var(--muted)]">
+              {activeLayer ? `正在展开「${activeLayer.name}」…` : "加载地点中…"}
+            </span>
           )}
         </div>
       )}

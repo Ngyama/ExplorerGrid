@@ -46,9 +46,153 @@ a {
   text-decoration: none;
 }
 
-.maplibregl-popup-content {
-  font-family: var(--font-sans);
-  padding: 8px 12px;
-  border-radius: 4px;
-  box-shadow: 0 8px 24px rgba(28, 25, 21, 0.16);
+.eg-map-canvas .maplibregl-canvas {
+  filter: saturate(0.62) sepia(0.2) contrast(0.92) brightness(1.03);
+}
+
+.eg-map-veil {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 46%,
+    rgba(43, 38, 32, 0.14) 100%
+  );
+}
+
+.maplibregl-ctrl-top-right {
+  top: 5.5rem;
+  right: 0.75rem;
+}
+
+.maplibregl-ctrl-group {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.maplibregl-ctrl-attrib {
+  background: transparent;
+  font-size: 10px;
+  opacity: 0.55;
+}
+
+.eg-node {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.eg-node__glow {
+  position: absolute;
+  inset: 3px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.eg-node__core {
+  position: absolute;
+  inset: 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1.5px solid #f3efe6;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.eg-node__label {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  padding: 3px 7px;
+  border-radius: 2px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 6px 18px rgba(28, 25, 21, 0.12);
+}
+
+.eg-node:hover .eg-node__label,
+.eg-node:focus-visible .eg-node__label {
+  opacity: 1;
+}
+
+.eg-node.is-unvisited .eg-node__core {
+  background: #d5e0d8;
+  border-color: #f3efe6;
+  box-shadow: 0 1px 6px rgba(28, 25, 21, 0.16);
+  opacity: 0.86;
+}
+
+.eg-node.is-want .eg-node__core {
+  background: #e7eef6;
+  border-color: #f3efe6;
+  box-shadow:
+    0 0 0 3px rgba(59, 110, 165, 0.28),
+    0 2px 8px rgba(28, 25, 21, 0.16);
+}
+
+.eg-node.is-visited {
+  z-index: 2;
+}
+
+.eg-node.is-visited .eg-node__glow {
+  background: rgba(196, 92, 38, 0.28);
+  filter: blur(5px);
+}
+
+.eg-node.is-visited .eg-node__core {
+  background: #c45c26;
+  border-color: #f6f1e8;
+  transform: scale(1.08);
+  box-shadow:
+    0 0 0 3px rgba(196, 92, 38, 0.2),
+    0 4px 14px rgba(196, 92, 38, 0.28);
+}
+
+.eg-grid-card {
+  display: block;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid transparent;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.eg-grid-card:hover {
+  transform: translateY(-1px);
+}
+
+.eg-grid-card.is-unvisited .eg-grid-card__image {
+  filter: grayscale(0.55) saturate(0.7);
+  opacity: 0.72;
+}
+
+.eg-grid-card.is-unvisited .eg-grid-card__veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(243, 239, 230, 0.22);
+}
+
+.eg-grid-card.is-want {
+  border-color: rgba(59, 110, 165, 0.35);
+}
+
+.eg-grid-card.is-want .eg-grid-card__image {
+  filter: saturate(0.92);
+}
+
+.eg-grid-card.is-visited {
+  border-color: rgba(196, 92, 38, 0.28);
+}
+
+.eg-grid-card.is-visited .eg-grid-card__image {
+  filter: none;
 }

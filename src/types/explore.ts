@@ -1,8 +1,13 @@
+import type { PlaceCategory } from "./place";
+import type { UserPlaceStatus } from "./user";
+
 export interface ExploreLayer {
   id: string;
   name: string;
   description: string;
   coverImage: string;
+  placeCount: number;
+  visitedCount: number;
 }
 
 export interface ExploreLayerPlace {
@@ -17,6 +22,6 @@ export interface MapPlaceMarker {
   name: string;
   latitude: number;
   longitude: number;
-  category: string;
-  status: "want_to_go" | "visited" | null;
+  category: PlaceCategory;
+  status: UserPlaceStatus | null;
 }

@@ -1,4 +1,4 @@
-import type { UserPlaceStatus } from "./user";
+import type { Photo, UserPlaceStatus, Visit } from "./user";
 
 export type PlaceCategory =
   | "museum"
@@ -29,5 +29,9 @@ export interface ExploreLayerSummary {
 
 export interface PlaceWithStatus extends Place {
   status: UserPlaceStatus | null;
-  layers?: ExploreLayerSummary[];
+  rating: number | null;
+  note: string | null;
+  layers: ExploreLayerSummary[];
+  visits: Visit[];
+  photos: Photo[];
 }

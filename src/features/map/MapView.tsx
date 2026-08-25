@@ -2,45 +2,41 @@
 
 import { useEffect, useRef } from "react";
 import {
+  LngLatBounds,
   Map,
   Marker,
   NavigationControl,
-  Popup,
   type Map as MapLibreMap,
   type Marker as MapLibreMarker,
 } from "maplibre-gl";
+import { applyExplorerMapStyle } from "@/features/map/applyExplorerStyle";
+import { createPlaceMarkerElement } from "@/features/map/createPlaceMarker";
 import type { MapPlaceMarker } from "@/types/explore";
 
 const TOKYO_CENTER: [number, number] = [139.7671, 35.6812];
-const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+const STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
 
-function markerColor(status: MapPlaceMarker["status"]) {
-  if (status === "visited") return "#c45c26";
-  if (status === "want_to_go") return "#3b6ea5";
-  return "#2f5d50";
-}
-
-function createMarkerElement(place: MapPlaceMarker) {
-  const el = document.createElement("button");
-  el.type = "button";
-  el.className = "eg-marker";
-  el.setAttribute("aria-label", place.name);
-  el.style.cssText = `
-    width: 18px;
-    height: 18px;
-    border-radius: 999px;
-    border: 2px solid #f3efe6;
-    background: ${markerColor(place.status)};
-    box-shadow: 0 2px 8px rgba(28,25,21,0.35);
-    cursor: pointer;
-    transform: ${place.status === "visited" ? "scale(1.15)" : "scale(1)"};
-  `;
-  return el;
-}
+const FIT_PADDING = { top: 100, bottom: 210, left: 36, right: 56 };
 
 interface MapViewProps {
   places: MapPlaceMarker[];
   onPlaceClick: (placeId: string) => void;
+}
+
+function fitToPlaces(map: MapLibreMap, places: MapPlaceMarker[]) {
+  if (places.length === 0) return;
+
+  const bounds = new LngLatBounds();
+  for (const place of places) {
+    bounds.extend([place.longitude, place.latitude]);
+  }
+
+  map.fitBounds(bounds, {
+    padding: FIT_PADDING,
+    maxZoom: 12.6,
+    duration: 850,
+    essential: true,
+  });
 }
 
 export function MapView({ places, onPlaceClick }: MapViewProps) {
@@ -48,10 +44,15 @@ export function MapView({ places, onPlaceClick }: MapViewProps) {
   const mapRef = useRef<MapLibreMap | null>(null);
   const markersRef = useRef<MapLibreMarker[]>([]);
   const onPlaceClickRef = useRef(onPlaceClick);
+  const placesRef = useRef(places);
 
   useEffect(() => {
     onPlaceClickRef.current = onPlaceClick;
   }, [onPlaceClick]);
+
+  useEffect(() => {
+    placesRef.current = places;
+  }, [places]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -60,10 +61,19 @@ export function MapView({ places, onPlaceClick }: MapViewProps) {
       container: containerRef.current,
       style: STYLE_URL,
       center: TOKYO_CENTER,
-      zoom: 11.2,
+      zoom: 11.1,
+      attributionControl: { compact: true },
+      pitchWithRotate: false,
+      touchPitch: false,
     });
 
     map.addControl(new NavigationControl({ showCompass: false }), "top-right");
+
+    map.on("load", () => {
+      applyExplorerMapStyle(map);
+      fitToPlaces(map, placesRef.current);
+    });
+
     mapRef.current = map;
 
     return () => {
@@ -81,23 +91,35 @@ export function MapView({ places, onPlaceClick }: MapViewProps) {
     markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = [];
 
-    places.forEach((place) => {
-      const el = createMarkerElement(place);
+    const sorted = [...places].sort((a, b) => {
+      const rank = (status: MapPlaceMarker["status"]) =>
+        status === "visited" ? 2 : status === "want_to_go" ? 1 : 0;
+      return rank(a.status) - rank(b.status);
+    });
+
+    sorted.forEach((place) => {
+      const el = createPlaceMarkerElement(place);
       el.addEventListener("click", (event) => {
         event.stopPropagation();
         onPlaceClickRef.current(place.id);
       });
 
-      const marker = new Marker({ element: el })
+      const marker = new Marker({ element: el, anchor: "center" })
         .setLngLat([place.longitude, place.latitude])
-        .setPopup(
-          new Popup({ offset: 12, closeButton: false }).setText(place.name)
-        )
         .addTo(map);
 
       markersRef.current.push(marker);
     });
+
+    if (map.isStyleLoaded() && places.length > 0) {
+      fitToPlaces(map, places);
+    }
   }, [places]);
 
-  return <div ref={containerRef} className="absolute inset-0 h-full w-full" />;
+  return (
+    <div
+      ref={containerRef}
+      className="eg-map-canvas absolute inset-0 h-full w-full"
+    />
+  );
 }

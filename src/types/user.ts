@@ -1,3 +1,5 @@
+import type { PlaceCategory } from "./place";
+
 export type UserPlaceStatus = "want_to_go" | "visited";
 
 export const LOCAL_USER_ID = "local";
@@ -27,9 +29,19 @@ export interface Photo {
   createdAt: string;
 }
 
+export interface PlaceRecord {
+  status: UserPlaceStatus | null;
+  rating: number | null;
+  note: string | null;
+  visits: Visit[];
+  photos: Photo[];
+}
+
 export interface GridPlaceItem {
   id: string;
   name: string;
+  image: string;
+  category: PlaceCategory;
   status: UserPlaceStatus | null;
 }
 
