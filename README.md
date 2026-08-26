@@ -59,7 +59,7 @@ data/imports/
 
 SQLite 文件位于 `data/explorer-grid.db`（本地生成，不入库）。
 
-底图默认使用国土地理院 pale **栅格**（`/geo/raster-basemap.json`），放大到街道级仍可见。OpenFreeMap / MapTiler 可通过 `.env.local` 的 `NEXT_PUBLIC_MAP_STYLE_URL` 切换。对照页：`/map-debug`。
+底图优先 **MapTiler Japan**（`NEXT_PUBLIC_MAPTILER_KEY` → MIERUNE Streets + ExplorerGrid 弱化样式）。无 key 时自动回退国土地理院 pale 栅格。可用 `NEXT_PUBLIC_MAP_STYLE_URL` 覆盖。对照页：`/map-debug`。
 
 ## MVP 范围
 

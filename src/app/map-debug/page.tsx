@@ -2,64 +2,35 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Map, NavigationControl, type Map as MapLibreMap } from "maplibre-gl";
+import { applyExplorerBasemapStyle } from "@/features/map/applyExplorerStyle";
 import {
-  DEFAULT_MAP_STYLE_URL,
-  getMapMaxZoom,
-  getMapStyleUrl,
-  isOpenFreeMapStyle,
-  OPENFREEMAP_LIBERTY_STYLE_URL,
-  OPENFREEMAP_SOURCE_MAX_ZOOM,
+  getActiveMapProvider,
+  listDebugProviders,
+  LOCAL_IDEOGRAPH_FONT_FAMILY,
+  MAP_LAND_COLOR,
 } from "@/lib/map/config";
 import { attachMapDebugListeners } from "@/lib/map/debug";
+import type { MapProviderConfig } from "@/lib/map/providers/types";
 
 const TOKYO: [number, number] = [139.7671, 35.6812];
 
-const PRESETS = [
-  {
-    id: "raster-gsi",
-    label: "GSI pale raster (default)",
-    styleUrl: DEFAULT_MAP_STYLE_URL,
-    maxZoom: 18,
-  },
-  {
-    id: "openfreemap-liberty",
-    label: "OpenFreeMap Liberty (vector)",
-    styleUrl: OPENFREEMAP_LIBERTY_STYLE_URL,
-    maxZoom: OPENFREEMAP_SOURCE_MAX_ZOOM,
-  },
-  {
-    id: "maplibre-demo",
-    label: "MapLibre Demo Tiles",
-    styleUrl: "https://demotiles.maplibre.org/style.json",
-    maxZoom: 18,
-  },
-  {
-    id: "env",
-    label: "Env NEXT_PUBLIC_MAP_STYLE_URL",
-    styleUrl: null as string | null,
-    maxZoom: null as number | null,
-  },
-] as const;
-
 /**
- * Minimal MapLibre harness — no Region, markers, or ExplorerGrid style mute.
+ * Minimal MapLibre harness — compare MapTiler Japan / GSI / custom styles.
  */
 export default function MapDebugPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
-  const [presetId, setPresetId] = useState<string>("raster-gsi");
+  const providers = useMemo(() => listDebugProviders(), []);
+  const active = useMemo(() => getActiveMapProvider(), []);
+  const [presetId, setPresetId] = useState<string>(active.id);
   const [zoom, setZoom] = useState(5.2);
   const [status, setStatus] = useState("booting");
   const [lastError, setLastError] = useState<string | null>(null);
   const [sourceInfo, setSourceInfo] = useState<string>("—");
+  const [applyMute, setApplyMute] = useState(true);
 
-  const preset = useMemo(
-    () => PRESETS.find((item) => item.id === presetId) ?? PRESETS[0],
-    [presetId]
-  );
-
-  const styleUrl = preset.styleUrl ?? getMapStyleUrl();
-  const maxZoom = preset.maxZoom ?? getMapMaxZoom();
+  const preset: MapProviderConfig =
+    providers.find((item) => item.id === presetId) ?? providers[0] ?? active;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -75,11 +46,12 @@ export default function MapDebugPage() {
 
     const map = new Map({
       container: containerRef.current,
-      style: styleUrl,
+      style: preset.styleUrl,
       center: TOKYO,
       zoom: 5.2,
       minZoom: 4,
-      maxZoom,
+      maxZoom: preset.maxZoom,
+      localIdeographFontFamily: LOCAL_IDEOGRAPH_FONT_FAMILY,
       cancelPendingTileRequestsWhileZooming: false,
       fadeDuration: 0,
       attributionControl: { compact: true },
@@ -99,6 +71,9 @@ export default function MapDebugPage() {
     });
 
     map.on("load", () => {
+      if (applyMute && preset.supportsCustomStyle) {
+        applyExplorerBasemapStyle(map);
+      }
       setStatus("loaded");
       map.resize();
       const sources = map.getStyle()?.sources ?? {};
@@ -123,53 +98,71 @@ export default function MapDebugPage() {
       map.remove();
       mapRef.current = null;
     };
-  }, [styleUrl, maxZoom]);
+  }, [preset.styleUrl, preset.maxZoom, preset.supportsCustomStyle, applyMute]);
 
   return (
-    <div className="relative h-[100dvh] w-full bg-[#e8e4da] text-[#1c1915]">
-      <div ref={containerRef} className="absolute inset-0 h-full w-full" />
+    <div
+      className="relative h-[100dvh] w-full text-[#1c1915]"
+      style={{ background: MAP_LAND_COLOR }}
+    >
+      <div
+        ref={containerRef}
+        className="absolute inset-0 h-full w-full"
+        style={{ background: MAP_LAND_COLOR }}
+      />
 
       <div className="pointer-events-none absolute left-3 top-3 z-10 max-w-md rounded-sm border border-[var(--line)] bg-[var(--panel)] p-3 text-xs leading-5 shadow-sm backdrop-blur-sm">
         <div className="mb-2 text-[10px] tracking-[0.16em] text-[var(--muted)]">
           MAP DEBUG
         </div>
         <label className="pointer-events-auto mb-2 block">
-          <span className="text-[var(--muted)]">Style preset</span>
+          <span className="text-[var(--muted)]">Provider</span>
           <select
             className="mt-1 w-full rounded-sm border border-[var(--line)] bg-white px-2 py-1"
             value={presetId}
             onChange={(event) => setPresetId(event.target.value)}
           >
-            {PRESETS.map((item) => (
+            {providers.map((item) => (
               <option key={item.id} value={item.id}>
                 {item.label}
               </option>
             ))}
           </select>
         </label>
-        <div className="break-all">style: {styleUrl}</div>
+        <label className="pointer-events-auto mb-2 flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={applyMute}
+            onChange={(e) => setApplyMute(e.target.checked)}
+          />
+          ExplorerGrid style mute
+        </label>
+        <div>provider: {preset.id}</div>
+        <div className="break-all">style: {preset.styleUrl}</div>
+        <div>type: {preset.type}</div>
         <div>status: {status}</div>
         <div>
-          zoom: {zoom.toFixed(2)} (maxZoom={maxZoom})
+          zoom: {zoom.toFixed(2)} (maxZoom={preset.maxZoom})
         </div>
         <div>sources: {sourceInfo}</div>
-        <div>openfreemap?: {String(isOpenFreeMapStyle(styleUrl))}</div>
         {lastError && (
           <div className="mt-2 text-red-700">error: {lastError}</div>
         )}
         <div className="mt-2 text-[var(--muted)]">
-          默认用国土地理院 pale 栅格（可放大到 z18）。可选 OpenFreeMap Liberty
-          对比：vector 在 z7 后是否变空白。
+          优先 MapTiler Japan（需 NEXT_PUBLIC_MAPTILER_KEY）；无 key 时回退
+          GSI pale。对比 z5–z18 加载与标签密度。
         </div>
         <div className="pointer-events-auto mt-2 flex flex-wrap gap-2">
-          {[4, 7, 10, 12, 14, 16, 18].map((z) => (
+          {[5, 8, 10, 12, 14, 16, 18].map((z) => (
             <button
               key={z}
               type="button"
               className="rounded-sm border border-[var(--line)] bg-white px-2 py-1 hover:bg-[var(--accent-soft)] disabled:opacity-40"
-              disabled={z > maxZoom}
+              disabled={z > preset.maxZoom}
               onClick={() =>
-                mapRef.current?.zoomTo(Math.min(z, maxZoom), { duration: 400 })
+                mapRef.current?.zoomTo(Math.min(z, preset.maxZoom), {
+                  duration: 400,
+                })
               }
             >
               z{z}

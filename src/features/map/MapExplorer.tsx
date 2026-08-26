@@ -112,6 +112,19 @@ export function MapExplorer() {
   const geoReadyRef = useRef(false);
   const urlTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const [stableRegion, setStableRegion] = useState<Region>(JAPAN_REGION);
+  const regionDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (regionDebounceRef.current) clearTimeout(regionDebounceRef.current);
+    regionDebounceRef.current = setTimeout(() => {
+      setStableRegion(region);
+    }, 280);
+    return () => {
+      if (regionDebounceRef.current) clearTimeout(regionDebounceRef.current);
+    };
+  }, [region]);
+
   useEffect(() => {
     let cancelled = false;
     async function loadGeo() {
@@ -209,7 +222,7 @@ export function MapExplorer() {
     let cancelled = false;
     async function loadLayers() {
       try {
-        const res = await fetch(`/api/layers?${regionQuery(region)}`);
+        const res = await fetch(`/api/layers?${regionQuery(stableRegion)}`);
         if (!res.ok) throw new Error("无法加载探索主题");
         const data = (await res.json()) as ExploreLayer[];
         if (cancelled) return;
@@ -227,7 +240,7 @@ export function MapExplorer() {
     return () => {
       cancelled = true;
     };
-  }, [region, activeLayerId, placesVersion]);
+  }, [stableRegion, activeLayerId, placesVersion]);
 
   useEffect(() => {
     let cancelled = false;
@@ -235,9 +248,9 @@ export function MapExplorer() {
       setLoading(true);
       setError(null);
       try {
-        const params = regionQuery(region);
-        params.set("zoom", String(camera.zoom));
-        if (activeCategory) params.set("categories", activeCategory);
+        // Fetch full view payload once; MapLibre layer filters handle zoom/importance.
+        const params = regionQuery(stableRegion);
+        params.set("zoom", "20");
 
         let res: Response;
         if (mode === "collection") {
@@ -271,9 +284,7 @@ export function MapExplorer() {
     mode,
     activeLayerId,
     activeCollectionId,
-    region,
-    camera.zoom,
-    activeCategory,
+    stableRegion,
     placesVersion,
   ]);
 
@@ -281,7 +292,7 @@ export function MapExplorer() {
     let cancelled = false;
     async function loadSummary() {
       try {
-        const params = regionQuery(region);
+        const params = regionQuery(stableRegion);
         if (mode === "collection" && activeCollectionId) {
           params.set("collectionId", activeCollectionId);
         } else if (activeLayerId) {
@@ -303,7 +314,7 @@ export function MapExplorer() {
     return () => {
       cancelled = true;
     };
-  }, [mode, activeLayerId, activeCollectionId, region, places]);
+  }, [mode, activeLayerId, activeCollectionId, stableRegion, places]);
 
   const handlePlaceClick = useCallback(
     async (placeId: string) => {

@@ -1,46 +1,63 @@
-/**
- * Basemap provider configuration.
- *
- * Default: local MapLibre style → 国土地理院 pale **raster** tiles.
- * These load reliably past z7 (unlike OpenFreeMap Liberty, whose natural_earth
- * raster ends ~z7 and then depends on vector paint).
- *
- * OpenFreeMap / MapTiler remain available via NEXT_PUBLIC_MAP_STYLE_URL.
- */
-export const DEFAULT_MAP_STYLE_URL = "/geo/raster-basemap.json";
+import {
+  resolveMapProvider,
+  GSI_PALE_STYLE_URL,
+  OPENFREEMAP_LIBERTY_STYLE_URL,
+  listDebugProviders,
+  getMapTilerKey,
+} from "@/lib/map/providers";
+import type { MapProviderConfig } from "@/lib/map/providers/types";
+import {
+  LOCAL_IDEOGRAPH_FONT_FAMILY,
+  MAP_LAND_COLOR,
+} from "@/lib/map/providers/types";
 
-export const OPENFREEMAP_LIBERTY_STYLE_URL =
-  "https://tiles.openfreemap.org/styles/liberty";
+/** @deprecated Use resolveMapProvider().styleUrl — kept for older imports. */
+export const DEFAULT_MAP_STYLE_URL = GSI_PALE_STYLE_URL;
 
-/** OpenFreeMap planet vector tiles stop at z14 (z15+ → HTTP 200 empty body). */
+export {
+  OPENFREEMAP_LIBERTY_STYLE_URL,
+  GSI_PALE_STYLE_URL,
+  listDebugProviders,
+  getMapTilerKey,
+  LOCAL_IDEOGRAPH_FONT_FAMILY,
+  MAP_LAND_COLOR,
+};
+
 export const OPENFREEMAP_SOURCE_MAX_ZOOM = 14;
 
+export function getActiveMapProvider(): MapProviderConfig {
+  return resolveMapProvider();
+}
+
 export function getMapStyleUrl(): string {
-  return process.env.NEXT_PUBLIC_MAP_STYLE_URL?.trim() || DEFAULT_MAP_STYLE_URL;
+  return resolveMapProvider().styleUrl;
+}
+
+export function getMapMaxZoom(): number {
+  const fromEnv = Number(process.env.NEXT_PUBLIC_MAP_MAX_ZOOM);
+  if (Number.isFinite(fromEnv) && fromEnv > 0) return fromEnv;
+  return resolveMapProvider().maxZoom;
+}
+
+export function getMapLandColor(): string {
+  return resolveMapProvider().landColor || MAP_LAND_COLOR;
 }
 
 export function isOpenFreeMapStyle(styleUrl: string = getMapStyleUrl()): boolean {
   return styleUrl.includes("openfreemap.org");
 }
 
-export function getMapMaxZoom(): number {
-  const fromEnv = Number(process.env.NEXT_PUBLIC_MAP_MAX_ZOOM);
-  if (Number.isFinite(fromEnv) && fromEnv > 0) {
-    return fromEnv;
-  }
-  if (isOpenFreeMapStyle()) {
-    return OPENFREEMAP_SOURCE_MAX_ZOOM;
-  }
-  // GSI pale tiles go to z18.
-  return 18;
+export function isMapTilerStyle(styleUrl: string = getMapStyleUrl()): boolean {
+  return styleUrl.includes("maptiler.com");
 }
 
 export function isMapDebugEnabled(): boolean {
   return process.env.NEXT_PUBLIC_MAP_DEBUG === "1";
 }
 
+/** Apply ExplorerGrid cartographic mute when the provider supports it. */
 export function shouldApplyExplorerStyleMute(
-  styleUrl: string = getMapStyleUrl()
+  provider: MapProviderConfig = resolveMapProvider()
 ): boolean {
-  return isOpenFreeMapStyle(styleUrl);
+  return provider.supportsCustomStyle;
 }

@@ -5,15 +5,18 @@ import {
   LngLatBounds,
   Map,
   NavigationControl,
+  Popup,
   type GeoJSONSource,
   type Map as MapLibreMap,
   type MapLayerMouseEvent,
+  type MapGeoJSONFeature,
 } from "maplibre-gl";
-import { applyExplorerMapStyle } from "@/features/map/applyExplorerStyle";
+import { applyExplorerBasemapStyle } from "@/features/map/applyExplorerStyle";
 import {
-  getMapMaxZoom,
-  getMapStyleUrl,
+  getActiveMapProvider,
+  getMapLandColor,
   isMapDebugEnabled,
+  LOCAL_IDEOGRAPH_FONT_FAMILY,
   shouldApplyExplorerStyleMute,
 } from "@/lib/map/config";
 import { attachMapDebugListeners } from "@/lib/map/debug";
@@ -44,84 +47,103 @@ interface MapViewProps {
   onContextAddPlace?: (lng: number, lat: number) => void;
 }
 
-const SOURCE_ID = "eg-places";
-const CLUSTER_LAYER = "eg-clusters";
-const CLUSTER_COUNT = "eg-cluster-count";
-const POINT_LAYER = "eg-unclustered";
+export const EG_PLACES_SOURCE = "eg-places";
+export const EG_CLUSTER_LAYER = "eg-clusters";
+export const EG_CLUSTER_COUNT = "eg-cluster-count";
+export const EG_POINT_LAYER = "eg-unclustered";
+export const EG_POINT_HALO = "eg-unclustered-halo";
+
+/** Status colors aligned with brand tokens in globals.css */
+const COLOR_UNVISITED = "#6b7a6e";
+const COLOR_WANT = "#3b6ea5";
+const COLOR_VISITED = "#c45c26";
+const COLOR_STROKE = "#f3efe6";
+const COLOR_CLUSTER = "#5a5046";
+
+/**
+ * Client density filter so clusters only include places visible at current zoom.
+ * importance: 1 national, 2 regional, 3 local
+ */
+function filterPlacesForZoom(
+  places: MapPlaceMarker[],
+  zoom: number
+): MapPlaceMarker[] {
+  return places.filter((place) => {
+    const importance = place.importance ?? 3;
+    const minZoom = place.minZoom ?? 10;
+    if (zoom + 0.01 < minZoom) return false;
+    if (zoom < 7 && importance > 1) return false;
+    if (zoom < 9 && importance > 2) return false;
+    return true;
+  });
+}
 
 function placesToGeoJSON(
-  places: MapPlaceMarker[],
-  highlightedCategory: string | null | undefined,
-  selectedPlaceId: string | null | undefined
+  places: MapPlaceMarker[]
 ): GeoJSON.FeatureCollection {
   return {
     type: "FeatureCollection",
-    features: places.map((place) => {
-      let dim = 0;
-      if (highlightedCategory) {
-        dim = place.category === highlightedCategory ? 0 : 1;
-      }
-      return {
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [place.longitude, place.latitude],
-        },
-        properties: {
-          id: place.id,
-          name: place.name,
-          category: place.category,
-          status: place.status ?? "none",
-          importance: place.importance,
-          dim,
-          selected: place.id === selectedPlaceId ? 1 : 0,
-        },
-      };
-    }),
+    features: places.map((place) => ({
+      type: "Feature",
+      id: place.id,
+      geometry: {
+        type: "Point",
+        coordinates: [place.longitude, place.latitude],
+      },
+      properties: {
+        id: place.id,
+        name: place.name,
+        category: place.category,
+        status: place.status ?? "none",
+        importance: place.importance ?? 3,
+        minZoom: place.minZoom ?? 10,
+      },
+    })),
   };
 }
 
 function ensurePlaceLayers(map: MapLibreMap) {
-  if (map.getSource(SOURCE_ID)) return;
+  if (map.getSource(EG_PLACES_SOURCE)) return;
 
-  map.addSource(SOURCE_ID, {
+  map.addSource(EG_PLACES_SOURCE, {
     type: "geojson",
     data: { type: "FeatureCollection", features: [] },
+    promoteId: "id",
     cluster: true,
-    clusterMaxZoom: 14,
-    clusterRadius: 48,
+    clusterMaxZoom: 13,
+    clusterRadius: 42,
   });
 
   map.addLayer({
-    id: CLUSTER_LAYER,
+    id: EG_CLUSTER_LAYER,
     type: "circle",
-    source: SOURCE_ID,
+    source: EG_PLACES_SOURCE,
     filter: ["has", "point_count"],
     paint: {
-      "circle-color": "#5c4a3a",
+      "circle-color": COLOR_CLUSTER,
       "circle-radius": [
         "step",
         ["get", "point_count"],
-        16,
-        8,
-        20,
-        25,
-        26,
+        12,
+        10,
+        15,
+        30,
+        18,
       ],
-      "circle-opacity": 0.88,
-      "circle-stroke-width": 2,
-      "circle-stroke-color": "#f3efe6",
+      "circle-opacity": 0.82,
+      "circle-stroke-width": 1.25,
+      "circle-stroke-color": COLOR_STROKE,
     },
   });
 
   map.addLayer({
-    id: CLUSTER_COUNT,
+    id: EG_CLUSTER_COUNT,
     type: "symbol",
-    source: SOURCE_ID,
+    source: EG_PLACES_SOURCE,
     filter: ["has", "point_count"],
     layout: {
       "text-field": "{point_count_abbreviated}",
-      "text-size": 12,
+      "text-size": 11,
     },
     paint: {
       "text-color": "#f7f3ea",
@@ -129,41 +151,126 @@ function ensurePlaceLayers(map: MapLibreMap) {
   });
 
   map.addLayer({
-    id: POINT_LAYER,
+    id: EG_POINT_HALO,
     type: "circle",
-    source: SOURCE_ID,
+    source: EG_PLACES_SOURCE,
     filter: ["!", ["has", "point_count"]],
     paint: {
       "circle-radius": [
         "case",
-        ["==", ["get", "selected"], 1],
-        11,
-        8,
+        ["boolean", ["feature-state", "selected"], false],
+        16,
+        0,
+      ],
+      "circle-color": "transparent",
+      "circle-stroke-width": 2.5,
+      "circle-stroke-color": COLOR_VISITED,
+      "circle-opacity": 0.9,
+    },
+  });
+
+  map.addLayer({
+    id: EG_POINT_LAYER,
+    type: "circle",
+    source: EG_PLACES_SOURCE,
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        5,
+        [
+          "case",
+          ["boolean", ["feature-state", "selected"], false],
+          7,
+          5,
+        ],
+        12,
+        [
+          "case",
+          ["boolean", ["feature-state", "selected"], false],
+          10,
+          7.5,
+        ],
+        16,
+        [
+          "case",
+          ["boolean", ["feature-state", "selected"], false],
+          12,
+          9,
+        ],
       ],
       "circle-color": [
         "match",
         ["get", "status"],
         "visited",
-        "#2f6b4f",
+        COLOR_VISITED,
         "want_to_go",
-        "#c45c26",
-        "#6b5a48",
+        COLOR_WANT,
+        COLOR_UNVISITED,
       ],
       "circle-opacity": [
         "case",
-        ["==", ["get", "dim"], 1],
-        0.28,
+        ["boolean", ["feature-state", "dim"], false],
+        0.22,
+        ["boolean", ["feature-state", "hover"], false],
+        1,
         0.92,
       ],
       "circle-stroke-width": [
         "case",
-        ["==", ["get", "selected"], 1],
-        3,
-        1.5,
+        ["boolean", ["feature-state", "selected"], false],
+        2.5,
+        1.25,
       ],
-      "circle-stroke-color": "#f3efe6",
+      "circle-stroke-color": COLOR_STROKE,
     },
   });
+}
+
+function syncFeatureStates(
+  map: MapLibreMap,
+  places: MapPlaceMarker[],
+  selectedPlaceId: string | null | undefined,
+  highlightedCategory: string | null | undefined,
+  prevSelectedRef: { current: string | null }
+) {
+  if (prevSelectedRef.current && prevSelectedRef.current !== selectedPlaceId) {
+    try {
+      map.setFeatureState(
+        { source: EG_PLACES_SOURCE, id: prevSelectedRef.current },
+        { selected: false }
+      );
+    } catch {
+      // feature may be gone
+    }
+  }
+  if (selectedPlaceId) {
+    try {
+      map.setFeatureState(
+        { source: EG_PLACES_SOURCE, id: selectedPlaceId },
+        { selected: true }
+      );
+    } catch {
+      // ignore
+    }
+  }
+  prevSelectedRef.current = selectedPlaceId ?? null;
+
+  for (const place of places) {
+    const dim = Boolean(
+      highlightedCategory && place.category !== highlightedCategory
+    );
+    try {
+      map.setFeatureState(
+        { source: EG_PLACES_SOURCE, id: place.id },
+        { dim }
+      );
+    } catch {
+      // ignore
+    }
+  }
 }
 
 export function MapView({
@@ -182,11 +289,33 @@ export function MapView({
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
+  const popupRef = useRef<Popup | null>(null);
+  const hoverIdRef = useRef<string | null>(null);
+  const prevSelectedRef = useRef<string | null>(null);
+  const placesSigRef = useRef<string>("");
+  const placesRef = useRef(places);
+  const selectedRef = useRef(selectedPlaceId);
+  const categoryRef = useRef(highlightedCategory);
   const onPlaceClickRef = useRef(onPlaceClick);
   const onCameraChangeRef = useRef(onCameraChange);
   const onContextAddPlaceRef = useRef(onContextAddPlace);
   const [mapError, setMapError] = useState<string | null>(null);
   const [styleReady, setStyleReady] = useState(false);
+  const [booting, setBooting] = useState(true);
+
+  const landColor = getMapLandColor();
+
+  useEffect(() => {
+    placesRef.current = places;
+  }, [places]);
+
+  useEffect(() => {
+    selectedRef.current = selectedPlaceId;
+  }, [selectedPlaceId]);
+
+  useEffect(() => {
+    categoryRef.current = highlightedCategory;
+  }, [highlightedCategory]);
 
   useEffect(() => {
     onPlaceClickRef.current = onPlaceClick;
@@ -203,16 +332,26 @@ export function MapView({
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
-    const styleUrl = getMapStyleUrl();
-    const maxZoom = getMapMaxZoom();
+    const provider = getActiveMapProvider();
+    const maxZoom = provider.maxZoom;
     const initialZoom = Math.min(
       initialCamera?.zoom ?? JAPAN_DEFAULT_ZOOM,
       maxZoom
     );
 
+    if (
+      provider.id === "gsi-pale" &&
+      process.env.NODE_ENV === "development" &&
+      !process.env.NEXT_PUBLIC_MAPTILER_KEY
+    ) {
+      console.info(
+        "[ExplorerGrid map] MapTiler key not configured; using GSI pale fallback."
+      );
+    }
+
     const map = new Map({
       container: containerRef.current,
-      style: styleUrl,
+      style: provider.styleUrl,
       center: [
         initialCamera?.lng ?? JAPAN_CENTER[0],
         initialCamera?.lat ?? JAPAN_CENTER[1],
@@ -227,17 +366,22 @@ export function MapView({
       ],
       minZoom: 4,
       maxZoom,
-      zoomLevelsToOverscale: undefined,
+      localIdeographFontFamily: LOCAL_IDEOGRAPH_FONT_FAMILY,
       cancelPendingTileRequestsWhileZooming: false,
       collectResourceTiming: isMapDebugEnabled(),
       fadeDuration: 0,
     });
 
-    (map as unknown as { _zoomLevelsToOverscale?: number })._zoomLevelsToOverscale =
-      undefined;
-
     map.addControl(new NavigationControl({ showCompass: false }), "top-right");
     const detachDebug = attachMapDebugListeners(map);
+
+    popupRef.current = new Popup({
+      closeButton: false,
+      closeOnClick: false,
+      offset: 12,
+      className: "eg-map-tooltip",
+      maxWidth: "220px",
+    });
 
     const resizeObserver =
       typeof ResizeObserver !== "undefined"
@@ -258,26 +402,27 @@ export function MapView({
       setMapError(message);
     });
 
-    map.on("load", () => {
-      (map as unknown as { _zoomLevelsToOverscale?: number })._zoomLevelsToOverscale =
-        undefined;
-      if (shouldApplyExplorerStyleMute(styleUrl)) {
-        applyExplorerMapStyle(map);
+    const onStyleReady = () => {
+      if (shouldApplyExplorerStyleMute(provider)) {
+        applyExplorerBasemapStyle(map);
       }
       ensurePlaceLayers(map);
       setStyleReady(true);
+      setBooting(false);
       setMapError(null);
       map.resize();
       onMapReady?.(map);
-    });
+    };
 
-    map.on("click", CLUSTER_LAYER, (event) => {
+    map.on("load", onStyleReady);
+
+    map.on("click", EG_CLUSTER_LAYER, (event) => {
       const features = map.queryRenderedFeatures(event.point, {
-        layers: [CLUSTER_LAYER],
+        layers: [EG_CLUSTER_LAYER],
       });
       const feature = features[0];
       const clusterId = feature?.properties?.cluster_id;
-      const source = map.getSource(SOURCE_ID) as GeoJSONSource | undefined;
+      const source = map.getSource(EG_PLACES_SOURCE) as GeoJSONSource | undefined;
       if (clusterId == null || !source) return;
       void source.getClusterExpansionZoom(clusterId).then((zoom) => {
         if (zoom == null) return;
@@ -289,22 +434,62 @@ export function MapView({
       });
     });
 
-    map.on("click", POINT_LAYER, (event: MapLayerMouseEvent) => {
+    map.on("click", EG_POINT_LAYER, (event: MapLayerMouseEvent) => {
       const feature = event.features?.[0];
-      const id = feature?.properties?.id;
+      const id = feature?.properties?.id ?? feature?.id;
       if (typeof id === "string") onPlaceClickRef.current(id);
     });
 
-    map.on("mouseenter", CLUSTER_LAYER, () => {
+    const setHover = (feature: MapGeoJSONFeature | undefined) => {
+      const id = (feature?.properties?.id ?? feature?.id) as string | undefined;
+      if (hoverIdRef.current && hoverIdRef.current !== id) {
+        try {
+          map.setFeatureState(
+            { source: EG_PLACES_SOURCE, id: hoverIdRef.current },
+            { hover: false }
+          );
+        } catch {
+          // ignore
+        }
+        hoverIdRef.current = null;
+      }
+      if (id) {
+        try {
+          map.setFeatureState(
+            { source: EG_PLACES_SOURCE, id },
+            { hover: true }
+          );
+        } catch {
+          // ignore
+        }
+        hoverIdRef.current = id;
+        const name = feature?.properties?.name;
+        if (typeof name === "string" && feature?.geometry.type === "Point") {
+          const coords = feature.geometry.coordinates as [number, number];
+          popupRef.current
+            ?.setLngLat(coords)
+            .setHTML(
+              `<div class="eg-map-tooltip__name">${name.replace(/[<>&]/g, "")}</div>`
+            )
+            .addTo(map);
+        }
+      } else {
+        popupRef.current?.remove();
+      }
+    };
+
+    map.on("mousemove", EG_POINT_LAYER, (event) => {
       map.getCanvas().style.cursor = "pointer";
+      setHover(event.features?.[0]);
     });
-    map.on("mouseleave", CLUSTER_LAYER, () => {
+    map.on("mouseleave", EG_POINT_LAYER, () => {
       map.getCanvas().style.cursor = "";
+      setHover(undefined);
     });
-    map.on("mouseenter", POINT_LAYER, () => {
+    map.on("mouseenter", EG_CLUSTER_LAYER, () => {
       map.getCanvas().style.cursor = "pointer";
     });
-    map.on("mouseleave", POINT_LAYER, () => {
+    map.on("mouseleave", EG_CLUSTER_LAYER, () => {
       map.getCanvas().style.cursor = "";
     });
 
@@ -314,17 +499,41 @@ export function MapView({
     });
 
     let moveTimer: ReturnType<typeof setTimeout> | null = null;
+    const pushCamera = () => {
+      const center = map.getCenter();
+      onCameraChangeRef.current?.({
+        lng: center.lng,
+        lat: center.lat,
+        zoom: map.getZoom(),
+      });
+    };
     map.on("moveend", () => {
       if (moveTimer) clearTimeout(moveTimer);
-      moveTimer = setTimeout(() => {
-        const center = map.getCenter();
-        onCameraChangeRef.current?.({
-          lng: center.lng,
-          lat: center.lat,
-          zoom: map.getZoom(),
-        });
-      }, 120);
+      moveTimer = setTimeout(pushCamera, 200);
     });
+
+    const pushPlacesForZoom = () => {
+      const source = map.getSource(EG_PLACES_SOURCE) as GeoJSONSource | undefined;
+      if (!source) return;
+      const visible = filterPlacesForZoom(placesRef.current, map.getZoom());
+      const sig = visible
+        .map((p) => `${p.id}:${p.status ?? ""}`)
+        .join("|");
+      if (sig !== placesSigRef.current) {
+        placesSigRef.current = sig;
+        source.setData(placesToGeoJSON(visible));
+      }
+      requestAnimationFrame(() => {
+        syncFeatureStates(
+          map,
+          visible,
+          selectedRef.current,
+          categoryRef.current,
+          prevSelectedRef
+        );
+      });
+    };
+    map.on("zoomend", pushPlacesForZoom);
 
     mapRef.current = map;
     requestAnimationFrame(() => map.resize());
@@ -333,21 +542,35 @@ export function MapView({
       detachDebug();
       resizeObserver?.disconnect();
       if (moveTimer) clearTimeout(moveTimer);
+      popupRef.current?.remove();
       map.remove();
       mapRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Places GeoJSON — filter by zoom locally; no API round-trip.
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !styleReady) return;
     ensurePlaceLayers(map);
-    const source = map.getSource(SOURCE_ID) as GeoJSONSource | undefined;
+    const source = map.getSource(EG_PLACES_SOURCE) as GeoJSONSource | undefined;
     if (!source) return;
-    source.setData(
-      placesToGeoJSON(places, highlightedCategory, selectedPlaceId)
-    );
+
+    const visible = filterPlacesForZoom(places, map.getZoom());
+    const sig = visible.map((p) => `${p.id}:${p.status ?? ""}`).join("|");
+    placesSigRef.current = sig;
+    source.setData(placesToGeoJSON(visible));
+
+    requestAnimationFrame(() => {
+      syncFeatureStates(
+        map,
+        visible,
+        selectedPlaceId,
+        highlightedCategory,
+        prevSelectedRef
+      );
+    });
   }, [places, highlightedCategory, selectedPlaceId, styleReady]);
 
   useEffect(() => {
@@ -378,11 +601,17 @@ export function MapView({
   }, [flyTo, flyToKey]);
 
   return (
-    <div className="absolute inset-0 h-full w-full">
+    <div className="absolute inset-0 h-full w-full" style={{ background: landColor }}>
       <div
         ref={containerRef}
         className="eg-map-canvas absolute inset-0 h-full w-full"
+        style={{ background: landColor }}
       />
+      {booting && (
+        <div className="pointer-events-none absolute left-4 top-[7.5rem] z-10 text-xs text-[var(--muted)]">
+          地图加载中
+        </div>
+      )}
       {mapError && (
         <div className="absolute inset-x-4 top-24 z-30 mx-auto max-w-md rounded-sm border border-red-300 bg-[#f8ece8] px-4 py-3 text-sm text-red-800">
           <div className="font-medium">Map failed to load</div>

@@ -87,6 +87,32 @@ a {
   opacity: 0.55;
 }
 
+.eg-map-tooltip {
+  background: transparent;
+  box-shadow: none;
+}
+
+.eg-map-tooltip .maplibregl-popup-content {
+  padding: 0.35rem 0.55rem;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: none;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.eg-map-tooltip .maplibregl-popup-tip {
+  border-top-color: var(--panel);
+}
+
+.eg-map-tooltip__name {
+  max-width: 12rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .eg-node {
   position: relative;
   width: 34px;
