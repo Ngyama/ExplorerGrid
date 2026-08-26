@@ -27,18 +27,19 @@ npm run dev
 | 命令 | 说明 |
 |------|------|
 | `npm run dev` | 启动开发服务器 |
-| `npm run db:seed` | 同步地点与 Explore View |
+| `npm run db:seed` | 同步基础策展地点与 Explore View |
+| `npm run places:import` | 导入 curated 目录（可重复；`--live`/`--region tokyo` 可拉 OSM） |
 | `npm run db:reset` | 清空用户访问状态后保留地点数据 |
 | `npm run build` | 生产构建 |
 
 ## 体验路径
 
-1. 首页地图默认显示「经典东京」
-2. 底部切换「博物馆东京」「文学东京」
-3. 点击 marker 进入地点详情
-4. 点击「想去」或「去过」
-5. 返回地图查看 marker 状态变化
-6. 打开「图鉴」查看 ○ / ● 记录
+1. 首页地图：低 zoom 看全国级地点，放大东京看更多内容
+2. 底部切换 Explore View（经典东京 / 博物馆东京 / 文学东京…）或 My Collections
+3. 搜索地点；外部结果可「加入 ExplorerGrid」
+4. 右键地图创建 Custom Place
+5. Quick Panel：想去 / 去过 / 评分 / 感想 / 加入 Collection
+6. 打开「图鉴」按地区筛选回顾
 
 ## 项目结构
 
@@ -48,8 +49,12 @@ src/
   components/    # 通用 UI
   features/      # map / places / explore / grid
   data/          # schema、seed、SQLite
-  lib/           # repositories
+  lib/           # repositories / providers / places
   types/         # 共享类型
+scripts/
+  import-places.ts
+data/imports/
+  curated-catalog.json
 ```
 
 SQLite 文件位于 `data/explorer-grid.db`（本地生成，不入库）。
@@ -58,6 +63,6 @@ SQLite 文件位于 `data/explorer-grid.db`（本地生成，不入库）。
 
 ## MVP 范围
 
-已实现：日本范围地图工作空间、Region 自动识别、Region Summary、Place Quick Panel、Explore View、访问/评分/感想、图鉴页。
+已实现：日本范围地图工作空间、Region、Explore View、Collection、地点搜索、Custom Place、OSM 导入管线、importance/zoom 过滤、Marker clustering、访问/评分/感想、图鉴 Region 筛选。
 
-未实现：登录、社交、推荐、GPS 打卡、完整日本 POI 导入、PostGIS、管理后台。
+未实现：登录、社交、推荐、GPS 打卡、全日本 POI、PostGIS、管理后台。

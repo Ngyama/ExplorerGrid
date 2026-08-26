@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { getLayerPlaces } from "@/lib/repositories/places";
+import {
+  addPlaceToCollection,
+  getCollectionPlaces,
+  removePlaceFromCollection,
+} from "@/lib/repositories/collections";
 import type { Region, RegionType } from "@/types/region";
 
 export const runtime = "nodejs";
@@ -18,7 +22,7 @@ export async function GET(
   const categoriesRaw = searchParams.get("categories");
   const categories = categoriesRaw
     ? categoriesRaw.split(",").map((s) => s.trim()).filter(Boolean)
-    : null;
+    : undefined;
 
   const region: Region | null =
     regionId && regionType && regionLabel
@@ -32,10 +36,37 @@ export async function GET(
         }
       : null;
 
-  const markers = getLayerPlaces(id, "local", {
+  const markers = getCollectionPlaces(id, "local", {
     region,
     zoom: Number.isFinite(zoom) ? zoom : 12,
     categories,
   });
   return NextResponse.json(markers);
+}
+
+export async function POST(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  const body = (await request.json()) as { placeId?: string; note?: string };
+  if (!body.placeId) {
+    return NextResponse.json({ error: "placeId required" }, { status: 400 });
+  }
+  addPlaceToCollection(id, body.placeId, body.note);
+  return NextResponse.json({ ok: true });
+}
+
+export async function DELETE(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  const { searchParams } = new URL(request.url);
+  const placeId = searchParams.get("placeId");
+  if (!placeId) {
+    return NextResponse.json({ error: "placeId required" }, { status: 400 });
+  }
+  removePlaceFromCollection(id, placeId);
+  return NextResponse.json({ ok: true });
 }

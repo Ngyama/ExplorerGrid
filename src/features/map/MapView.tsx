@@ -4,13 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import {
   LngLatBounds,
   Map,
-  Marker,
   NavigationControl,
+  type GeoJSONSource,
   type Map as MapLibreMap,
-  type Marker as MapLibreMarker,
+  type MapLayerMouseEvent,
 } from "maplibre-gl";
 import { applyExplorerMapStyle } from "@/features/map/applyExplorerStyle";
-import { createPlaceMarkerElement } from "@/features/map/createPlaceMarker";
 import {
   getMapMaxZoom,
   getMapStyleUrl,
@@ -40,6 +39,131 @@ interface MapViewProps {
   onMapReady?: (map: MapLibreMap) => void;
   flyToBounds?: [number, number, number, number] | null;
   flyKey?: number;
+  flyTo?: { lng: number; lat: number; zoom?: number } | null;
+  flyToKey?: number;
+  onContextAddPlace?: (lng: number, lat: number) => void;
+}
+
+const SOURCE_ID = "eg-places";
+const CLUSTER_LAYER = "eg-clusters";
+const CLUSTER_COUNT = "eg-cluster-count";
+const POINT_LAYER = "eg-unclustered";
+
+function placesToGeoJSON(
+  places: MapPlaceMarker[],
+  highlightedCategory: string | null | undefined,
+  selectedPlaceId: string | null | undefined
+): GeoJSON.FeatureCollection {
+  return {
+    type: "FeatureCollection",
+    features: places.map((place) => {
+      let dim = 0;
+      if (highlightedCategory) {
+        dim = place.category === highlightedCategory ? 0 : 1;
+      }
+      return {
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [place.longitude, place.latitude],
+        },
+        properties: {
+          id: place.id,
+          name: place.name,
+          category: place.category,
+          status: place.status ?? "none",
+          importance: place.importance,
+          dim,
+          selected: place.id === selectedPlaceId ? 1 : 0,
+        },
+      };
+    }),
+  };
+}
+
+function ensurePlaceLayers(map: MapLibreMap) {
+  if (map.getSource(SOURCE_ID)) return;
+
+  map.addSource(SOURCE_ID, {
+    type: "geojson",
+    data: { type: "FeatureCollection", features: [] },
+    cluster: true,
+    clusterMaxZoom: 14,
+    clusterRadius: 48,
+  });
+
+  map.addLayer({
+    id: CLUSTER_LAYER,
+    type: "circle",
+    source: SOURCE_ID,
+    filter: ["has", "point_count"],
+    paint: {
+      "circle-color": "#5c4a3a",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        16,
+        8,
+        20,
+        25,
+        26,
+      ],
+      "circle-opacity": 0.88,
+      "circle-stroke-width": 2,
+      "circle-stroke-color": "#f3efe6",
+    },
+  });
+
+  map.addLayer({
+    id: CLUSTER_COUNT,
+    type: "symbol",
+    source: SOURCE_ID,
+    filter: ["has", "point_count"],
+    layout: {
+      "text-field": "{point_count_abbreviated}",
+      "text-size": 12,
+    },
+    paint: {
+      "text-color": "#f7f3ea",
+    },
+  });
+
+  map.addLayer({
+    id: POINT_LAYER,
+    type: "circle",
+    source: SOURCE_ID,
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-radius": [
+        "case",
+        ["==", ["get", "selected"], 1],
+        11,
+        8,
+      ],
+      "circle-color": [
+        "match",
+        ["get", "status"],
+        "visited",
+        "#2f6b4f",
+        "want_to_go",
+        "#c45c26",
+        "#6b5a48",
+      ],
+      "circle-opacity": [
+        "case",
+        ["==", ["get", "dim"], 1],
+        0.28,
+        0.92,
+      ],
+      "circle-stroke-width": [
+        "case",
+        ["==", ["get", "selected"], 1],
+        3,
+        1.5,
+      ],
+      "circle-stroke-color": "#f3efe6",
+    },
+  });
 }
 
 export function MapView({
@@ -52,12 +176,15 @@ export function MapView({
   onMapReady,
   flyToBounds,
   flyKey = 0,
+  flyTo,
+  flyToKey = 0,
+  onContextAddPlace,
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
-  const markersRef = useRef<MapLibreMarker[]>([]);
   const onPlaceClickRef = useRef(onPlaceClick);
   const onCameraChangeRef = useRef(onCameraChange);
+  const onContextAddPlaceRef = useRef(onContextAddPlace);
   const [mapError, setMapError] = useState<string | null>(null);
   const [styleReady, setStyleReady] = useState(false);
 
@@ -68,6 +195,10 @@ export function MapView({
   useEffect(() => {
     onCameraChangeRef.current = onCameraChange;
   }, [onCameraChange]);
+
+  useEffect(() => {
+    onContextAddPlaceRef.current = onContextAddPlace;
+  }, [onContextAddPlace]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -95,22 +226,17 @@ export function MapView({
         [154, 48],
       ],
       minZoom: 4,
-      // OpenFreeMap planet tiles end at z14; z15+ returns HTTP 200 with empty body.
       maxZoom,
-      // Disable v6 overscale window so coveringTiles uses full source.maxzoom.
       zoomLevelsToOverscale: undefined,
-      // Keep in-flight tiles while the user zooms past natural_earth (z≤7).
       cancelPendingTileRequestsWhileZooming: false,
       collectResourceTiming: isMapDebugEnabled(),
       fadeDuration: 0,
     });
 
-    // Belt-and-suspenders: defaults merge can leave overscale=4 if undefined is dropped.
     (map as unknown as { _zoomLevelsToOverscale?: number })._zoomLevelsToOverscale =
       undefined;
 
     map.addControl(new NavigationControl({ showCompass: false }), "top-right");
-
     const detachDebug = attachMapDebugListeners(map);
 
     const resizeObserver =
@@ -123,16 +249,14 @@ export function MapView({
       resizeObserver.observe(containerRef.current);
     }
 
-    const handleError = (event: { error?: Error | { message?: string } }) => {
+    map.on("error", (event) => {
       const message =
         event.error instanceof Error
           ? event.error.message
-          : event.error?.message ?? "Unknown map error";
+          : String(event.error ?? "Unknown map error");
       console.error("[ExplorerGrid map]", event.error ?? event);
       setMapError(message);
-    };
-
-    map.on("error", handleError);
+    });
 
     map.on("load", () => {
       (map as unknown as { _zoomLevelsToOverscale?: number })._zoomLevelsToOverscale =
@@ -140,39 +264,66 @@ export function MapView({
       if (shouldApplyExplorerStyleMute(styleUrl)) {
         applyExplorerMapStyle(map);
       }
+      ensurePlaceLayers(map);
       setStyleReady(true);
       setMapError(null);
       map.resize();
       onMapReady?.(map);
+    });
 
-      if (isMapDebugEnabled()) {
-        const sources = map.getStyle()?.sources ?? {};
-        for (const [id, source] of Object.entries(sources)) {
-          if (source && source.type === "vector") {
-            console.info("[ExplorerGrid map] vector source", {
-              id,
-              maxzoom: "maxzoom" in source ? source.maxzoom : undefined,
-              tiles: "tiles" in source ? source.tiles : undefined,
-              url: "url" in source ? source.url : undefined,
-            });
-          }
-        }
-      }
+    map.on("click", CLUSTER_LAYER, (event) => {
+      const features = map.queryRenderedFeatures(event.point, {
+        layers: [CLUSTER_LAYER],
+      });
+      const feature = features[0];
+      const clusterId = feature?.properties?.cluster_id;
+      const source = map.getSource(SOURCE_ID) as GeoJSONSource | undefined;
+      if (clusterId == null || !source) return;
+      void source.getClusterExpansionZoom(clusterId).then((zoom) => {
+        if (zoom == null) return;
+        const coords = (feature.geometry as GeoJSON.Point).coordinates as [
+          number,
+          number,
+        ];
+        map.easeTo({ center: coords, zoom });
+      });
+    });
+
+    map.on("click", POINT_LAYER, (event: MapLayerMouseEvent) => {
+      const feature = event.features?.[0];
+      const id = feature?.properties?.id;
+      if (typeof id === "string") onPlaceClickRef.current(id);
+    });
+
+    map.on("mouseenter", CLUSTER_LAYER, () => {
+      map.getCanvas().style.cursor = "pointer";
+    });
+    map.on("mouseleave", CLUSTER_LAYER, () => {
+      map.getCanvas().style.cursor = "";
+    });
+    map.on("mouseenter", POINT_LAYER, () => {
+      map.getCanvas().style.cursor = "pointer";
+    });
+    map.on("mouseleave", POINT_LAYER, () => {
+      map.getCanvas().style.cursor = "";
+    });
+
+    map.on("contextmenu", (event) => {
+      event.preventDefault();
+      onContextAddPlaceRef.current?.(event.lngLat.lng, event.lngLat.lat);
     });
 
     let moveTimer: ReturnType<typeof setTimeout> | null = null;
-    const emitCamera = () => {
-      const center = map.getCenter();
-      onCameraChangeRef.current?.({
-        lng: center.lng,
-        lat: center.lat,
-        zoom: map.getZoom(),
-      });
-    };
-
     map.on("moveend", () => {
       if (moveTimer) clearTimeout(moveTimer);
-      moveTimer = setTimeout(emitCamera, 120);
+      moveTimer = setTimeout(() => {
+        const center = map.getCenter();
+        onCameraChangeRef.current?.({
+          lng: center.lng,
+          lat: center.lat,
+          zoom: map.getZoom(),
+        });
+      }, 120);
     });
 
     mapRef.current = map;
@@ -182,14 +333,22 @@ export function MapView({
       detachDebug();
       resizeObserver?.disconnect();
       if (moveTimer) clearTimeout(moveTimer);
-      markersRef.current.forEach((marker) => marker.remove());
-      markersRef.current = [];
       map.remove();
       mapRef.current = null;
     };
-    // initialCamera only used on first mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !styleReady) return;
+    ensurePlaceLayers(map);
+    const source = map.getSource(SOURCE_ID) as GeoJSONSource | undefined;
+    if (!source) return;
+    source.setData(
+      placesToGeoJSON(places, highlightedCategory, selectedPlaceId)
+    );
+  }, [places, highlightedCategory, selectedPlaceId, styleReady]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -210,40 +369,13 @@ export function MapView({
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !styleReady) return;
-
-    markersRef.current.forEach((marker) => marker.remove());
-    markersRef.current = [];
-
-    const sorted = [...places].sort((a, b) => {
-      const rank = (status: MapPlaceMarker["status"]) =>
-        status === "visited" ? 2 : status === "want_to_go" ? 1 : 0;
-      return rank(a.status) - rank(b.status);
+    if (!map || !flyTo) return;
+    map.flyTo({
+      center: [flyTo.lng, flyTo.lat],
+      zoom: flyTo.zoom ?? Math.max(map.getZoom(), 13),
+      duration: 800,
     });
-
-    sorted.forEach((place) => {
-      const el = createPlaceMarkerElement(place);
-      if (highlightedCategory && place.category === highlightedCategory) {
-        el.classList.add("is-highlighted");
-      } else if (highlightedCategory) {
-        el.classList.add("is-dimmed");
-      }
-      if (selectedPlaceId === place.id) {
-        el.classList.add("is-selected");
-      }
-
-      el.addEventListener("click", (event) => {
-        event.stopPropagation();
-        onPlaceClickRef.current(place.id);
-      });
-
-      const marker = new Marker({ element: el, anchor: "center" })
-        .setLngLat([place.longitude, place.latitude])
-        .addTo(map);
-
-      markersRef.current.push(marker);
-    });
-  }, [places, highlightedCategory, selectedPlaceId, styleReady]);
+  }, [flyTo, flyToKey]);
 
   return (
     <div className="absolute inset-0 h-full w-full">
@@ -255,10 +387,6 @@ export function MapView({
         <div className="absolute inset-x-4 top-24 z-30 mx-auto max-w-md rounded-sm border border-red-300 bg-[#f8ece8] px-4 py-3 text-sm text-red-800">
           <div className="font-medium">Map failed to load</div>
           <div className="mt-1 opacity-90">{mapError}</div>
-          <div className="mt-2 text-xs opacity-75">
-            Check console for style / tile / WebGL errors. Open{" "}
-            <code>/map-debug</code> for a minimal basemap harness.
-          </div>
         </div>
       )}
     </div>

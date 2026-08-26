@@ -1,0 +1,3372 @@
+{
+  "version": 1,
+  "places": [
+    {
+      "id": "fuji",
+      "name": "富士山",
+      "description": "富士山",
+      "latitude": 35.3606,
+      "longitude": 138.7274,
+      "category": "nature",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-19",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "himeji-castle",
+      "name": "姬路城",
+      "description": "姬路城",
+      "latitude": 34.8394,
+      "longitude": 134.6939,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-28",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "itsukushima",
+      "name": "严岛神社",
+      "description": "严岛神社",
+      "latitude": 34.2958,
+      "longitude": 132.3197,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-34",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "kiyomizu",
+      "name": "清水寺",
+      "description": "清水寺",
+      "latitude": 34.9949,
+      "longitude": 135.785,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "fushimi-inari",
+      "name": "伏见稻荷大社",
+      "description": "伏见稻荷大社",
+      "latitude": 34.9671,
+      "longitude": 135.7727,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "todaiji",
+      "name": "东大寺",
+      "description": "东大寺",
+      "latitude": 34.689,
+      "longitude": 135.8398,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-29",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "osaka-castle",
+      "name": "大阪城",
+      "description": "大阪城",
+      "latitude": 34.6873,
+      "longitude": 135.5262,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "hiroshima-peace",
+      "name": "广岛和平纪念公园",
+      "description": "广岛和平纪念公园",
+      "latitude": 34.3955,
+      "longitude": 132.4536,
+      "category": "memorial",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-34",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "sapporo-clock",
+      "name": "札幌市钟楼",
+      "description": "札幌市钟楼",
+      "latitude": 43.0626,
+      "longitude": 141.3535,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-01",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "dazaifu",
+      "name": "太宰府天满宫",
+      "description": "太宰府天满宫",
+      "latitude": 33.5195,
+      "longitude": 130.5349,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-40",
+      "importance": 1,
+      "minZoom": 6,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "shuri-castle",
+      "name": "首里城",
+      "description": "首里城",
+      "latitude": 26.217,
+      "longitude": 127.7192,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-47",
+      "importance": 1,
+      "minZoom": 5,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "nikko-tosho",
+      "name": "日光东照宫",
+      "description": "日光东照宫",
+      "latitude": 36.7581,
+      "longitude": 139.5989,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-09",
+      "importance": 1,
+      "minZoom": 6,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "kanazawa-kenroku",
+      "name": "兼六园",
+      "description": "兼六园",
+      "latitude": 36.562,
+      "longitude": 136.6626,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-17",
+      "importance": 1,
+      "minZoom": 6,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "matsumoto-castle",
+      "name": "松本城",
+      "description": "松本城",
+      "latitude": 36.2386,
+      "longitude": 137.9688,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-20",
+      "importance": 1,
+      "minZoom": 6,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "goryokaku",
+      "name": "五棱郭",
+      "description": "五棱郭",
+      "latitude": 41.7968,
+      "longitude": 140.757,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-01",
+      "importance": 2,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "sensoji",
+      "name": "浅草寺",
+      "description": "浅草寺",
+      "latitude": 35.7148,
+      "longitude": 139.7967,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo",
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "tokyo-tower",
+      "name": "东京塔",
+      "description": "东京塔",
+      "latitude": 35.6586,
+      "longitude": 139.7454,
+      "category": "observation",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo",
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "skytree",
+      "name": "东京晴空塔",
+      "description": "东京晴空塔",
+      "latitude": 35.7101,
+      "longitude": 139.8107,
+      "category": "observation",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "meiji-jingu",
+      "name": "明治神宫",
+      "description": "明治神宫",
+      "latitude": 35.6764,
+      "longitude": 139.6993,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "ueno-park",
+      "name": "上野公园",
+      "description": "上野公园",
+      "latitude": 35.7142,
+      "longitude": 139.7731,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-station",
+      "name": "东京站",
+      "description": "东京站",
+      "latitude": 35.6812,
+      "longitude": 139.7671,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "imperial-palace",
+      "name": "皇居",
+      "description": "皇居",
+      "latitude": 35.6852,
+      "longitude": 139.7528,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "shinjuku-gyoen",
+      "name": "新宿御苑",
+      "description": "新宿御苑",
+      "latitude": 35.6852,
+      "longitude": 139.7101,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "yoyogi-park",
+      "name": "代代木公园",
+      "description": "代代木公园",
+      "latitude": 35.671,
+      "longitude": 139.695,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "shibuya-crossing",
+      "name": "涩谷十字路口",
+      "description": "涩谷十字路口",
+      "latitude": 35.6595,
+      "longitude": 139.7005,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 1,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "teamlab-planets",
+      "name": "teamLab Planets",
+      "description": "teamLab Planets",
+      "latitude": 35.649,
+      "longitude": 139.7865,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13108",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo",
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-national-museum",
+      "name": "东京国立博物馆",
+      "description": "东京国立博物馆",
+      "latitude": 35.7188,
+      "longitude": 139.7765,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo",
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "mori-art",
+      "name": "森美术馆",
+      "description": "森美术馆",
+      "latitude": 35.6605,
+      "longitude": 139.7292,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "moma-tokyo",
+      "name": "东京现代艺术博物馆",
+      "description": "东京现代艺术博物馆",
+      "latitude": 35.6804,
+      "longitude": 139.7705,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "edo-tokyo-museum",
+      "name": "江户东京博物馆",
+      "description": "江户东京博物馆",
+      "latitude": 35.6963,
+      "longitude": 139.7962,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "national-science",
+      "name": "国立科学博物馆",
+      "description": "国立科学博物馆",
+      "latitude": 35.7163,
+      "longitude": 139.7764,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "teamlab-borderless",
+      "name": "teamLab Borderless",
+      "description": "teamLab Borderless",
+      "latitude": 35.6264,
+      "longitude": 139.7824,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13108",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "nezu-museum",
+      "name": "根津美术馆",
+      "description": "根津美术馆",
+      "latitude": 35.6623,
+      "longitude": 139.7172,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "suntory-museum",
+      "name": "三得利美术馆",
+      "description": "三得利美术馆",
+      "latitude": 35.6657,
+      "longitude": 139.7308,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-midtown",
+      "name": "东京中城",
+      "description": "东京中城",
+      "latitude": 35.6654,
+      "longitude": 139.7308,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "roppongi-hills",
+      "name": "六本木新城",
+      "description": "六本木新城",
+      "latitude": 35.6605,
+      "longitude": 139.7292,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "ginza",
+      "name": "银座",
+      "description": "银座",
+      "latitude": 35.6717,
+      "longitude": 139.7649,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "akihabara",
+      "name": "秋叶原",
+      "description": "秋叶原",
+      "latitude": 35.6984,
+      "longitude": 139.7731,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "jimbocho",
+      "name": "神保町古书街",
+      "description": "神保町古书街",
+      "latitude": 35.6955,
+      "longitude": 139.7577,
+      "category": "bookstore",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "soseki-museum",
+      "name": "漱石山房纪念馆",
+      "description": "漱石山房纪念馆",
+      "latitude": 35.712,
+      "longitude": 139.7045,
+      "category": "memorial",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13115",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "mori-ogai",
+      "name": "森鸥外旧居",
+      "description": "森鸥外旧居",
+      "latitude": 35.7205,
+      "longitude": 139.751,
+      "category": "memorial",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "waseda",
+      "name": "早稻田大学",
+      "description": "早稻田大学",
+      "latitude": 35.709,
+      "longitude": 139.719,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "book-and-cafe",
+      "name": "神保町书香咖啡馆",
+      "description": "神保町书香咖啡馆",
+      "latitude": 35.6958,
+      "longitude": 139.757,
+      "category": "cafe",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "yanaka",
+      "name": "谷中银座",
+      "description": "谷中银座",
+      "latitude": 35.7265,
+      "longitude": 139.7665,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo",
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "ueno-zoo",
+      "name": "上野动物园",
+      "description": "上野动物园",
+      "latitude": 35.7155,
+      "longitude": 139.7713,
+      "category": "zoo",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "sumida-aquarium",
+      "name": "晴空塔水族馆",
+      "description": "晴空塔水族馆",
+      "latitude": 35.71,
+      "longitude": 139.81,
+      "category": "aquarium",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "sunshine-aquarium",
+      "name": "Sunshine Aquarium",
+      "description": "Sunshine Aquarium",
+      "latitude": 35.7289,
+      "longitude": 139.718,
+      "category": "aquarium",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13116",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "koishikawa-korakuen",
+      "name": "小石川后乐园",
+      "description": "小石川后乐园",
+      "latitude": 35.7055,
+      "longitude": 139.749,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "hama-rikyu",
+      "name": "滨离宫恩赐庭园",
+      "description": "滨离宫恩赐庭园",
+      "latitude": 35.6597,
+      "longitude": 139.7635,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "yasukuni",
+      "name": "靖国神社",
+      "description": "靖国神社",
+      "latitude": 35.694,
+      "longitude": 139.7435,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kanda-myojin",
+      "name": "神田明神",
+      "description": "神田明神",
+      "latitude": 35.7018,
+      "longitude": 139.7675,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "zojoji",
+      "name": "增上寺",
+      "description": "增上寺",
+      "latitude": 35.6575,
+      "longitude": 139.7485,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "gotokuji",
+      "name": "豪德寺",
+      "description": "豪德寺",
+      "latitude": 35.6485,
+      "longitude": 139.6475,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13112",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "nezu-shrine",
+      "name": "根津神社",
+      "description": "根津神社",
+      "latitude": 35.72,
+      "longitude": 139.7608,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "odaiba",
+      "name": "台场海滨公园",
+      "description": "台场海滨公园",
+      "latitude": 35.6295,
+      "longitude": 139.775,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "rainbow-bridge",
+      "name": "彩虹大桥",
+      "description": "彩虹大桥",
+      "latitude": 35.6365,
+      "longitude": 139.7635,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tsukiji-outer",
+      "name": "筑地场外市场",
+      "description": "筑地场外市场",
+      "latitude": 35.6654,
+      "longitude": 139.7707,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "toyosu-market",
+      "name": "丰洲市场",
+      "description": "丰洲市场",
+      "latitude": 35.6435,
+      "longitude": 139.7825,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13108",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "nakamise",
+      "name": "仲见世通",
+      "description": "仲见世通",
+      "latitude": 35.7115,
+      "longitude": 139.796,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "asaksua-culture",
+      "name": "浅草文化旅游中心",
+      "description": "浅草文化旅游中心",
+      "latitude": 35.711,
+      "longitude": 139.7965,
+      "category": "observation",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kabukiza",
+      "name": "歌舞伎座",
+      "description": "歌舞伎座",
+      "latitude": 35.6695,
+      "longitude": 139.7678,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "nhk-studio",
+      "name": "NHK Studio Park",
+      "description": "NHK Studio Park",
+      "latitude": 35.6655,
+      "longitude": 139.6965,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "ghibli-museum",
+      "name": "三鹰之森吉卜力美术馆",
+      "description": "三鹰之森吉卜力美术馆",
+      "latitude": 35.6962,
+      "longitude": 139.5704,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-13",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo",
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "miraikan",
+      "name": "日本科学未来馆",
+      "description": "日本科学未来馆",
+      "latitude": 35.6194,
+      "longitude": 139.7769,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-dome-city",
+      "name": "东京巨蛋城",
+      "description": "东京巨蛋城",
+      "latitude": 35.7056,
+      "longitude": 139.7519,
+      "category": "theme_park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "sanrio-puroland",
+      "name": "三丽鸥彩虹乐园",
+      "description": "三丽鸥彩虹乐园",
+      "latitude": 35.6505,
+      "longitude": 139.4275,
+      "category": "theme_park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-13",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "disneyland-tokyo",
+      "name": "东京迪士尼乐园",
+      "description": "东京迪士尼乐园",
+      "latitude": 35.6329,
+      "longitude": 139.8804,
+      "category": "theme_park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-12",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "disneysea",
+      "name": "东京迪士尼海洋",
+      "description": "东京迪士尼海洋",
+      "latitude": 35.6267,
+      "longitude": 139.8851,
+      "category": "theme_park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-12",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "kamakura-daibutsu",
+      "name": "镰仓大佛",
+      "description": "镰仓大佛",
+      "latitude": 35.3167,
+      "longitude": 139.5356,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-14",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "enoshima",
+      "name": "江之岛",
+      "description": "江之岛",
+      "latitude": 35.2995,
+      "longitude": 139.4805,
+      "category": "nature",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-14",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "yokohama-chinatown",
+      "name": "横滨中华街",
+      "description": "横滨中华街",
+      "latitude": 35.4427,
+      "longitude": 139.6455,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-14",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "cupnoodles",
+      "name": "杯面博物馆横滨",
+      "description": "杯面博物馆横滨",
+      "latitude": 35.4555,
+      "longitude": 139.64,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-14",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "hakone-shrine",
+      "name": "箱根神社",
+      "description": "箱根神社",
+      "latitude": 35.205,
+      "longitude": 139.0255,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-14",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "owada-park",
+      "name": "井之头恩赐公园",
+      "description": "井之头恩赐公园",
+      "latitude": 35.7,
+      "longitude": 139.575,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-13",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "rikugien",
+      "name": "六义园",
+      "description": "六义园",
+      "latitude": 35.733,
+      "longitude": 139.7465,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kiyosumi-garden",
+      "name": "清澄庭园",
+      "description": "清澄庭园",
+      "latitude": 35.6805,
+      "longitude": 139.7975,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokyu-plaza",
+      "name": "东急 Plaza 表参道原宿",
+      "description": "东急 Plaza 表参道原宿",
+      "latitude": 35.6685,
+      "longitude": 139.7055,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "harajuku",
+      "name": "原宿竹下通",
+      "description": "原宿竹下通",
+      "latitude": 35.6702,
+      "longitude": 139.7027,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "omotesando",
+      "name": "表参道",
+      "description": "表参道",
+      "latitude": 35.6652,
+      "longitude": 139.7122,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "shimokitazawa",
+      "name": "下北泽",
+      "description": "下北泽",
+      "latitude": 35.6615,
+      "longitude": 139.6675,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13112",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo",
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "koenji",
+      "name": "高圆寺",
+      "description": "高圆寺",
+      "latitude": 35.7055,
+      "longitude": 139.6495,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13115",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "nakano-broadway",
+      "name": "中野百老汇",
+      "description": "中野百老汇",
+      "latitude": 35.7085,
+      "longitude": 139.6655,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13114",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "ikebukuro",
+      "name": "池袋西口公园",
+      "description": "池袋西口公园",
+      "latitude": 35.7295,
+      "longitude": 139.7105,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13116",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "otome-road",
+      "name": "乙女路",
+      "description": "乙女路",
+      "latitude": 35.7298,
+      "longitude": 139.7155,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "sugamo",
+      "name": "巢鸭地藏通",
+      "description": "巢鸭地藏通",
+      "latitude": 35.7335,
+      "longitude": 139.7395,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kagurazaka",
+      "name": "神乐坂",
+      "description": "神乐坂",
+      "latitude": 35.7025,
+      "longitude": 139.7405,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo",
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "yanesen",
+      "name": "谷根千散步",
+      "description": "谷根千散步",
+      "latitude": 35.7255,
+      "longitude": 139.7635,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-metropolitan",
+      "name": "东京都美术馆",
+      "description": "东京都美术馆",
+      "latitude": 35.7172,
+      "longitude": 139.7728,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "national-museum-western",
+      "name": "国立西洋美术馆",
+      "description": "国立西洋美术馆",
+      "latitude": 35.7154,
+      "longitude": 139.7758,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "shitamachi-museum",
+      "name": "下町风情博物馆",
+      "description": "下町风情博物馆",
+      "latitude": 35.7115,
+      "longitude": 139.7715,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "sumo-museum",
+      "name": "相扑博物馆",
+      "description": "相扑博物馆",
+      "latitude": 35.697,
+      "longitude": 139.7935,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "railway-museum",
+      "name": "铁道博物馆（大宫）",
+      "description": "铁道博物馆（大宫）",
+      "latitude": 35.9205,
+      "longitude": 139.6175,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-11",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "edo-tokyo-open-air",
+      "name": "江户东京建筑园",
+      "description": "江户东京建筑园",
+      "latitude": 35.7155,
+      "longitude": 139.5165,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-13",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "kinkakuji",
+      "name": "金阁寺",
+      "description": "金阁寺",
+      "latitude": 35.0394,
+      "longitude": 135.7292,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "ginkakuji",
+      "name": "银阁寺",
+      "description": "银阁寺",
+      "latitude": 35.027,
+      "longitude": 135.7985,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "arashiyama",
+      "name": "岚山竹林",
+      "description": "岚山竹林",
+      "latitude": 35.017,
+      "longitude": 135.672,
+      "category": "nature",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "nijo-castle",
+      "name": "二条城",
+      "description": "二条城",
+      "latitude": 35.0142,
+      "longitude": 135.7482,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "gion",
+      "name": "祗园",
+      "description": "祗园",
+      "latitude": 35.0037,
+      "longitude": 135.778,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "philosophers-path",
+      "name": "哲学之道",
+      "description": "哲学之道",
+      "latitude": 35.0265,
+      "longitude": 135.7955,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "tozai-kyoto",
+      "name": "京都国立博物馆",
+      "description": "京都国立博物馆",
+      "latitude": 34.9902,
+      "longitude": 135.773,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "kyoto-imperial",
+      "name": "京都御所",
+      "description": "京都御所",
+      "latitude": 35.0254,
+      "longitude": 135.7621,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "yasaka",
+      "name": "八坂神社",
+      "description": "八坂神社",
+      "latitude": 35.0036,
+      "longitude": 135.7786,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "tenryuji",
+      "name": "天龙寺",
+      "description": "天龙寺",
+      "latitude": 35.0159,
+      "longitude": 135.6736,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "ryoanji",
+      "name": "龙安寺",
+      "description": "龙安寺",
+      "latitude": 35.0345,
+      "longitude": 135.7183,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "nishiki-market",
+      "name": "锦市场",
+      "description": "锦市场",
+      "latitude": 35.005,
+      "longitude": 135.7648,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "kyoto-tower",
+      "name": "京都塔",
+      "description": "京都塔",
+      "latitude": 34.9875,
+      "longitude": 135.759,
+      "category": "observation",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "sanjusangendo",
+      "name": "三十三间堂",
+      "description": "三十三间堂",
+      "latitude": 34.9879,
+      "longitude": 135.7717,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "tōfukuji",
+      "name": "东福寺",
+      "description": "东福寺",
+      "latitude": 34.9808,
+      "longitude": 135.7739,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "kurama",
+      "name": "鞍马寺",
+      "description": "鞍马寺",
+      "latitude": 35.1175,
+      "longitude": 135.7705,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-26",
+      "importance": 3,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "kyoto-temples"
+      ]
+    },
+    {
+      "id": "dotonbori",
+      "name": "道顿堀",
+      "description": "道顿堀",
+      "latitude": 34.6687,
+      "longitude": 135.5013,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "universal-studios-japan",
+      "name": "环球影城日本",
+      "description": "环球影城日本",
+      "latitude": 34.6654,
+      "longitude": 135.4323,
+      "category": "theme_park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "shinsekai",
+      "name": "新世界",
+      "description": "新世界",
+      "latitude": 34.6525,
+      "longitude": 135.5062,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "osaka-aquarium",
+      "name": "海游馆",
+      "description": "海游馆",
+      "latitude": 34.6545,
+      "longitude": 135.4289,
+      "category": "aquarium",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 1,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "shitennoji",
+      "name": "四天王寺",
+      "description": "四天王寺",
+      "latitude": 34.6534,
+      "longitude": 135.5164,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "umeda-sky",
+      "name": "梅田蓝天大厦",
+      "description": "梅田蓝天大厦",
+      "latitude": 34.7055,
+      "longitude": 135.4904,
+      "category": "observation",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "kuromon",
+      "name": "黑门市场",
+      "description": "黑门市场",
+      "latitude": 34.666,
+      "longitude": 135.5065,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "namba-yasaka",
+      "name": "难波八阪神社",
+      "description": "难波八阪神社",
+      "latitude": 34.662,
+      "longitude": 135.4965,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 3,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "osaka-museum-history",
+      "name": "大阪历史博物馆",
+      "description": "大阪历史博物馆",
+      "latitude": 34.6825,
+      "longitude": 135.5205,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "sumiyoshi-taisha",
+      "name": "住吉大社",
+      "description": "住吉大社",
+      "latitude": 34.6125,
+      "longitude": 135.493,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-27",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan",
+        "osaka-classics"
+      ]
+    },
+    {
+      "id": "nara-park",
+      "name": "奈良公园",
+      "description": "奈良公园",
+      "latitude": 34.6851,
+      "longitude": 135.8048,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-29",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "kasuga-taisha",
+      "name": "春日大社",
+      "description": "春日大社",
+      "latitude": 34.6814,
+      "longitude": 135.8484,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-29",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "hiroshima-castle",
+      "name": "广岛城",
+      "description": "广岛城",
+      "latitude": 34.4025,
+      "longitude": 132.4594,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-34",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "miyajima-mt",
+      "name": "弥山",
+      "description": "弥山",
+      "latitude": 34.28,
+      "longitude": 132.31,
+      "category": "nature",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-34",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "fukuoka-tower",
+      "name": "福冈塔",
+      "description": "福冈塔",
+      "latitude": 33.5933,
+      "longitude": 130.3515,
+      "category": "observation",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-40",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "canal-city",
+      "name": "Canal City 博多",
+      "description": "Canal City 博多",
+      "latitude": 33.5897,
+      "longitude": 130.411,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-40",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "nagasaki-peace",
+      "name": "长崎和平公园",
+      "description": "长崎和平公园",
+      "latitude": 32.775,
+      "longitude": 129.8645,
+      "category": "memorial",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-42",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "odotori",
+      "name": "大通公园",
+      "description": "大通公园",
+      "latitude": 43.0595,
+      "longitude": 141.3545,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-01",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "susukino",
+      "name": "薄野",
+      "description": "薄野",
+      "latitude": 43.0555,
+      "longitude": 141.3535,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-01",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "moerenuma",
+      "name": "莫埃来沼公园",
+      "description": "莫埃来沼公园",
+      "latitude": 43.122,
+      "longitude": 141.4265,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-01",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "kanazawa-castle",
+      "name": "金泽城",
+      "description": "金泽城",
+      "latitude": 36.5645,
+      "longitude": 136.6595,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-17",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "higashi-chaya",
+      "name": "东茶屋街",
+      "description": "东茶屋街",
+      "latitude": 36.5715,
+      "longitude": 136.6685,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-17",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "takayama-old",
+      "name": "高山古街",
+      "description": "高山古街",
+      "latitude": 36.1465,
+      "longitude": 137.2595,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-21",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "shirakawa-go",
+      "name": "白川乡",
+      "description": "白川乡",
+      "latitude": 36.2575,
+      "longitude": 136.9065,
+      "category": "nature",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-21",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "mt-koya",
+      "name": "高野山",
+      "description": "高野山",
+      "latitude": 34.2135,
+      "longitude": 135.5865,
+      "category": "temple",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-30",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "nachi-falls",
+      "name": "那智瀑布",
+      "description": "那智瀑布",
+      "latitude": 33.6685,
+      "longitude": 135.8895,
+      "category": "nature",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-30",
+      "importance": 1,
+      "minZoom": 8,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "ise-jingu",
+      "name": "伊势神宫",
+      "description": "伊势神宫",
+      "latitude": 34.455,
+      "longitude": 136.7255,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-24",
+      "importance": 1,
+      "minZoom": 6,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "nagoya-castle",
+      "name": "名古屋城",
+      "description": "名古屋城",
+      "latitude": 35.1856,
+      "longitude": 136.8997,
+      "category": "castle",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-23",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "atsuta",
+      "name": "热田神宫",
+      "description": "热田神宫",
+      "latitude": 35.127,
+      "longitude": 136.9085,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-23",
+      "importance": 2,
+      "minZoom": 9,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "toyama-glass",
+      "name": "富山玻璃美术馆",
+      "description": "富山玻璃美术馆",
+      "latitude": 36.7065,
+      "longitude": 137.2115,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-16",
+      "importance": 3,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "sendai-osaki",
+      "name": "瑞凤殿",
+      "description": "瑞凤殿",
+      "latitude": 38.2525,
+      "longitude": 140.8665,
+      "category": "memorial",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-04",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "matsushima",
+      "name": "松岛",
+      "description": "松岛",
+      "latitude": 38.3695,
+      "longitude": 141.0615,
+      "category": "nature",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-04",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "aomori-museum",
+      "name": "青森美术馆",
+      "description": "青森美术馆",
+      "latitude": 40.8285,
+      "longitude": 140.7065,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-02",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "churaumi",
+      "name": "冲绳美丽海水族馆",
+      "description": "冲绳美丽海水族馆",
+      "latitude": 26.694,
+      "longitude": 127.8778,
+      "category": "aquarium",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-47",
+      "importance": 1,
+      "minZoom": 7,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "shikinaen",
+      "name": "识名园",
+      "description": "识名园",
+      "latitude": 26.2045,
+      "longitude": 127.7145,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "pref-47",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-japan"
+      ]
+    },
+    {
+      "id": "kanda-book",
+      "name": "古书咖啡 Book House Cafe",
+      "description": "古书咖啡 Book House Cafe",
+      "latitude": 35.6962,
+      "longitude": 139.7585,
+      "category": "cafe",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "sanseido",
+      "name": "三省堂书店神保町",
+      "description": "三省堂书店神保町",
+      "latitude": 35.6956,
+      "longitude": 139.7575,
+      "category": "bookstore",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-anime-center",
+      "name": "东京动画中心",
+      "description": "东京动画中心",
+      "latitude": 35.6995,
+      "longitude": 139.7715,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "origami-kaikan",
+      "name": "折纸会馆",
+      "description": "折纸会馆",
+      "latitude": 35.7035,
+      "longitude": 139.7585,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 14,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "kitanomaru",
+      "name": "北之丸公园",
+      "description": "北之丸公园",
+      "latitude": 35.6915,
+      "longitude": 139.751,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "hie-shrine",
+      "name": "日枝神社",
+      "description": "日枝神社",
+      "latitude": 35.6745,
+      "longitude": 139.7405,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-international-forum",
+      "name": "东京国际论坛",
+      "description": "东京国际论坛",
+      "latitude": 35.6765,
+      "longitude": 139.7642,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "marunouchi-building",
+      "name": "丸之内大楼",
+      "description": "丸之内大楼",
+      "latitude": 35.6815,
+      "longitude": 139.7645,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kitte",
+      "name": "KITTE",
+      "description": "KITTE",
+      "latitude": 35.6798,
+      "longitude": 139.7648,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "bridgestone",
+      "name": "普利司通美术馆旧址周边",
+      "description": "普利司通美术馆旧址周边",
+      "latitude": 35.6785,
+      "longitude": 139.7705,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "kabutocho",
+      "name": "兜町",
+      "description": "兜町",
+      "latitude": 35.6795,
+      "longitude": 139.7785,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "nihonbashi",
+      "name": "日本桥",
+      "description": "日本桥",
+      "latitude": 35.6835,
+      "longitude": 139.7745,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "mitsukoshi",
+      "name": "日本桥三越",
+      "description": "日本桥三越",
+      "latitude": 35.6855,
+      "longitude": 139.7735,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tsukishima",
+      "name": "月岛",
+      "description": "月岛",
+      "latitude": 35.6645,
+      "longitude": 139.7825,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "toyosu-gururi",
+      "name": "丰洲公园",
+      "description": "丰洲公园",
+      "latitude": 35.6495,
+      "longitude": 139.7955,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kameido-tenjin",
+      "name": "龟户天神社",
+      "description": "龟户天神社",
+      "latitude": 35.7025,
+      "longitude": 139.8255,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kiyosumi-shirakawa",
+      "name": "清澄白河",
+      "description": "清澄白河",
+      "latitude": 35.6825,
+      "longitude": 139.7995,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "museum-contemporary",
+      "name": "东京都现代美术馆",
+      "description": "东京都现代美术馆",
+      "latitude": 35.7105,
+      "longitude": 139.8075,
+      "category": "art_museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "ryogoku-kokugikan",
+      "name": "两国国技馆",
+      "description": "两国国技馆",
+      "latitude": 35.6968,
+      "longitude": 139.7933,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "mukojima-hyakkaen",
+      "name": "向岛百花园",
+      "description": "向岛百花园",
+      "latitude": 35.7205,
+      "longitude": 139.8155,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-skytree-town",
+      "name": "晴空塔城",
+      "description": "晴空塔城",
+      "latitude": 35.7095,
+      "longitude": 139.8095,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "ushijima-shrine",
+      "name": "牛岛神社",
+      "description": "牛岛神社",
+      "latitude": 35.7105,
+      "longitude": 139.809,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "minZoom": 14,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "asakusa-jinja",
+      "name": "浅草神社",
+      "description": "浅草神社",
+      "latitude": 35.7149,
+      "longitude": 139.7969,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "hanayashiki",
+      "name": "花屋敷",
+      "description": "花屋敷",
+      "latitude": 35.7158,
+      "longitude": 139.7945,
+      "category": "theme_park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kappabashi",
+      "name": "合羽桥道具街",
+      "description": "合羽桥道具街",
+      "latitude": 35.7135,
+      "longitude": 139.7895,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-national-museum-hyokei",
+      "name": "表庆馆",
+      "description": "表庆馆",
+      "latitude": 35.7195,
+      "longitude": 139.776,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo"
+      ]
+    },
+    {
+      "id": "ueno-shitamachi",
+      "name": "上野山下",
+      "description": "上野山下",
+      "latitude": 35.711,
+      "longitude": 139.774,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "yanaka-cemetery",
+      "name": "谷中灵园",
+      "description": "谷中灵园",
+      "latitude": 35.7245,
+      "longitude": 139.7705,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "nezu-cafe",
+      "name": "根津咖啡馆街",
+      "description": "根津咖啡馆街",
+      "latitude": 35.7195,
+      "longitude": 139.7615,
+      "category": "cafe",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "minZoom": 14,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-dome",
+      "name": "东京巨蛋",
+      "description": "东京巨蛋",
+      "latitude": 35.7056,
+      "longitude": 139.7519,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "koishikawa-botanical",
+      "name": "小石川植物园",
+      "description": "小石川植物园",
+      "latitude": 35.7165,
+      "longitude": 139.7465,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-university",
+      "name": "东京大学赤门",
+      "description": "东京大学赤门",
+      "latitude": 35.7135,
+      "longitude": 139.7625,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "yushima-tenjin",
+      "name": "汤岛天满宫",
+      "description": "汤岛天满宫",
+      "latitude": 35.7078,
+      "longitude": 139.7682,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "ikebukuro-nishiguchi",
+      "name": "池袋西口",
+      "description": "池袋西口",
+      "latitude": 35.7295,
+      "longitude": 139.71,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13116",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "sunshine-city",
+      "name": "Sunshine City",
+      "description": "Sunshine City",
+      "latitude": 35.729,
+      "longitude": 139.7195,
+      "category": "landmark",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13116",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokiwaso",
+      "name": "丰岛区立德间纪念漫画图书馆",
+      "description": "丰岛区立德间纪念漫画图书馆",
+      "latitude": 35.7285,
+      "longitude": 139.7005,
+      "category": "museum",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "museum-tokyo",
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "zoshigaya",
+      "name": "杂司谷鬼子母神",
+      "description": "杂司谷鬼子母神",
+      "latitude": 35.7205,
+      "longitude": 139.7155,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "meiji-jingu-goyen",
+      "name": "明治神宫外苑",
+      "description": "明治神宫外苑",
+      "latitude": 35.6755,
+      "longitude": 139.7175,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "takeshita",
+      "name": "竹下通",
+      "description": "竹下通",
+      "latitude": 35.671,
+      "longitude": 139.703,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "cat-street",
+      "name": "猫街",
+      "description": "猫街",
+      "latitude": 35.6655,
+      "longitude": 139.7055,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "yoyogi-hachimangu",
+      "name": "代代木八幡宫",
+      "description": "代代木八幡宫",
+      "latitude": 35.6685,
+      "longitude": 139.6885,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "shibuya-sky",
+      "name": "Shibuya Sky",
+      "description": "Shibuya Sky",
+      "latitude": 35.6585,
+      "longitude": 139.7025,
+      "category": "observation",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "miyashita-park",
+      "name": "宫下公园",
+      "description": "宫下公园",
+      "latitude": 35.6605,
+      "longitude": 139.7015,
+      "category": "park",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "nonbei-yokocho",
+      "name": "のんべい横丁",
+      "description": "のんべい横丁",
+      "latitude": 35.6595,
+      "longitude": 139.7,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "minZoom": 14,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "shinjuku-golden",
+      "name": "新宿黄金街",
+      "description": "新宿黄金街",
+      "latitude": 35.6938,
+      "longitude": 139.7005,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "kabukicho",
+      "name": "歌舞伎町",
+      "description": "歌舞伎町",
+      "latitude": 35.6945,
+      "longitude": 139.702,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "minZoom": 12,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "shinjuku-goyoen-east",
+      "name": "新宿御苑东门",
+      "description": "新宿御苑东门",
+      "latitude": 35.6855,
+      "longitude": 139.7105,
+      "category": "garden",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "minZoom": 11,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "tokyo-metro-gov",
+      "name": "都厅展望室",
+      "description": "都厅展望室",
+      "latitude": 35.6895,
+      "longitude": 139.6917,
+      "category": "observation",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "minZoom": 10,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "omoide-yokocho",
+      "name": "回忆横丁",
+      "description": "回忆横丁",
+      "latitude": 35.6925,
+      "longitude": 139.6995,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "hanazono-jinja",
+      "name": "花园神社",
+      "description": "花园神社",
+      "latitude": 35.6935,
+      "longitude": 139.7055,
+      "category": "shrine",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "classic-tokyo"
+      ]
+    },
+    {
+      "id": "meiji-university",
+      "name": "明治大学图书馆",
+      "description": "明治大学图书馆",
+      "latitude": 35.6975,
+      "longitude": 139.7615,
+      "category": "bookstore",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 13,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    },
+    {
+      "id": "hitotsubashi",
+      "name": "一桥大学周边",
+      "description": "一桥大学周边",
+      "latitude": 35.6935,
+      "longitude": 139.7585,
+      "category": "street",
+      "image": "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "minZoom": 14,
+      "sourceType": "curated",
+      "osm": null,
+      "layers": [
+        "literary-tokyo"
+      ]
+    }
+  ]
+}

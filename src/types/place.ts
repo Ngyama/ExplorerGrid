@@ -1,16 +1,26 @@
-import type { Photo, UserPlaceStatus, Visit } from "./user";
-
 export type PlaceCategory =
   | "museum"
-  | "restaurant"
-  | "cafe"
-  | "landmark"
+  | "art_museum"
+  | "aquarium"
+  | "zoo"
   | "park"
+  | "garden"
   | "shrine"
-  | "cinema"
-  | "street"
+  | "temple"
+  | "castle"
+  | "landmark"
+  | "observation"
   | "bookstore"
-  | "memorial";
+  | "memorial"
+  | "street"
+  | "cafe"
+  | "restaurant"
+  | "theme_park"
+  | "nature"
+  | "cinema"
+  | "other";
+
+export type PlaceSourceType = "curated" | "imported" | "custom";
 
 export interface Place {
   id: string;
@@ -23,6 +33,7 @@ export interface Place {
   regionId: string | null;
   importance: number;
   minZoom: number;
+  sourceType: PlaceSourceType;
 }
 
 export interface ExploreLayerSummary {
@@ -31,10 +42,11 @@ export interface ExploreLayerSummary {
 }
 
 export interface PlaceWithStatus extends Place {
-  status: UserPlaceStatus | null;
+  status: import("./user").UserPlaceStatus | null;
   rating: number | null;
   note: string | null;
   layers: ExploreLayerSummary[];
-  visits: Visit[];
-  photos: Photo[];
+  visits: import("./user").Visit[];
+  photos: import("./user").Photo[];
+  exploreNote?: string | null;
 }

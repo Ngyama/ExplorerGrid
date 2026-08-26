@@ -22,7 +22,9 @@ function upsertContent() {
       .where(eq(places.id, place.id))
       .get();
     if (!existing) {
-      db.insert(places).values(place).run();
+      db.insert(places)
+        .values({ ...place, sourceType: "curated" })
+        .run();
     } else {
       db.update(places)
         .set({
@@ -35,6 +37,7 @@ function upsertContent() {
           regionId: place.regionId,
           importance: place.importance,
           minZoom: place.minZoom,
+          sourceType: existing.sourceType === "custom" ? "custom" : "curated",
         })
         .where(eq(places.id, place.id))
         .run();
@@ -48,7 +51,9 @@ function upsertContent() {
       .where(eq(exploreLayers.id, layer.id))
       .get();
     if (!existing) {
-      db.insert(exploreLayers).values(layer).run();
+      db.insert(exploreLayers)
+        .values({ ...layer, type: "curated", visibility: "public" })
+        .run();
     } else {
       db.update(exploreLayers)
         .set({
@@ -56,6 +61,8 @@ function upsertContent() {
           description: layer.description,
           coverImage: layer.coverImage,
           regionId: layer.regionId,
+          type: "curated",
+          visibility: "public",
         })
         .where(eq(exploreLayers.id, layer.id))
         .run();

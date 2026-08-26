@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { CategoryIcon } from "@/components/CategoryIcon";
 import { StatusDot } from "@/components/StatusDot";
 import { categoryLabel } from "@/lib/categories";
@@ -7,7 +10,19 @@ import type { GridLayerGroup, GridPlaceItem } from "@/types/user";
 
 interface GridViewProps {
   groups: GridLayerGroup[];
+  regionId?: string | null;
 }
+
+const REGION_OPTIONS = [
+  { id: "", label: "全部地区" },
+  { id: "japan", label: "日本" },
+  { id: "pref-13", label: "东京都" },
+  { id: "pref-26", label: "京都府" },
+  { id: "pref-27", label: "大阪府" },
+  { id: "pref-01", label: "北海道" },
+  { id: "pref-34", label: "广岛县" },
+  { id: "pref-40", label: "福冈县" },
+];
 
 function cardTone(status: GridPlaceItem["status"]) {
   if (status === "visited") return "eg-grid-card is-visited";
@@ -42,7 +57,9 @@ function GridCard({ place }: { place: GridPlaceItem }) {
   );
 }
 
-export function GridView({ groups }: GridViewProps) {
+export function GridView({ groups, regionId }: GridViewProps) {
+  const router = useRouter();
+
   return (
     <div className="mx-auto min-h-[100dvh] max-w-5xl px-4 pb-16 pt-24 sm:px-6">
       <header className="mb-10">
@@ -52,11 +69,30 @@ export function GridView({ groups }: GridViewProps) {
         <p className="mt-2 max-w-xl text-[var(--muted)]">
           地图负责「我要去哪里」，格子负责「我经历过什么」。
         </p>
+        <label className="mt-4 block text-sm text-[var(--muted)]">
+          地区
+          <select
+            name="regionId"
+            defaultValue={regionId ?? ""}
+            className="ml-2 rounded-sm border border-[var(--line)] bg-white px-2 py-1"
+            onChange={(event) => {
+              const value = event.target.value;
+              router.push(value ? `/grid?regionId=${value}` : "/grid");
+            }}
+          >
+            {REGION_OPTIONS.map((option) => (
+              <option key={option.id || "all"} value={option.id}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
       </header>
 
       <div className="space-y-12">
         {groups.map((group) => {
           const visited = group.places.filter((p) => p.status === "visited").length;
+          if (group.places.length === 0) return null;
           return (
             <section key={group.layerId}>
               <div className="mb-4 flex items-baseline justify-between gap-4 border-b border-[var(--line)] pb-2">

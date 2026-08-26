@@ -1,5 +1,4 @@
-import type { PlaceCategory } from "./place";
-import type { UserPlaceStatus } from "./user";
+import type { PlaceCategory } from "@/types/place";
 
 export interface ExploreLayer {
   id: string;
@@ -7,6 +6,8 @@ export interface ExploreLayer {
   description: string;
   coverImage: string;
   regionId: string | null;
+  type: "curated" | "dynamic" | "user";
+  visibility: "public" | "private";
   placeCount: number;
   visitedCount: number;
 }
@@ -16,6 +17,7 @@ export interface ExploreLayerPlace {
   placeId: string;
   priority: number;
   order: number;
+  note: string | null;
 }
 
 export interface MapPlaceMarker {
@@ -24,8 +26,18 @@ export interface MapPlaceMarker {
   latitude: number;
   longitude: number;
   category: PlaceCategory;
-  status: UserPlaceStatus | null;
+  status: import("./user").UserPlaceStatus | null;
   regionId: string | null;
   importance: number;
   minZoom: number;
 }
+
+export interface CollectionSummary {
+  id: string;
+  name: string;
+  description: string;
+  placeCount: number;
+  createdAt: string;
+}
+
+export type MapContentMode = "explore" | "collection";

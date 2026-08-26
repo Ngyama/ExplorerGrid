@@ -49,15 +49,30 @@ function ensureDatabase() {
       image TEXT NOT NULL,
       region_id TEXT,
       importance INTEGER NOT NULL DEFAULT 3,
-      min_zoom REAL NOT NULL DEFAULT 10
+      min_zoom REAL NOT NULL DEFAULT 10,
+      source_type TEXT NOT NULL DEFAULT 'curated'
     );
+
+    CREATE TABLE IF NOT EXISTS place_external_references (
+      id TEXT PRIMARY KEY,
+      place_id TEXT NOT NULL REFERENCES places(id),
+      provider TEXT NOT NULL,
+      external_id TEXT NOT NULL,
+      raw_metadata TEXT,
+      source_updated_at TEXT
+    );
+
+    CREATE UNIQUE INDEX IF NOT EXISTS place_ext_ref_provider_external
+      ON place_external_references(provider, external_id);
 
     CREATE TABLE IF NOT EXISTS explore_layers (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
       description TEXT NOT NULL,
       cover_image TEXT NOT NULL,
-      region_id TEXT
+      region_id TEXT,
+      type TEXT NOT NULL DEFAULT 'curated',
+      visibility TEXT NOT NULL DEFAULT 'public'
     );
 
     CREATE TABLE IF NOT EXISTS explore_layer_places (
@@ -65,7 +80,24 @@ function ensureDatabase() {
       place_id TEXT NOT NULL REFERENCES places(id),
       priority INTEGER NOT NULL DEFAULT 0,
       "order" INTEGER NOT NULL DEFAULT 0,
+      note TEXT,
       PRIMARY KEY (layer_id, place_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS collections (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      name TEXT NOT NULL,
+      description TEXT NOT NULL DEFAULT '',
+      created_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS collection_places (
+      collection_id TEXT NOT NULL REFERENCES collections(id),
+      place_id TEXT NOT NULL REFERENCES places(id),
+      note TEXT,
+      "order" INTEGER NOT NULL DEFAULT 0,
+      PRIMARY KEY (collection_id, place_id)
     );
 
     CREATE TABLE IF NOT EXISTS user_places (
@@ -95,11 +127,20 @@ function ensureDatabase() {
     );
   `);
 
-  // Migrate older local DBs created before region/importance columns.
+  // Migrate older local DBs.
   ensureColumn(sqlite, "places", "region_id", "TEXT");
   ensureColumn(sqlite, "places", "importance", "INTEGER NOT NULL DEFAULT 3");
   ensureColumn(sqlite, "places", "min_zoom", "REAL NOT NULL DEFAULT 10");
+  ensureColumn(sqlite, "places", "source_type", "TEXT NOT NULL DEFAULT 'curated'");
   ensureColumn(sqlite, "explore_layers", "region_id", "TEXT");
+  ensureColumn(sqlite, "explore_layers", "type", "TEXT NOT NULL DEFAULT 'curated'");
+  ensureColumn(
+    sqlite,
+    "explore_layers",
+    "visibility",
+    "TEXT NOT NULL DEFAULT 'public'"
+  );
+  ensureColumn(sqlite, "explore_layer_places", "note", "TEXT");
 
   return sqlite;
 }

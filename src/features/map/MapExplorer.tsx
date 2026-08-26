@@ -2,7 +2,10 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { LayerSwitcher } from "@/features/explore/LayerSwitcher";
+import { ContentSwitcher } from "@/features/explore/ContentSwitcher";
+import { CustomPlaceDialog } from "@/features/map/CustomPlaceDialog";
+import { ExploreViewPanel } from "@/features/map/ExploreViewPanel";
+import { MapSearch } from "@/features/map/MapSearch";
 import { MapView, type MapCameraState } from "@/features/map/MapView";
 import { PlaceQuickPanel } from "@/features/map/PlaceQuickPanel";
 import { RegionBreadcrumb } from "@/features/map/RegionBreadcrumb";
@@ -15,7 +18,11 @@ import {
   type RegionFeature,
   type RegionFeatureCollection,
 } from "@/lib/geo/regions";
-import type { ExploreLayer, MapPlaceMarker } from "@/types/explore";
+import type {
+  CollectionSummary,
+  ExploreLayer,
+  MapPlaceMarker,
+} from "@/types/explore";
 import type { PlaceWithStatus } from "@/types/place";
 import type {
   CategoryExploreStat,
@@ -51,9 +58,14 @@ export function MapExplorer() {
     };
   }, [searchParams]);
 
+  const [mode, setMode] = useState<"explore" | "collection">("explore");
   const [layers, setLayers] = useState<ExploreLayer[]>([]);
+  const [collections, setCollections] = useState<CollectionSummary[]>([]);
   const [activeLayerId, setActiveLayerId] = useState(
     () => searchParams.get("view") || "classic-japan"
+  );
+  const [activeCollectionId, setActiveCollectionId] = useState<string | null>(
+    null
   );
   const [places, setPlaces] = useState<MapPlaceMarker[]>([]);
   const [camera, setCamera] = useState<MapCameraState>({
@@ -75,6 +87,11 @@ export function MapExplorer() {
   const [selectedPlace, setSelectedPlace] = useState<PlaceWithStatus | null>(
     null
   );
+  const [showExploreDetail, setShowExploreDetail] = useState(false);
+  const [customDraft, setCustomDraft] = useState<{
+    lng: number;
+    lat: number;
+  } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [summaryCollapsed, setSummaryCollapsed] = useState(true);
@@ -82,6 +99,13 @@ export function MapExplorer() {
     [number, number, number, number] | null
   >(null);
   const [flyKey, setFlyKey] = useState(0);
+  const [flyTo, setFlyTo] = useState<{
+    lng: number;
+    lat: number;
+    zoom?: number;
+  } | null>(null);
+  const [flyToKey, setFlyToKey] = useState(0);
+  const [placesVersion, setPlacesVersion] = useState(0);
 
   const prefecturesRef = useRef<RegionFeature[]>([]);
   const wardsRef = useRef<RegionFeature[]>([]);
@@ -136,6 +160,18 @@ export function MapExplorer() {
     return () => media.removeEventListener("change", sync);
   }, []);
 
+  const refreshCollections = useCallback(async () => {
+    const res = await fetch("/api/collections");
+    if (!res.ok) return;
+    const data = (await res.json()) as CollectionSummary[];
+    setCollections(data);
+    setActiveCollectionId((current) => current ?? data[0]?.id ?? null);
+  }, []);
+
+  useEffect(() => {
+    void refreshCollections();
+  }, [refreshCollections]);
+
   const handleCameraChange = useCallback((next: MapCameraState) => {
     setCamera(next);
     if (!geoReadyRef.current) return;
@@ -153,13 +189,12 @@ export function MapExplorer() {
   useEffect(() => {
     if (urlTimerRef.current) clearTimeout(urlTimerRef.current);
     urlTimerRef.current = setTimeout(() => {
-      // Avoid Next.js router.replace during pan/zoom — it can re-render the
-      // App Router tree and interrupt MapLibre tile loading.
       const params = new URLSearchParams();
       params.set("lat", camera.lat.toFixed(5));
       params.set("lng", camera.lng.toFixed(5));
       params.set("zoom", camera.zoom.toFixed(2));
-      params.set("view", activeLayerId);
+      if (mode === "explore") params.set("view", activeLayerId);
+      else if (activeCollectionId) params.set("collection", activeCollectionId);
       const next = `${pathname}?${params.toString()}`;
       if (typeof window !== "undefined") {
         window.history.replaceState(window.history.state, "", next);
@@ -168,7 +203,7 @@ export function MapExplorer() {
     return () => {
       if (urlTimerRef.current) clearTimeout(urlTimerRef.current);
     };
-  }, [camera, activeLayerId, pathname]);
+  }, [camera, activeLayerId, activeCollectionId, mode, pathname]);
 
   useEffect(() => {
     let cancelled = false;
@@ -192,20 +227,31 @@ export function MapExplorer() {
     return () => {
       cancelled = true;
     };
-  }, [region, activeLayerId]);
+  }, [region, activeLayerId, placesVersion]);
 
   useEffect(() => {
     let cancelled = false;
     async function loadPlaces() {
-      if (!activeLayerId) return;
       setLoading(true);
       setError(null);
       try {
         const params = regionQuery(region);
         params.set("zoom", String(camera.zoom));
-        const res = await fetch(
-          `/api/layers/${activeLayerId}/places?${params}`
-        );
+        if (activeCategory) params.set("categories", activeCategory);
+
+        let res: Response;
+        if (mode === "collection") {
+          if (!activeCollectionId) {
+            if (!cancelled) setPlaces([]);
+            return;
+          }
+          res = await fetch(
+            `/api/collections/${activeCollectionId}/places?${params}`
+          );
+        } else {
+          if (!activeLayerId) return;
+          res = await fetch(`/api/layers/${activeLayerId}/places?${params}`);
+        }
         if (!res.ok) throw new Error("无法加载地点");
         const data = (await res.json()) as MapPlaceMarker[];
         if (!cancelled) setPlaces(data);
@@ -221,15 +267,28 @@ export function MapExplorer() {
     return () => {
       cancelled = true;
     };
-  }, [activeLayerId, region, camera.zoom]);
+  }, [
+    mode,
+    activeLayerId,
+    activeCollectionId,
+    region,
+    camera.zoom,
+    activeCategory,
+    placesVersion,
+  ]);
 
   useEffect(() => {
     let cancelled = false;
     async function loadSummary() {
-      if (!activeLayerId) return;
       try {
         const params = regionQuery(region);
-        params.set("layerId", activeLayerId);
+        if (mode === "collection" && activeCollectionId) {
+          params.set("collectionId", activeCollectionId);
+        } else if (activeLayerId) {
+          params.set("layerId", activeLayerId);
+        } else {
+          return;
+        }
         const res = await fetch(`/api/region-summary?${params}`);
         if (!res.ok) return;
         const data = (await res.json()) as {
@@ -237,26 +296,36 @@ export function MapExplorer() {
         };
         if (!cancelled) setCategories(data.categories);
       } catch {
-        // Summary is non-critical.
+        // non-critical
       }
     }
     loadSummary();
     return () => {
       cancelled = true;
     };
-  }, [activeLayerId, region, places]);
+  }, [mode, activeLayerId, activeCollectionId, region, places]);
 
-  const handlePlaceClick = useCallback(async (placeId: string) => {
-    try {
-      const res = await fetch(`/api/places/${placeId}`);
-      if (!res.ok) throw new Error("无法加载地点");
-      const data = (await res.json()) as PlaceWithStatus;
-      setSelectedPlace(data);
-      setSummaryCollapsed(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "加载失败");
-    }
-  }, []);
+  const handlePlaceClick = useCallback(
+    async (placeId: string) => {
+      try {
+        const params = new URLSearchParams();
+        if (mode === "explore" && activeLayerId) {
+          params.set("layerId", activeLayerId);
+        }
+        const res = await fetch(
+          `/api/places/${placeId}${params.size ? `?${params}` : ""}`
+        );
+        if (!res.ok) throw new Error("无法加载地点");
+        const data = (await res.json()) as PlaceWithStatus;
+        setSelectedPlace(data);
+        setShowExploreDetail(false);
+        setSummaryCollapsed(true);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "加载失败");
+      }
+    },
+    [mode, activeLayerId]
+  );
 
   const handleRecordChange = useCallback(
     (placeId: string, record: PlaceRecord) => {
@@ -270,15 +339,8 @@ export function MapExplorer() {
           ? { ...current, ...record }
           : current
       );
-      setLayers((current) =>
-        current.map((layer) => {
-          if (layer.id !== activeLayerId) return layer;
-          // Refresh counts on next summary fetch; optimistic bump for visited.
-          return layer;
-        })
-      );
     },
-    [activeLayerId]
+    []
   );
 
   const handleBreadcrumb = useCallback((item: RegionPathItem) => {
@@ -303,12 +365,24 @@ export function MapExplorer() {
         onCameraChange={handleCameraChange}
         flyToBounds={flyToBounds}
         flyKey={flyKey}
+        flyTo={flyTo}
+        flyToKey={flyToKey}
+        onContextAddPlace={(lng, lat) => setCustomDraft({ lng, lat })}
       />
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 px-4 pt-[4.75rem] sm:px-6">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-wrap items-start justify-between gap-2 px-4 pt-[4.75rem] sm:px-6">
         <div className="pointer-events-auto inline-flex max-w-[min(92vw,420px)] rounded-sm border border-[var(--line)] bg-[var(--panel)] px-3 py-2 shadow-sm backdrop-blur-md">
           <RegionBreadcrumb path={path} onSelect={handleBreadcrumb} />
         </div>
+        <MapSearch
+          layerId={activeLayerId}
+          onSelectPlace={handlePlaceClick}
+          onFlyTo={(lng, lat) => {
+            setFlyTo({ lng, lat, zoom: 14 });
+            setFlyToKey((v) => v + 1);
+          }}
+          onImported={() => setPlacesVersion((v) => v + 1)}
+        />
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-[7.5rem] z-20 px-3 sm:inset-x-auto sm:bottom-auto sm:right-4 sm:top-24 sm:w-[min(92vw,320px)] sm:px-0 lg:right-6">
@@ -316,6 +390,7 @@ export function MapExplorer() {
           {selectedPlace ? (
             <PlaceQuickPanel
               place={selectedPlace}
+              collections={collections}
               onClose={() => {
                 setSelectedPlace(null);
                 if (
@@ -326,11 +401,24 @@ export function MapExplorer() {
                 }
               }}
               onRecordChange={handleRecordChange}
+              onCollectionsChange={() => {
+                void refreshCollections();
+              }}
+            />
+          ) : showExploreDetail && activeLayer ? (
+            <ExploreViewPanel
+              layer={activeLayer}
+              onClose={() => setShowExploreDetail(false)}
             />
           ) : (
             <RegionSummaryPanel
               regionLabel={region.label}
-              layerName={activeLayer?.name ?? null}
+              layerName={
+                mode === "explore"
+                  ? activeLayer?.name ?? null
+                  : collections.find((c) => c.id === activeCollectionId)?.name ??
+                    null
+              }
               categories={categories}
               placeCount={placeCount}
               visitedCount={visitedCount}
@@ -343,24 +431,69 @@ export function MapExplorer() {
         </div>
       </div>
 
-      <LayerSwitcher
+      <ContentSwitcher
+        mode={mode}
+        onModeChange={(next) => {
+          setMode(next);
+          setActiveCategory(null);
+          setSelectedPlace(null);
+          setShowExploreDetail(false);
+        }}
         layers={layers}
         activeLayerId={activeLayerId}
-        onChange={(id) => {
+        onLayerChange={(id) => {
           setActiveLayerId(id);
           setActiveCategory(null);
           setSelectedPlace(null);
+          setShowExploreDetail(false);
+        }}
+        collections={collections}
+        activeCollectionId={activeCollectionId}
+        onCollectionChange={(id) => {
+          setActiveCollectionId(id);
+          setActiveCategory(null);
+          setSelectedPlace(null);
+        }}
+        onCreateCollection={async () => {
+          const name = window.prompt("Collection 名称", "东京下次去");
+          if (!name?.trim()) return;
+          const res = await fetch("/api/collections", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name.trim() }),
+          });
+          if (!res.ok) return;
+          const created = (await res.json()) as CollectionSummary;
+          await refreshCollections();
+          setMode("collection");
+          setActiveCollectionId(created.id);
+        }}
+        onShowExploreDetail={() => {
+          setSelectedPlace(null);
+          setShowExploreDetail(true);
         }}
       />
+
+      {customDraft && (
+        <CustomPlaceDialog
+          lng={customDraft.lng}
+          lat={customDraft.lat}
+          layerId={mode === "explore" ? activeLayerId : null}
+          onClose={() => setCustomDraft(null)}
+          onCreated={(placeId) => {
+            setCustomDraft(null);
+            setPlacesVersion((v) => v + 1);
+            void handlePlaceClick(placeId);
+          }}
+        />
+      )}
 
       {(loading || error) && (
         <div className="pointer-events-none absolute left-4 top-[7.5rem] z-20 rounded-sm bg-[var(--panel)] px-3 py-2 text-sm backdrop-blur-sm">
           {error ? (
             <span className="text-red-700">{error}</span>
           ) : (
-            <span className="text-[var(--muted)]">
-              {activeLayer ? `正在展开「${activeLayer.name}」…` : "加载地点中…"}
-            </span>
+            <span className="text-[var(--muted)]">加载地点中…</span>
           )}
         </div>
       )}

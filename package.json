@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "db:seed": "tsx src/data/db/seed.ts",
-    "db:reset": "tsx src/data/db/seed.ts --reset"
+    "db:reset": "tsx src/data/db/seed.ts --reset",
+    "places:import": "tsx scripts/import-places.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",

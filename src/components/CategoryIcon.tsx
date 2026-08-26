@@ -18,7 +18,7 @@ export function CategoryIcon({
   className,
   title,
 }: CategoryIconProps) {
-  const key: PlaceCategory = isPlaceCategory(category) ? category : "landmark";
+  const key: PlaceCategory = isPlaceCategory(category) ? category : "other";
   const label = title ?? CATEGORY_LABEL[key];
 
   return (
@@ -46,6 +46,6 @@ export function categoryIconMarkup(
   size = 14,
   stroke = "currentColor"
 ): string {
-  const key: PlaceCategory = isPlaceCategory(category) ? category : "landmark";
+  const key: PlaceCategory = isPlaceCategory(category) ? category : "other";
   return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${stroke}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CATEGORY_ICON_PATHS[key]}</svg>`;
 }
