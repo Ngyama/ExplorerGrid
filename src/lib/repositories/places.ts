@@ -94,6 +94,7 @@ export function listLayers(
         placeId: exploreLayerPlaces.placeId,
         status: userPlaces.status,
         regionId: places.regionId,
+        reviewStatus: places.reviewStatus,
       })
       .from(exploreLayerPlaces)
       .innerJoin(places, eq(exploreLayerPlaces.placeId, places.id))
@@ -107,9 +108,10 @@ export function listLayers(
       .where(eq(exploreLayerPlaces.layerId, layer.id))
       .all();
 
-    const scoped = region
+    const scoped = (region
       ? rows.filter((row) => regionMatchesPlace(row.regionId, region))
-      : rows;
+      : rows
+    ).filter((row) => !row.reviewStatus || row.reviewStatus === "approved");
 
     return {
       id: layer.id,
@@ -157,6 +159,8 @@ export function getLayerPlaces(
       importance: places.importance,
       minZoom: places.minZoom,
       order: exploreLayerPlaces.order,
+      reviewStatus: places.reviewStatus,
+      sourceType: places.sourceType,
     })
     .from(exploreLayerPlaces)
     .innerJoin(places, eq(exploreLayerPlaces.placeId, places.id))
@@ -173,7 +177,11 @@ export function getLayerPlaces(
   const categories = options?.categories ?? null;
 
   return rows
-    .filter((row) => passesZoomAndRegion(row, zoom, region, categories))
+    .filter((row) => {
+      // Formal Explore Views only show approved editorial places.
+      if (row.reviewStatus && row.reviewStatus !== "approved") return false;
+      return passesZoomAndRegion(row, zoom, region, categories);
+    })
     .map((row) => ({
       id: row.id,
       name: row.name,

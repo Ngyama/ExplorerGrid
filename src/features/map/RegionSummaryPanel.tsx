@@ -8,6 +8,12 @@ interface RegionSummaryPanelProps {
   categories: CategoryExploreStat[];
   placeCount: number;
   visitedCount: number;
+  wardProgress?: {
+    visited: number;
+    total: number;
+    ratio: number;
+    conquered: boolean;
+  } | null;
   activeCategory: string | null;
   onSelectCategory: (category: string | null) => void;
   collapsed?: boolean;
@@ -20,6 +26,7 @@ export function RegionSummaryPanel({
   categories,
   placeCount,
   visitedCount,
+  wardProgress,
   activeCategory,
   onSelectCategory,
   collapsed,
@@ -43,6 +50,21 @@ export function RegionSummaryPanel({
           <div className="text-xs text-[var(--muted)]">
             {placeCount} 个地点 · 已探索 {visitedCount}
           </div>
+          {wardProgress && wardProgress.total > 0 && (
+            <div
+              className={`mt-0.5 text-xs tabular-nums ${
+                wardProgress.conquered
+                  ? "font-medium text-[var(--visited)]"
+                  : "text-[var(--muted)]"
+              }`}
+            >
+              {wardProgress.conquered
+                ? "制霸"
+                : `制霸进度 ${Math.round(wardProgress.ratio * 100)}%`}
+              {" · "}
+              {wardProgress.visited}/{wardProgress.total}
+            </div>
+          )}
           {onToggleCollapsed && (
             <button
               type="button"

@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "predev": "node ./scripts/copy-maplibre-worker.mjs",
     "build": "next build",
+    "prebuild": "node ./scripts/copy-maplibre-worker.mjs",
     "start": "next start",
     "lint": "next lint",
     "db:seed": "tsx src/data/db/seed.ts",
     "db:reset": "tsx src/data/db/seed.ts --reset",
     "places:import": "tsx scripts/import-places.ts",
+    "geo:chome": "tsx scripts/generate-tokyo-chome-grid.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

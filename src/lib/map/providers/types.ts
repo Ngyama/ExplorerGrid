@@ -1,4 +1,7 @@
+import type { StyleSpecification } from "maplibre-gl";
+
 export type MapProviderId =
+  | "abstract"
   | "maptiler-japan"
   | "gsi-pale"
   | "openfreemap-liberty"
@@ -9,7 +12,10 @@ export type MapProviderType = "vector" | "raster";
 export interface MapProviderConfig {
   id: MapProviderId;
   label: string;
+  /** Remote/local style URL — omit when inlineStyle is set. */
   styleUrl: string;
+  /** Inline MapLibre style (preferred for abstract basemap). */
+  inlineStyle?: StyleSpecification;
   maxZoom: number;
   type: MapProviderType;
   supportsCustomStyle: boolean;

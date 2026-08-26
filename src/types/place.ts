@@ -22,6 +22,8 @@ export type PlaceCategory =
 
 export type PlaceSourceType = "curated" | "imported" | "custom";
 
+export type PlaceReviewStatus = "pending" | "approved" | "rejected";
+
 export interface Place {
   id: string;
   name: string;
@@ -34,6 +36,9 @@ export interface Place {
   importance: number;
   minZoom: number;
   sourceType: PlaceSourceType;
+  reviewStatus?: PlaceReviewStatus;
+  nameJa?: string | null;
+  nameEn?: string | null;
 }
 
 export interface ExploreLayerSummary {

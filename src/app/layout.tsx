@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="zh-CN">
       <body className="antialiased">
         <AppNav />
-        <main>{children}</main>
+        <main className="relative h-[100dvh] overflow-hidden">{children}</main>
       </body>
     </html>
   );

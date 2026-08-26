@@ -9,12 +9,18 @@ import {
 } from "@/data/db/schema";
 import { assignRegionId } from "@/lib/places/assignRegion";
 import {
+  buildNeutralDescription,
   defaultMinZoomForImportance,
   placeholderImageForCategory,
+  scoreImportanceFromOsm,
 } from "@/lib/places/importance";
-import { assertCategory } from "@/lib/places/osmCategoryMap";
+import { assertCategory } from "@/lib/places/categoryMapping";
 import type { ExternalPlaceCandidate } from "@/lib/providers/places/types";
-import type { PlaceCategory, PlaceSourceType } from "@/types/place";
+import type {
+  PlaceCategory,
+  PlaceReviewStatus,
+  PlaceSourceType,
+} from "@/types/place";
 
 export type CatalogPlace = {
   id: string;
@@ -31,6 +37,8 @@ export type CatalogPlace = {
   osm?: string | null;
   layers?: string[];
   layerNotes?: Record<string, string>;
+  nameJa?: string | null;
+  nameEn?: string | null;
 };
 
 export type UpsertStats = {
@@ -46,6 +54,25 @@ function slugify(name: string): string {
     .replace(/[^\p{L}\p{N}]+/gu, "-")
     .replace(/^-|-$/g, "")
     .slice(0, 48);
+}
+
+function reviewDefaultsForSource(sourceType: PlaceSourceType): {
+  reviewStatus: PlaceReviewStatus;
+  reviewSource: string;
+  reviewedAt: string | null;
+} {
+  if (sourceType === "imported") {
+    return {
+      reviewStatus: "pending",
+      reviewSource: "import",
+      reviewedAt: null,
+    };
+  }
+  return {
+    reviewStatus: "approved",
+    reviewSource: sourceType === "custom" ? "manual" : "curated",
+    reviewedAt: new Date().toISOString(),
+  };
 }
 
 export function findPlaceIdByExternal(
@@ -124,8 +151,9 @@ export function upsertPlaceFromCatalog(
   const importance = item.importance ?? 3;
   const minZoom =
     item.minZoom ?? defaultMinZoomForImportance(importance);
-  const image = item.image || placeholderImageForCategory(category);
+  const image = item.image ?? placeholderImageForCategory(category);
   const sourceType = item.sourceType ?? "curated";
+  const review = reviewDefaultsForSource(sourceType);
 
   let placeId = item.id;
   if (item.osm) {
@@ -153,10 +181,19 @@ export function upsertPlaceFromCatalog(
         importance,
         minZoom,
         sourceType,
+        reviewStatus: review.reviewStatus,
+        reviewSource: review.reviewSource,
+        reviewedAt: review.reviewedAt,
+        nameJa: item.nameJa ?? null,
+        nameEn: item.nameEn ?? null,
       })
       .run();
     stats.inserted += 1;
   } else {
+    // Do not downgrade human-approved places when re-importing curated.
+    const keepReview =
+      existing.reviewStatus === "approved" ||
+      existing.reviewStatus === "rejected";
     db.update(places)
       .set({
         name: item.name,
@@ -164,12 +201,21 @@ export function upsertPlaceFromCatalog(
         latitude: item.latitude,
         longitude: item.longitude,
         category,
-        image,
+        image: image || existing.image,
         regionId,
         importance,
         minZoom,
         sourceType:
           existing.sourceType === "custom" ? "custom" : sourceType,
+        nameJa: item.nameJa ?? existing.nameJa,
+        nameEn: item.nameEn ?? existing.nameEn,
+        ...(keepReview
+          ? {}
+          : {
+              reviewStatus: review.reviewStatus,
+              reviewSource: review.reviewSource,
+              reviewedAt: review.reviewedAt,
+            }),
       })
       .where(eq(places.id, placeId))
       .run();
@@ -235,7 +281,9 @@ export function upsertFromExternalCandidate(
   options?: {
     sourceType?: PlaceSourceType;
     importance?: number;
+    /** Live imports should NOT auto-join formal Explore Views. */
     layerIds?: string[];
+    tags?: Record<string, string | undefined>;
   }
 ): { placeId: string; created: boolean } {
   const existingId = findPlaceIdByExternal(
@@ -243,25 +291,53 @@ export function upsertFromExternalCandidate(
     candidate.externalId
   );
   const category = assertCategory(candidate.category);
-  const importance = options?.importance ?? 3;
+  const tags = options?.tags ??
+    (candidate.rawMetadata &&
+    typeof candidate.rawMetadata === "object" &&
+    "tags" in candidate.rawMetadata
+      ? (candidate.rawMetadata.tags as Record<string, string | undefined>)
+      : {});
+  const importance =
+    options?.importance ?? scoreImportanceFromOsm(tags, category);
   const minZoom = defaultMinZoomForImportance(importance);
   const regionId = assignRegionId(candidate.longitude, candidate.latitude);
   const image = placeholderImageForCategory(category);
   const sourceType = options?.sourceType ?? "imported";
+  const review = reviewDefaultsForSource(sourceType);
+  const nameJa = tags.name ?? tags["name:ja"] ?? null;
+  const nameEn = tags["name:en"] ?? null;
+  const description =
+    candidate.description?.trim() ||
+    buildNeutralDescription({ name: candidate.name, category });
 
   if (existingId) {
+    const existing = db
+      .select()
+      .from(places)
+      .where(eq(places.id, existingId))
+      .get();
+    // Refresh geo/meta but preserve human review decisions.
     db.update(places)
       .set({
         name: candidate.name,
         description:
-          candidate.description ||
-          db.select().from(places).where(eq(places.id, existingId)).get()
-            ?.description ||
-          "",
+          existing?.reviewStatus === "approved"
+            ? existing.description
+            : description,
         latitude: candidate.latitude,
         longitude: candidate.longitude,
-        category,
+        category:
+          existing?.reviewStatus === "approved"
+            ? existing.category
+            : category,
         regionId,
+        importance:
+          existing?.reviewStatus === "approved"
+            ? existing.importance
+            : importance,
+        minZoom,
+        nameJa,
+        nameEn,
       })
       .where(eq(places.id, existingId))
       .run();
@@ -280,7 +356,7 @@ export function upsertFromExternalCandidate(
     .values({
       id: placeId,
       name: candidate.name,
-      description: candidate.description || `${candidate.name}（自 ${candidate.provider} 导入）`,
+      description,
       latitude: candidate.latitude,
       longitude: candidate.longitude,
       category,
@@ -289,6 +365,11 @@ export function upsertFromExternalCandidate(
       importance,
       minZoom,
       sourceType,
+      reviewStatus: review.reviewStatus,
+      reviewSource: review.reviewSource,
+      reviewedAt: review.reviewedAt,
+      nameJa,
+      nameEn,
     })
     .run();
 
@@ -300,6 +381,7 @@ export function upsertFromExternalCandidate(
     sourceUpdatedAt: candidate.sourceUpdatedAt,
   });
 
+  // Only link layers when explicitly requested (curated path).
   for (const layerId of options?.layerIds ?? []) {
     const exists = db
       .select()
@@ -336,6 +418,7 @@ export function createCustomPlace(input: {
 }): string {
   const id = `custom-${randomUUID()}`;
   const category = assertCategory(input.category);
+  const review = reviewDefaultsForSource("custom");
   db.insert(places)
     .values({
       id,
@@ -349,6 +432,9 @@ export function createCustomPlace(input: {
       importance: 3,
       minZoom: 12,
       sourceType: "custom",
+      reviewStatus: review.reviewStatus,
+      reviewSource: review.reviewSource,
+      reviewedAt: review.reviewedAt,
     })
     .run();
   return id;
@@ -366,7 +452,15 @@ export function searchLocalPlaces(query: string, limit = 12) {
       regionId: places.regionId,
     })
     .from(places)
-    .where(or(like(places.name, q), like(places.description, q)))
+    .where(
+      and(
+        or(like(places.name, q), like(places.description, q)),
+        or(
+          eq(places.reviewStatus, "approved"),
+          eq(places.sourceType, "custom")
+        )
+      )
+    )
     .limit(limit)
     .all();
 }

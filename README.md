@@ -63,6 +63,14 @@ SQLite 文件位于 `data/explorer-grid.db`（本地生成，不入库）。
 
 ## MVP 范围
 
-已实现：日本范围地图工作空间、Region、Explore View、Collection、地点搜索、Custom Place、OSM 导入管线、importance/zoom 过滤、Marker clustering、访问/评分/感想、图鉴 Region 筛选。
+已实现：日本范围地图工作空间、Region、Explore View、Collection、地点搜索、Custom Place、OSM 导入、内容审核 `/admin/review`、importance/zoom 过滤、Marker clustering、访问/评分/感想、图鉴 Region 筛选。
 
-未实现：登录、社交、推荐、GPS 打卡、全日本 POI、PostGIS、管理后台。
+未实现：登录、社交、推荐、GPS 打卡、全日本 POI、PostGIS、生产级 CMS。
+
+### 内容审核
+
+```bash
+npm run places:import -- --live --region tokyo
+```
+
+打开 [http://localhost:3000/admin/review](http://localhost:3000/admin/review)：筛选 pending → 批量 Approve / Reject / 加入 Explore View。

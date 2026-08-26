@@ -1,4 +1,13 @@
 import type { PlaceCategory } from "@/types/place";
+import { mapOsmTagsToCategory } from "@/lib/places/categoryMapping";
+
+/** Re-export mapping for older imports */
+export {
+  mapOsmTagsToCategory,
+  isExploreWorthyCategory,
+  assertCategory,
+} from "@/lib/places/categoryMapping";
+export type { OsmTags } from "@/lib/places/categoryMapping";
 
 /** importance: 1 = national, 2 = regional, 3 = local */
 export function defaultMinZoomForImportance(importance: number): number {
@@ -7,28 +16,73 @@ export function defaultMinZoomForImportance(importance: number): number {
   return 11;
 }
 
-export function inferImportanceFromOsm(tags: Record<string, string | undefined>): number {
-  const wikidata = tags.wikidata;
-  const wikipedia = tags.wikipedia;
-  const tourism = tags.tourism;
-  const historic = tags.historic;
+const NATIONAL_NAME_HINTS = [
+  "富士山",
+  "東京タワー",
+  "東京スカイツリー",
+  "浅草寺",
+  "明治神宮",
+  "皇居",
+  "清水寺",
+  "金閣寺",
+  "伏見稲荷",
+  "姫路城",
+  "厳島神社",
+  "東大寺",
+  "大阪城",
+];
 
+/**
+ * Initial importance suggestion from OSM tags.
+ * Always treat as a draft — humans override in Review.
+ */
+export function scoreImportanceFromOsm(
+  tags: Record<string, string | undefined>,
+  category?: PlaceCategory
+): number {
+  const resolved =
+    category ?? mapOsmTagsToCategory(tags);
+  const name = tags.name ?? tags["name:ja"] ?? "";
+  const nameEn = tags["name:en"] ?? "";
+
+  let score = 0;
+
+  if (NATIONAL_NAME_HINTS.some((n) => name.includes(n) || nameEn.includes(n))) {
+    score += 40;
+  }
+  if (tags.wikidata && tags.wikipedia) score += 18;
+  else if (tags.wikidata || tags.wikipedia) score += 12;
+
+  if (tags.heritage || tags["heritage:operator"]) score += 14;
+  if (tags.website || tags["contact:website"]) score += 4;
+  if (tags["name:en"] && tags.name) score += 3;
+  if (tags.opening_hours) score += 2;
+  if (tags.fee) score += 1;
+
+  if (resolved === "castle" || resolved === "theme_park") score += 16;
   if (
-    historic === "castle" ||
-    tourism === "theme_park" ||
-    tags.name === "富士山" ||
-    tags["name:en"] === "Mount Fuji"
+    resolved === "museum" ||
+    resolved === "art_museum" ||
+    resolved === "aquarium" ||
+    resolved === "zoo"
   ) {
-    return 1;
+    score += 10;
   }
+  if (resolved === "observation" || resolved === "landmark") score += 8;
+  if (resolved === "shrine" || resolved === "temple" || resolved === "garden") {
+    score += 6;
+  }
+  if (tags.tourism === "attraction") score += 5;
+  if (tags.historic) score += 4;
 
-  if (wikidata && wikipedia) return 2;
-  if (wikidata || wikipedia) return 2;
-  if (tourism === "museum" || tourism === "aquarium" || tourism === "zoo") {
-    return 2;
-  }
+  // Map score → 1/2/3
+  if (score >= 40) return 1;
+  if (score >= 18) return 2;
   return 3;
 }
+
+/** @deprecated alias */
+export const inferImportanceFromOsm = scoreImportanceFromOsm;
 
 export function placeholderImageForCategory(category: PlaceCategory): string {
   const map: Partial<Record<PlaceCategory, string>> = {
@@ -66,8 +120,36 @@ export function placeholderImageForCategory(category: PlaceCategory): string {
     nature:
       "https://images.unsplash.com/photo-1490806843957-31f4c9a91c8f?w=800&q=80",
   };
-  return (
-    map[category] ??
-    "https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&q=80"
-  );
+  return map[category] ?? "";
+}
+
+export function buildNeutralDescription(input: {
+  name: string;
+  category: PlaceCategory;
+  regionLabel?: string | null;
+}): string {
+  const where = input.regionLabel ? `位于${input.regionLabel}的` : "";
+  const kind: Record<string, string> = {
+    museum: "博物馆",
+    art_museum: "美术馆",
+    aquarium: "水族馆",
+    zoo: "动物园",
+    park: "公园",
+    garden: "庭园",
+    shrine: "神社",
+    temple: "寺院",
+    castle: "城郭",
+    landmark: "地标",
+    observation: "展望设施",
+    bookstore: "书店",
+    memorial: "纪念场所",
+    street: "街区",
+    cafe: "咖啡馆",
+    restaurant: "餐厅",
+    theme_park: "主题乐园",
+    nature: "自然景点",
+    cinema: "影院",
+    other: "地点",
+  };
+  return `${where}${kind[input.category] ?? "地点"}「${input.name}」。`;
 }

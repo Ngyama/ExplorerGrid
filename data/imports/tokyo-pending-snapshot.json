@@ -1,0 +1,2487 @@
+{
+  "version": 1,
+  "places": [
+    {
+      "provider": "osm",
+      "externalId": "node/900001",
+      "name": "千代田博物館1",
+      "nameJa": "千代田博物館1",
+      "nameEn": "千代田 museum 1",
+      "latitude": 35.693365,
+      "longitude": 139.763236,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900001,
+        "tags": {
+          "name": "千代田博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900001"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900002",
+      "name": "千代田美術館2",
+      "nameJa": "千代田美術館2",
+      "nameEn": "千代田 art_museum 2",
+      "latitude": 35.70616,
+      "longitude": 139.758066,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900002,
+        "tags": {
+          "name": "千代田美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900003",
+      "name": "千代田公園3",
+      "nameJa": "千代田公園3",
+      "nameEn": "千代田 park 3",
+      "latitude": 35.697054,
+      "longitude": 139.767277,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900003,
+        "tags": {
+          "name": "千代田公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900004",
+      "name": "千代田神社4",
+      "nameJa": "千代田神社4",
+      "nameEn": "千代田 shrine 4",
+      "latitude": 35.685588,
+      "longitude": 139.758794,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900004,
+        "tags": {
+          "name": "千代田神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900005",
+      "name": "千代田寺5",
+      "nameJa": "千代田寺5",
+      "nameEn": "千代田 temple 5",
+      "latitude": 35.704701,
+      "longitude": 139.745961,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900005,
+        "tags": {
+          "name": "千代田寺5",
+          "wikidata": "Q900005"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900006",
+      "name": "千代田庭園6",
+      "nameJa": "千代田庭園6",
+      "nameEn": "千代田 garden 6",
+      "latitude": 35.703277,
+      "longitude": 139.745699,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900006,
+        "tags": {
+          "name": "千代田庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900007",
+      "name": "千代田ランドマーク7",
+      "nameJa": "千代田ランドマーク7",
+      "nameEn": "千代田 landmark 7",
+      "latitude": 35.708379,
+      "longitude": 139.741953,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900007,
+        "tags": {
+          "name": "千代田ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900008",
+      "name": "千代田展望8",
+      "nameJa": "千代田展望8",
+      "nameEn": "千代田 observation 8",
+      "latitude": 35.681395,
+      "longitude": 139.751978,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900008,
+        "tags": {
+          "name": "千代田展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900009",
+      "name": "千代田書店9",
+      "nameJa": "千代田書店9",
+      "nameEn": "千代田 bookstore 9",
+      "latitude": 35.703092,
+      "longitude": 139.762227,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900009,
+        "tags": {
+          "name": "千代田書店9",
+          "wikidata": "Q900009"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900010",
+      "name": "千代田記念館10",
+      "nameJa": "千代田記念館10",
+      "nameEn": "千代田 memorial 10",
+      "latitude": 35.700543,
+      "longitude": 139.766982,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900010,
+        "tags": {
+          "name": "千代田記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900011",
+      "name": "千代田カフェ11",
+      "nameJa": "千代田カフェ11",
+      "nameEn": "千代田 cafe 11",
+      "latitude": 35.690495,
+      "longitude": 139.760972,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900011,
+        "tags": {
+          "name": "千代田カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900012",
+      "name": "千代田水族館12",
+      "nameJa": "千代田水族館12",
+      "nameEn": "千代田 aquarium 12",
+      "latitude": 35.701152,
+      "longitude": 139.760074,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900012,
+        "tags": {
+          "name": "千代田水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900013",
+      "name": "中央博物館1",
+      "nameJa": "中央博物館1",
+      "nameEn": "中央 museum 1",
+      "latitude": 35.677782,
+      "longitude": 139.760274,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900013,
+        "tags": {
+          "name": "中央博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900013"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900014",
+      "name": "中央美術館2",
+      "nameJa": "中央美術館2",
+      "nameEn": "中央 art_museum 2",
+      "latitude": 35.676882,
+      "longitude": 139.762432,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900014,
+        "tags": {
+          "name": "中央美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900015",
+      "name": "中央公園3",
+      "nameJa": "中央公園3",
+      "nameEn": "中央 park 3",
+      "latitude": 35.682961,
+      "longitude": 139.78242,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900015,
+        "tags": {
+          "name": "中央公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900016",
+      "name": "中央神社4",
+      "nameJa": "中央神社4",
+      "nameEn": "中央 shrine 4",
+      "latitude": 35.665312,
+      "longitude": 139.778358,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900016,
+        "tags": {
+          "name": "中央神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900017",
+      "name": "中央寺5",
+      "nameJa": "中央寺5",
+      "nameEn": "中央 temple 5",
+      "latitude": 35.661752,
+      "longitude": 139.779091,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900017,
+        "tags": {
+          "name": "中央寺5",
+          "wikidata": "Q900017"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900018",
+      "name": "中央庭園6",
+      "nameJa": "中央庭園6",
+      "nameEn": "中央 garden 6",
+      "latitude": 35.679772,
+      "longitude": 139.772255,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900018,
+        "tags": {
+          "name": "中央庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900019",
+      "name": "中央ランドマーク7",
+      "nameJa": "中央ランドマーク7",
+      "nameEn": "中央 landmark 7",
+      "latitude": 35.657301,
+      "longitude": 139.786696,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900019,
+        "tags": {
+          "name": "中央ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900020",
+      "name": "中央展望8",
+      "nameJa": "中央展望8",
+      "nameEn": "中央 observation 8",
+      "latitude": 35.666109,
+      "longitude": 139.767177,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900020,
+        "tags": {
+          "name": "中央展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900021",
+      "name": "中央書店9",
+      "nameJa": "中央書店9",
+      "nameEn": "中央 bookstore 9",
+      "latitude": 35.659863,
+      "longitude": 139.785732,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900021,
+        "tags": {
+          "name": "中央書店9",
+          "wikidata": "Q900021"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900022",
+      "name": "中央記念館10",
+      "nameJa": "中央記念館10",
+      "nameEn": "中央 memorial 10",
+      "latitude": 35.669887,
+      "longitude": 139.765612,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900022,
+        "tags": {
+          "name": "中央記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900023",
+      "name": "中央カフェ11",
+      "nameJa": "中央カフェ11",
+      "nameEn": "中央 cafe 11",
+      "latitude": 35.666116,
+      "longitude": 139.76018,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900023,
+        "tags": {
+          "name": "中央カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900024",
+      "name": "中央水族館12",
+      "nameJa": "中央水族館12",
+      "nameEn": "中央 aquarium 12",
+      "latitude": 35.676753,
+      "longitude": 139.784935,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13102",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900024,
+        "tags": {
+          "name": "中央水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900025",
+      "name": "港区博物館1",
+      "nameJa": "港区博物館1",
+      "nameEn": "港区 museum 1",
+      "latitude": 35.666623,
+      "longitude": 139.754078,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900025,
+        "tags": {
+          "name": "港区博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900025"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900026",
+      "name": "港区美術館2",
+      "nameJa": "港区美術館2",
+      "nameEn": "港区 art_museum 2",
+      "latitude": 35.658575,
+      "longitude": 139.756411,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900026,
+        "tags": {
+          "name": "港区美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900027",
+      "name": "港区公園3",
+      "nameJa": "港区公園3",
+      "nameEn": "港区 park 3",
+      "latitude": 35.650856,
+      "longitude": 139.765013,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900027,
+        "tags": {
+          "name": "港区公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900028",
+      "name": "港区神社4",
+      "nameJa": "港区神社4",
+      "nameEn": "港区 shrine 4",
+      "latitude": 35.651472,
+      "longitude": 139.754797,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900028,
+        "tags": {
+          "name": "港区神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900029",
+      "name": "港区寺5",
+      "nameJa": "港区寺5",
+      "nameEn": "港区 temple 5",
+      "latitude": 35.643762,
+      "longitude": 139.742648,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900029,
+        "tags": {
+          "name": "港区寺5",
+          "wikidata": "Q900029"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900030",
+      "name": "港区庭園6",
+      "nameJa": "港区庭園6",
+      "nameEn": "港区 garden 6",
+      "latitude": 35.647779,
+      "longitude": 139.756036,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900030,
+        "tags": {
+          "name": "港区庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900031",
+      "name": "港区ランドマーク7",
+      "nameJa": "港区ランドマーク7",
+      "nameEn": "港区 landmark 7",
+      "latitude": 35.648853,
+      "longitude": 139.759928,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900031,
+        "tags": {
+          "name": "港区ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900032",
+      "name": "港区展望8",
+      "nameJa": "港区展望8",
+      "nameEn": "港区 observation 8",
+      "latitude": 35.663565,
+      "longitude": 139.754287,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900032,
+        "tags": {
+          "name": "港区展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900033",
+      "name": "港区書店9",
+      "nameJa": "港区書店9",
+      "nameEn": "港区 bookstore 9",
+      "latitude": 35.657302,
+      "longitude": 139.751311,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900033,
+        "tags": {
+          "name": "港区書店9",
+          "wikidata": "Q900033"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900034",
+      "name": "港区記念館10",
+      "nameJa": "港区記念館10",
+      "nameEn": "港区 memorial 10",
+      "latitude": 35.668977,
+      "longitude": 139.742339,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900034,
+        "tags": {
+          "name": "港区記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900035",
+      "name": "港区カフェ11",
+      "nameJa": "港区カフェ11",
+      "nameEn": "港区 cafe 11",
+      "latitude": 35.660943,
+      "longitude": 139.758305,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900035,
+        "tags": {
+          "name": "港区カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900036",
+      "name": "港区水族館12",
+      "nameJa": "港区水族館12",
+      "nameEn": "港区 aquarium 12",
+      "latitude": 35.645646,
+      "longitude": 139.747776,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13103",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900036,
+        "tags": {
+          "name": "港区水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900037",
+      "name": "新宿博物館1",
+      "nameJa": "新宿博物館1",
+      "nameEn": "新宿 museum 1",
+      "latitude": 35.69073,
+      "longitude": 139.707357,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900037,
+        "tags": {
+          "name": "新宿博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900037"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900038",
+      "name": "新宿美術館2",
+      "nameJa": "新宿美術館2",
+      "nameEn": "新宿 art_museum 2",
+      "latitude": 35.700027,
+      "longitude": 139.691324,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900038,
+        "tags": {
+          "name": "新宿美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900039",
+      "name": "新宿公園3",
+      "nameJa": "新宿公園3",
+      "nameEn": "新宿 park 3",
+      "latitude": 35.705493,
+      "longitude": 139.715406,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900039,
+        "tags": {
+          "name": "新宿公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900040",
+      "name": "新宿神社4",
+      "nameJa": "新宿神社4",
+      "nameEn": "新宿 shrine 4",
+      "latitude": 35.679702,
+      "longitude": 139.688277,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900040,
+        "tags": {
+          "name": "新宿神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900041",
+      "name": "新宿寺5",
+      "nameJa": "新宿寺5",
+      "nameEn": "新宿 temple 5",
+      "latitude": 35.682733,
+      "longitude": 139.712919,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900041,
+        "tags": {
+          "name": "新宿寺5",
+          "wikidata": "Q900041"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900042",
+      "name": "新宿庭園6",
+      "nameJa": "新宿庭園6",
+      "nameEn": "新宿 garden 6",
+      "latitude": 35.707773,
+      "longitude": 139.69346,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900042,
+        "tags": {
+          "name": "新宿庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900043",
+      "name": "新宿ランドマーク7",
+      "nameJa": "新宿ランドマーク7",
+      "nameEn": "新宿 landmark 7",
+      "latitude": 35.692316,
+      "longitude": 139.712611,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900043,
+        "tags": {
+          "name": "新宿ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900044",
+      "name": "新宿展望8",
+      "nameJa": "新宿展望8",
+      "nameEn": "新宿 observation 8",
+      "latitude": 35.683211,
+      "longitude": 139.710882,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900044,
+        "tags": {
+          "name": "新宿展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900045",
+      "name": "新宿書店9",
+      "nameJa": "新宿書店9",
+      "nameEn": "新宿 bookstore 9",
+      "latitude": 35.692278,
+      "longitude": 139.689017,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900045,
+        "tags": {
+          "name": "新宿書店9",
+          "wikidata": "Q900045"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900046",
+      "name": "新宿記念館10",
+      "nameJa": "新宿記念館10",
+      "nameEn": "新宿 memorial 10",
+      "latitude": 35.703537,
+      "longitude": 139.701436,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900046,
+        "tags": {
+          "name": "新宿記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900047",
+      "name": "新宿カフェ11",
+      "nameJa": "新宿カフェ11",
+      "nameEn": "新宿 cafe 11",
+      "latitude": 35.702238,
+      "longitude": 139.709514,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900047,
+        "tags": {
+          "name": "新宿カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900048",
+      "name": "新宿水族館12",
+      "nameJa": "新宿水族館12",
+      "nameEn": "新宿 aquarium 12",
+      "latitude": 35.683558,
+      "longitude": 139.703424,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13104",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900048,
+        "tags": {
+          "name": "新宿水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900049",
+      "name": "文京博物館1",
+      "nameJa": "文京博物館1",
+      "nameEn": "文京 museum 1",
+      "latitude": 35.709782,
+      "longitude": 139.764242,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900049,
+        "tags": {
+          "name": "文京博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900049"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900050",
+      "name": "文京美術館2",
+      "nameJa": "文京美術館2",
+      "nameEn": "文京 art_museum 2",
+      "latitude": 35.706201,
+      "longitude": 139.763735,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900050,
+        "tags": {
+          "name": "文京美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900051",
+      "name": "文京公園3",
+      "nameJa": "文京公園3",
+      "nameEn": "文京 park 3",
+      "latitude": 35.698787,
+      "longitude": 139.739451,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900051,
+        "tags": {
+          "name": "文京公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900052",
+      "name": "文京神社4",
+      "nameJa": "文京神社4",
+      "nameEn": "文京 shrine 4",
+      "latitude": 35.706566,
+      "longitude": 139.762974,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900052,
+        "tags": {
+          "name": "文京神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900053",
+      "name": "文京寺5",
+      "nameJa": "文京寺5",
+      "nameEn": "文京 temple 5",
+      "latitude": 35.700527,
+      "longitude": 139.760184,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900053,
+        "tags": {
+          "name": "文京寺5",
+          "wikidata": "Q900053"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900054",
+      "name": "文京庭園6",
+      "nameJa": "文京庭園6",
+      "nameEn": "文京 garden 6",
+      "latitude": 35.696676,
+      "longitude": 139.748451,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900054,
+        "tags": {
+          "name": "文京庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900055",
+      "name": "文京ランドマーク7",
+      "nameJa": "文京ランドマーク7",
+      "nameEn": "文京 landmark 7",
+      "latitude": 35.712148,
+      "longitude": 139.76411,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900055,
+        "tags": {
+          "name": "文京ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900056",
+      "name": "文京展望8",
+      "nameJa": "文京展望8",
+      "nameEn": "文京 observation 8",
+      "latitude": 35.699482,
+      "longitude": 139.748285,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900056,
+        "tags": {
+          "name": "文京展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900057",
+      "name": "文京書店9",
+      "nameJa": "文京書店9",
+      "nameEn": "文京 bookstore 9",
+      "latitude": 35.722073,
+      "longitude": 139.762127,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900057,
+        "tags": {
+          "name": "文京書店9",
+          "wikidata": "Q900057"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900058",
+      "name": "文京記念館10",
+      "nameJa": "文京記念館10",
+      "nameEn": "文京 memorial 10",
+      "latitude": 35.693476,
+      "longitude": 139.758516,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900058,
+        "tags": {
+          "name": "文京記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900059",
+      "name": "文京カフェ11",
+      "nameJa": "文京カフェ11",
+      "nameEn": "文京 cafe 11",
+      "latitude": 35.706814,
+      "longitude": 139.759298,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900059,
+        "tags": {
+          "name": "文京カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900060",
+      "name": "文京水族館12",
+      "nameJa": "文京水族館12",
+      "nameEn": "文京 aquarium 12",
+      "latitude": 35.701133,
+      "longitude": 139.739359,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13105",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900060,
+        "tags": {
+          "name": "文京水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900061",
+      "name": "台东博物館1",
+      "nameJa": "台东博物館1",
+      "nameEn": "台东 museum 1",
+      "latitude": 35.708806,
+      "longitude": 139.773941,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900061,
+        "tags": {
+          "name": "台东博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900061"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900062",
+      "name": "台东美術館2",
+      "nameJa": "台东美術館2",
+      "nameEn": "台东 art_museum 2",
+      "latitude": 35.72257,
+      "longitude": 139.77314,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900062,
+        "tags": {
+          "name": "台东美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900063",
+      "name": "台东公園3",
+      "nameJa": "台东公園3",
+      "nameEn": "台东 park 3",
+      "latitude": 35.706596,
+      "longitude": 139.775967,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900063,
+        "tags": {
+          "name": "台东公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900064",
+      "name": "台东神社4",
+      "nameJa": "台东神社4",
+      "nameEn": "台东 shrine 4",
+      "latitude": 35.713848,
+      "longitude": 139.777739,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900064,
+        "tags": {
+          "name": "台东神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900065",
+      "name": "台东寺5",
+      "nameJa": "台东寺5",
+      "nameEn": "台东 temple 5",
+      "latitude": 35.700998,
+      "longitude": 139.774975,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900065,
+        "tags": {
+          "name": "台东寺5",
+          "wikidata": "Q900065"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900066",
+      "name": "台东庭園6",
+      "nameJa": "台东庭園6",
+      "nameEn": "台东 garden 6",
+      "latitude": 35.715157,
+      "longitude": 139.793777,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900066,
+        "tags": {
+          "name": "台东庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900067",
+      "name": "台东ランドマーク7",
+      "nameJa": "台东ランドマーク7",
+      "nameEn": "台东 landmark 7",
+      "latitude": 35.708565,
+      "longitude": 139.773275,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900067,
+        "tags": {
+          "name": "台东ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900068",
+      "name": "台东展望8",
+      "nameJa": "台东展望8",
+      "nameEn": "台东 observation 8",
+      "latitude": 35.705912,
+      "longitude": 139.774648,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900068,
+        "tags": {
+          "name": "台东展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900069",
+      "name": "台东書店9",
+      "nameJa": "台东書店9",
+      "nameEn": "台东 bookstore 9",
+      "latitude": 35.710169,
+      "longitude": 139.786109,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900069,
+        "tags": {
+          "name": "台东書店9",
+          "wikidata": "Q900069"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900070",
+      "name": "台东記念館10",
+      "nameJa": "台东記念館10",
+      "nameEn": "台东 memorial 10",
+      "latitude": 35.699785,
+      "longitude": 139.781399,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900070,
+        "tags": {
+          "name": "台东記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900071",
+      "name": "台东カフェ11",
+      "nameJa": "台东カフェ11",
+      "nameEn": "台东 cafe 11",
+      "latitude": 35.720021,
+      "longitude": 139.787455,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900071,
+        "tags": {
+          "name": "台东カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900072",
+      "name": "台东水族館12",
+      "nameJa": "台东水族館12",
+      "nameEn": "台东 aquarium 12",
+      "latitude": 35.714181,
+      "longitude": 139.775217,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13106",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900072,
+        "tags": {
+          "name": "台东水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900073",
+      "name": "墨田博物館1",
+      "nameJa": "墨田博物館1",
+      "nameEn": "墨田 museum 1",
+      "latitude": 35.718241,
+      "longitude": 139.81477,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900073,
+        "tags": {
+          "name": "墨田博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900073"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900074",
+      "name": "墨田美術館2",
+      "nameJa": "墨田美術館2",
+      "nameEn": "墨田 art_museum 2",
+      "latitude": 35.705343,
+      "longitude": 139.791735,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900074,
+        "tags": {
+          "name": "墨田美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900075",
+      "name": "墨田公園3",
+      "nameJa": "墨田公園3",
+      "nameEn": "墨田 park 3",
+      "latitude": 35.709208,
+      "longitude": 139.801744,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900075,
+        "tags": {
+          "name": "墨田公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900076",
+      "name": "墨田神社4",
+      "nameJa": "墨田神社4",
+      "nameEn": "墨田 shrine 4",
+      "latitude": 35.703902,
+      "longitude": 139.806378,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900076,
+        "tags": {
+          "name": "墨田神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900077",
+      "name": "墨田寺5",
+      "nameJa": "墨田寺5",
+      "nameEn": "墨田 temple 5",
+      "latitude": 35.712483,
+      "longitude": 139.800738,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900077,
+        "tags": {
+          "name": "墨田寺5",
+          "wikidata": "Q900077"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900078",
+      "name": "墨田庭園6",
+      "nameJa": "墨田庭園6",
+      "nameEn": "墨田 garden 6",
+      "latitude": 35.713096,
+      "longitude": 139.799128,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900078,
+        "tags": {
+          "name": "墨田庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900079",
+      "name": "墨田ランドマーク7",
+      "nameJa": "墨田ランドマーク7",
+      "nameEn": "墨田 landmark 7",
+      "latitude": 35.710054,
+      "longitude": 139.812731,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900079,
+        "tags": {
+          "name": "墨田ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900080",
+      "name": "墨田展望8",
+      "nameJa": "墨田展望8",
+      "nameEn": "墨田 observation 8",
+      "latitude": 35.706624,
+      "longitude": 139.813994,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900080,
+        "tags": {
+          "name": "墨田展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900081",
+      "name": "墨田書店9",
+      "nameJa": "墨田書店9",
+      "nameEn": "墨田 bookstore 9",
+      "latitude": 35.724527,
+      "longitude": 139.804579,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900081,
+        "tags": {
+          "name": "墨田書店9",
+          "wikidata": "Q900081"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900082",
+      "name": "墨田記念館10",
+      "nameJa": "墨田記念館10",
+      "nameEn": "墨田 memorial 10",
+      "latitude": 35.719367,
+      "longitude": 139.811949,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900082,
+        "tags": {
+          "name": "墨田記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900083",
+      "name": "墨田カフェ11",
+      "nameJa": "墨田カフェ11",
+      "nameEn": "墨田 cafe 11",
+      "latitude": 35.717888,
+      "longitude": 139.800851,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900083,
+        "tags": {
+          "name": "墨田カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900084",
+      "name": "墨田水族館12",
+      "nameJa": "墨田水族館12",
+      "nameEn": "墨田 aquarium 12",
+      "latitude": 35.71873,
+      "longitude": 139.794524,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13107",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900084,
+        "tags": {
+          "name": "墨田水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900085",
+      "name": "江东博物館1",
+      "nameJa": "江东博物館1",
+      "nameEn": "江东 museum 1",
+      "latitude": 35.665159,
+      "longitude": 139.813596,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900085,
+        "tags": {
+          "name": "江东博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900085"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900086",
+      "name": "江东美術館2",
+      "nameJa": "江东美術館2",
+      "nameEn": "江东 art_museum 2",
+      "latitude": 35.666539,
+      "longitude": 139.815265,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900086,
+        "tags": {
+          "name": "江东美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900087",
+      "name": "江东公園3",
+      "nameJa": "江东公園3",
+      "nameEn": "江东 park 3",
+      "latitude": 35.679832,
+      "longitude": 139.803863,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900087,
+        "tags": {
+          "name": "江东公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900088",
+      "name": "江东神社4",
+      "nameJa": "江东神社4",
+      "nameEn": "江东 shrine 4",
+      "latitude": 35.660916,
+      "longitude": 139.827458,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900088,
+        "tags": {
+          "name": "江东神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900089",
+      "name": "江东寺5",
+      "nameJa": "江东寺5",
+      "nameEn": "江东 temple 5",
+      "latitude": 35.68601,
+      "longitude": 139.821158,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900089,
+        "tags": {
+          "name": "江东寺5",
+          "wikidata": "Q900089"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900090",
+      "name": "江东庭園6",
+      "nameJa": "江东庭園6",
+      "nameEn": "江东 garden 6",
+      "latitude": 35.687288,
+      "longitude": 139.808689,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900090,
+        "tags": {
+          "name": "江东庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900091",
+      "name": "江东ランドマーク7",
+      "nameJa": "江东ランドマーク7",
+      "nameEn": "江东 landmark 7",
+      "latitude": 35.677035,
+      "longitude": 139.820734,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900091,
+        "tags": {
+          "name": "江东ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900092",
+      "name": "江东展望8",
+      "nameJa": "江东展望8",
+      "nameEn": "江东 observation 8",
+      "latitude": 35.683604,
+      "longitude": 139.831014,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900092,
+        "tags": {
+          "name": "江东展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900093",
+      "name": "江东書店9",
+      "nameJa": "江东書店9",
+      "nameEn": "江东 bookstore 9",
+      "latitude": 35.681556,
+      "longitude": 139.824947,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900093,
+        "tags": {
+          "name": "江东書店9",
+          "wikidata": "Q900093"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900094",
+      "name": "江东記念館10",
+      "nameJa": "江东記念館10",
+      "nameEn": "江东 memorial 10",
+      "latitude": 35.677087,
+      "longitude": 139.811219,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900094,
+        "tags": {
+          "name": "江东記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900095",
+      "name": "江东カフェ11",
+      "nameJa": "江东カフェ11",
+      "nameEn": "江东 cafe 11",
+      "latitude": 35.674741,
+      "longitude": 139.828369,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900095,
+        "tags": {
+          "name": "江东カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900096",
+      "name": "江东水族館12",
+      "nameJa": "江东水族館12",
+      "nameEn": "江东 aquarium 12",
+      "latitude": 35.669218,
+      "longitude": 139.804213,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13108",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900096,
+        "tags": {
+          "name": "江东水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900097",
+      "name": "涩谷博物館1",
+      "nameJa": "涩谷博物館1",
+      "nameEn": "涩谷 museum 1",
+      "latitude": 35.659067,
+      "longitude": 139.698789,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900097,
+        "tags": {
+          "name": "涩谷博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900097"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900098",
+      "name": "涩谷美術館2",
+      "nameJa": "涩谷美術館2",
+      "nameEn": "涩谷 art_museum 2",
+      "latitude": 35.671929,
+      "longitude": 139.709952,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900098,
+        "tags": {
+          "name": "涩谷美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900099",
+      "name": "涩谷公園3",
+      "nameJa": "涩谷公園3",
+      "nameEn": "涩谷 park 3",
+      "latitude": 35.655386,
+      "longitude": 139.693764,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900099,
+        "tags": {
+          "name": "涩谷公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900100",
+      "name": "涩谷神社4",
+      "nameJa": "涩谷神社4",
+      "nameEn": "涩谷 shrine 4",
+      "latitude": 35.660751,
+      "longitude": 139.703771,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900100,
+        "tags": {
+          "name": "涩谷神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900101",
+      "name": "涩谷寺5",
+      "nameJa": "涩谷寺5",
+      "nameEn": "涩谷 temple 5",
+      "latitude": 35.675561,
+      "longitude": 139.685189,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900101,
+        "tags": {
+          "name": "涩谷寺5",
+          "wikidata": "Q900101"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900102",
+      "name": "涩谷庭園6",
+      "nameJa": "涩谷庭園6",
+      "nameEn": "涩谷 garden 6",
+      "latitude": 35.659146,
+      "longitude": 139.706708,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900102,
+        "tags": {
+          "name": "涩谷庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900103",
+      "name": "涩谷ランドマーク7",
+      "nameJa": "涩谷ランドマーク7",
+      "nameEn": "涩谷 landmark 7",
+      "latitude": 35.662455,
+      "longitude": 139.707805,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900103,
+        "tags": {
+          "name": "涩谷ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900104",
+      "name": "涩谷展望8",
+      "nameJa": "涩谷展望8",
+      "nameEn": "涩谷 observation 8",
+      "latitude": 35.658017,
+      "longitude": 139.701491,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900104,
+        "tags": {
+          "name": "涩谷展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900105",
+      "name": "涩谷書店9",
+      "nameJa": "涩谷書店9",
+      "nameEn": "涩谷 bookstore 9",
+      "latitude": 35.659634,
+      "longitude": 139.696899,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900105,
+        "tags": {
+          "name": "涩谷書店9",
+          "wikidata": "Q900105"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900106",
+      "name": "涩谷記念館10",
+      "nameJa": "涩谷記念館10",
+      "nameEn": "涩谷 memorial 10",
+      "latitude": 35.661099,
+      "longitude": 139.704694,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900106,
+        "tags": {
+          "name": "涩谷記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900107",
+      "name": "涩谷カフェ11",
+      "nameJa": "涩谷カフェ11",
+      "nameEn": "涩谷 cafe 11",
+      "latitude": 35.665356,
+      "longitude": 139.692769,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900107,
+        "tags": {
+          "name": "涩谷カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900108",
+      "name": "涩谷水族館12",
+      "nameJa": "涩谷水族館12",
+      "nameEn": "涩谷 aquarium 12",
+      "latitude": 35.649013,
+      "longitude": 139.691945,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13113",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900108,
+        "tags": {
+          "name": "涩谷水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900109",
+      "name": "丰岛博物館1",
+      "nameJa": "丰岛博物館1",
+      "nameEn": "丰岛 museum 1",
+      "latitude": 35.721003,
+      "longitude": 139.706749,
+      "category": "museum",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900109,
+        "tags": {
+          "name": "丰岛博物館1",
+          "tourism": "museum",
+          "wikidata": "Q900109"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900110",
+      "name": "丰岛美術館2",
+      "nameJa": "丰岛美術館2",
+      "nameEn": "丰岛 art_museum 2",
+      "latitude": 35.739481,
+      "longitude": 139.718181,
+      "category": "art_museum",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900110,
+        "tags": {
+          "name": "丰岛美術館2"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900111",
+      "name": "丰岛公園3",
+      "nameJa": "丰岛公園3",
+      "nameEn": "丰岛 park 3",
+      "latitude": 35.715421,
+      "longitude": 139.728453,
+      "category": "park",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900111,
+        "tags": {
+          "name": "丰岛公園3"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900112",
+      "name": "丰岛神社4",
+      "nameJa": "丰岛神社4",
+      "nameEn": "丰岛 shrine 4",
+      "latitude": 35.711505,
+      "longitude": 139.708174,
+      "category": "shrine",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900112,
+        "tags": {
+          "name": "丰岛神社4"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900113",
+      "name": "丰岛寺5",
+      "nameJa": "丰岛寺5",
+      "nameEn": "丰岛 temple 5",
+      "latitude": 35.723582,
+      "longitude": 139.723555,
+      "category": "temple",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900113,
+        "tags": {
+          "name": "丰岛寺5",
+          "wikidata": "Q900113"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900114",
+      "name": "丰岛庭園6",
+      "nameJa": "丰岛庭園6",
+      "nameEn": "丰岛 garden 6",
+      "latitude": 35.712768,
+      "longitude": 139.709085,
+      "category": "garden",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900114,
+        "tags": {
+          "name": "丰岛庭園6"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900115",
+      "name": "丰岛ランドマーク7",
+      "nameJa": "丰岛ランドマーク7",
+      "nameEn": "丰岛 landmark 7",
+      "latitude": 35.724477,
+      "longitude": 139.711392,
+      "category": "landmark",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900115,
+        "tags": {
+          "name": "丰岛ランドマーク7"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900116",
+      "name": "丰岛展望8",
+      "nameJa": "丰岛展望8",
+      "nameEn": "丰岛 observation 8",
+      "latitude": 35.714527,
+      "longitude": 139.725329,
+      "category": "observation",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900116,
+        "tags": {
+          "name": "丰岛展望8"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900117",
+      "name": "丰岛書店9",
+      "nameJa": "丰岛書店9",
+      "nameEn": "丰岛 bookstore 9",
+      "latitude": 35.74064,
+      "longitude": 139.726461,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900117,
+        "tags": {
+          "name": "丰岛書店9",
+          "wikidata": "Q900117"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900118",
+      "name": "丰岛記念館10",
+      "nameJa": "丰岛記念館10",
+      "nameEn": "丰岛 memorial 10",
+      "latitude": 35.720678,
+      "longitude": 139.730596,
+      "category": "memorial",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900118,
+        "tags": {
+          "name": "丰岛記念館10"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900119",
+      "name": "丰岛カフェ11",
+      "nameJa": "丰岛カフェ11",
+      "nameEn": "丰岛 cafe 11",
+      "latitude": 35.736336,
+      "longitude": 139.704232,
+      "category": "cafe",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900119,
+        "tags": {
+          "name": "丰岛カフェ11"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/900120",
+      "name": "丰岛水族館12",
+      "nameJa": "丰岛水族館12",
+      "nameEn": "丰岛 aquarium 12",
+      "latitude": 35.728147,
+      "longitude": 139.730906,
+      "category": "aquarium",
+      "description": "",
+      "regionId": "ward-13116",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 900120,
+        "tags": {
+          "name": "丰岛水族館12"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/991001",
+      "name": "神保町古書街",
+      "nameJa": "神保町古書街",
+      "nameEn": "Jimbocho Book Town",
+      "latitude": 35.6956,
+      "longitude": 139.7576,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 2,
+      "rawMetadata": {
+        "type": "node",
+        "id": 991001,
+        "tags": {
+          "name": "神保町古書街",
+          "shop": "books"
+        }
+      }
+    },
+    {
+      "provider": "osm",
+      "externalId": "node/991002",
+      "name": "神保町古书街",
+      "nameJa": "神保町古書街",
+      "nameEn": "Jinbocho Books",
+      "latitude": 35.6957,
+      "longitude": 139.7577,
+      "category": "bookstore",
+      "description": "",
+      "regionId": "ward-13101",
+      "importance": 3,
+      "rawMetadata": {
+        "type": "node",
+        "id": 991002,
+        "tags": {
+          "name": "神保町古書街",
+          "shop": "books"
+        }
+      }
+    }
+  ]
+}

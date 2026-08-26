@@ -106,6 +106,19 @@ export function MapExplorer() {
   } | null>(null);
   const [flyToKey, setFlyToKey] = useState(0);
   const [placesVersion, setPlacesVersion] = useState(0);
+  const [conquestChomeGeoJSON, setConquestChomeGeoJSON] =
+    useState<GeoJSON.FeatureCollection | null>(null);
+  const [conquestWardGeoJSON, setConquestWardGeoJSON] =
+    useState<GeoJSON.FeatureCollection | null>(null);
+  const [wardProgressList, setWardProgressList] = useState<
+    Array<{
+      wardId: string;
+      visited: number;
+      total: number;
+      ratio: number;
+      conquered: boolean;
+    }>
+  >([]);
 
   const prefecturesRef = useRef<RegionFeature[]>([]);
   const wardsRef = useRef<RegionFeature[]>([]);
@@ -316,6 +329,37 @@ export function MapExplorer() {
     };
   }, [mode, activeLayerId, activeCollectionId, stableRegion, places]);
 
+  useEffect(() => {
+    if (mode !== "explore" || !activeLayerId) {
+      setConquestChomeGeoJSON(null);
+      setConquestWardGeoJSON(null);
+      setWardProgressList([]);
+      return;
+    }
+    let cancelled = false;
+    async function loadConquest() {
+      try {
+        const res = await fetch(`/api/conquest?layerId=${encodeURIComponent(activeLayerId)}`);
+        if (!res.ok) return;
+        const data = (await res.json()) as {
+          chomeGeoJSON: GeoJSON.FeatureCollection;
+          wardGeoJSON: GeoJSON.FeatureCollection;
+          wards: typeof wardProgressList;
+        };
+        if (cancelled) return;
+        setConquestChomeGeoJSON(data.chomeGeoJSON);
+        setConquestWardGeoJSON(data.wardGeoJSON);
+        setWardProgressList(data.wards);
+      } catch {
+        // non-critical overlay
+      }
+    }
+    void loadConquest();
+    return () => {
+      cancelled = true;
+    };
+  }, [mode, activeLayerId, placesVersion, places]);
+
   const handlePlaceClick = useCallback(
     async (placeId: string) => {
       try {
@@ -337,6 +381,13 @@ export function MapExplorer() {
     },
     [mode, activeLayerId]
   );
+
+  // Deep-link from Review: /?lat=&lng=&zoom=&place=
+  useEffect(() => {
+    const placeId = searchParams.get("place");
+    if (!placeId) return;
+    void handlePlaceClick(placeId);
+  }, [searchParams, handlePlaceClick]);
 
   const handleRecordChange = useCallback(
     (placeId: string, record: PlaceRecord) => {
@@ -364,14 +415,20 @@ export function MapExplorer() {
   const activeLayer = layers.find((layer) => layer.id === activeLayerId);
   const placeCount = categories.reduce((sum, item) => sum + item.total, 0);
   const visitedCount = categories.reduce((sum, item) => sum + item.visited, 0);
+  const wardProgress = useMemo(() => {
+    if (region.type !== "ward") return null;
+    return wardProgressList.find((w) => w.wardId === region.id) ?? null;
+  }, [region, wardProgressList]);
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden">
+    <div className="absolute inset-0 min-h-0 w-full overflow-hidden">
       <MapView
         places={places}
         highlightedCategory={activeCategory}
         selectedPlaceId={selectedPlace?.id ?? null}
         initialCamera={initialCamera}
+        conquestChomeGeoJSON={conquestChomeGeoJSON}
+        conquestWardGeoJSON={conquestWardGeoJSON}
         onPlaceClick={handlePlaceClick}
         onCameraChange={handleCameraChange}
         flyToBounds={flyToBounds}
@@ -433,6 +490,7 @@ export function MapExplorer() {
               categories={categories}
               placeCount={placeCount}
               visitedCount={visitedCount}
+              wardProgress={wardProgress}
               activeCategory={activeCategory}
               onSelectCategory={setActiveCategory}
               collapsed={summaryCollapsed}

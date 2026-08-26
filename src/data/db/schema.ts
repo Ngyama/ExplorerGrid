@@ -7,12 +7,21 @@ export const places = sqliteTable("places", {
   latitude: real("latitude").notNull(),
   longitude: real("longitude").notNull(),
   category: text("category").notNull(),
-  image: text("image").notNull(),
+  image: text("image").notNull().default(""),
   regionId: text("region_id"),
   importance: integer("importance").notNull().default(3),
   minZoom: real("min_zoom").notNull().default(10),
   /** curated | imported | custom */
   sourceType: text("source_type").notNull().default("curated"),
+  /** pending | approved | rejected */
+  reviewStatus: text("review_status").notNull().default("pending"),
+  reviewedAt: text("reviewed_at"),
+  /** manual | rule | curated | import */
+  reviewSource: text("review_source"),
+  nameJa: text("name_ja"),
+  nameEn: text("name_en"),
+  /** Soft duplicate hint — id of another place */
+  possibleDuplicateOf: text("possible_duplicate_of"),
 });
 
 /** Links a Place to one or more external POI identities (OSM, Wikidata, …). */
@@ -44,7 +53,7 @@ export const exploreLayers = sqliteTable("explore_layers", {
   regionId: text("region_id"),
   /** curated | dynamic | user */
   type: text("type").notNull().default("curated"),
-  /** public | private */
+  /** public | private | draft */
   visibility: text("visibility").notNull().default("public"),
 });
 

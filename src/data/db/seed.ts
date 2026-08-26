@@ -23,7 +23,13 @@ function upsertContent() {
       .get();
     if (!existing) {
       db.insert(places)
-        .values({ ...place, sourceType: "curated" })
+        .values({
+          ...place,
+          sourceType: "curated",
+          reviewStatus: "approved",
+          reviewSource: "curated",
+          reviewedAt: new Date().toISOString(),
+        })
         .run();
     } else {
       db.update(places)
@@ -38,6 +44,13 @@ function upsertContent() {
           importance: place.importance,
           minZoom: place.minZoom,
           sourceType: existing.sourceType === "custom" ? "custom" : "curated",
+          reviewStatus:
+            existing.reviewStatus === "rejected"
+              ? "rejected"
+              : existing.sourceType === "custom"
+                ? existing.reviewStatus
+                : "approved",
+          reviewSource: existing.reviewSource ?? "curated",
         })
         .where(eq(places.id, place.id))
         .run();

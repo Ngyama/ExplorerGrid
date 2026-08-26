@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/map/maplibreSetup";
 import { useEffect, useRef, useState } from "react";
 import {
   LngLatBounds,
@@ -12,6 +13,13 @@ import {
   type MapGeoJSONFeature,
 } from "maplibre-gl";
 import { applyExplorerBasemapStyle } from "@/features/map/applyExplorerStyle";
+import {
+  ensureConquestLayers,
+  ensurePrefectureOutlineLayers,
+  EG_PREF_FILL,
+  movePlaceLayersToTop,
+  setConquestLayerData,
+} from "@/features/map/conquestLayers";
 import {
   getActiveMapProvider,
   getMapLandColor,
@@ -37,6 +45,8 @@ interface MapViewProps {
   highlightedCategory?: string | null;
   selectedPlaceId?: string | null;
   initialCamera?: Partial<MapCameraState>;
+  conquestChomeGeoJSON?: GeoJSON.FeatureCollection | null;
+  conquestWardGeoJSON?: GeoJSON.FeatureCollection | null;
   onPlaceClick: (placeId: string) => void;
   onCameraChange?: (camera: MapCameraState) => void;
   onMapReady?: (map: MapLibreMap) => void;
@@ -133,20 +143,6 @@ function ensurePlaceLayers(map: MapLibreMap) {
       "circle-opacity": 0.82,
       "circle-stroke-width": 1.25,
       "circle-stroke-color": COLOR_STROKE,
-    },
-  });
-
-  map.addLayer({
-    id: EG_CLUSTER_COUNT,
-    type: "symbol",
-    source: EG_PLACES_SOURCE,
-    filter: ["has", "point_count"],
-    layout: {
-      "text-field": "{point_count_abbreviated}",
-      "text-size": 11,
-    },
-    paint: {
-      "text-color": "#f7f3ea",
     },
   });
 
@@ -286,6 +282,8 @@ export function MapView({
   flyTo,
   flyToKey = 0,
   onContextAddPlace,
+  conquestChomeGeoJSON,
+  conquestWardGeoJSON,
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
@@ -332,218 +330,267 @@ export function MapView({
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
-    const provider = getActiveMapProvider();
-    const maxZoom = provider.maxZoom;
-    const initialZoom = Math.min(
-      initialCamera?.zoom ?? JAPAN_DEFAULT_ZOOM,
-      maxZoom
-    );
-
-    if (
-      provider.id === "gsi-pale" &&
-      process.env.NODE_ENV === "development" &&
-      !process.env.NEXT_PUBLIC_MAPTILER_KEY
-    ) {
-      console.info(
-        "[ExplorerGrid map] MapTiler key not configured; using GSI pale fallback."
-      );
-    }
-
-    const map = new Map({
-      container: containerRef.current,
-      style: provider.styleUrl,
-      center: [
-        initialCamera?.lng ?? JAPAN_CENTER[0],
-        initialCamera?.lat ?? JAPAN_CENTER[1],
-      ],
-      zoom: initialZoom,
-      attributionControl: { compact: true },
-      pitchWithRotate: false,
-      touchPitch: false,
-      maxBounds: [
-        [122, 20],
-        [154, 48],
-      ],
-      minZoom: 4,
-      maxZoom,
-      localIdeographFontFamily: LOCAL_IDEOGRAPH_FONT_FAMILY,
-      cancelPendingTileRequestsWhileZooming: false,
-      collectResourceTiming: isMapDebugEnabled(),
-      fadeDuration: 0,
-    });
-
-    map.addControl(new NavigationControl({ showCompass: false }), "top-right");
-    const detachDebug = attachMapDebugListeners(map);
-
-    popupRef.current = new Popup({
-      closeButton: false,
-      closeOnClick: false,
-      offset: 12,
-      className: "eg-map-tooltip",
-      maxWidth: "220px",
-    });
-
-    const resizeObserver =
-      typeof ResizeObserver !== "undefined"
-        ? new ResizeObserver(() => {
-            map.resize();
-          })
-        : null;
-    if (containerRef.current && resizeObserver) {
-      resizeObserver.observe(containerRef.current);
-    }
-
-    map.on("error", (event) => {
-      const message =
-        event.error instanceof Error
-          ? event.error.message
-          : String(event.error ?? "Unknown map error");
-      console.error("[ExplorerGrid map]", event.error ?? event);
-      setMapError(message);
-    });
-
-    const onStyleReady = () => {
-      if (shouldApplyExplorerStyleMute(provider)) {
-        applyExplorerBasemapStyle(map);
-      }
-      ensurePlaceLayers(map);
-      setStyleReady(true);
-      setBooting(false);
-      setMapError(null);
-      map.resize();
-      onMapReady?.(map);
-    };
-
-    map.on("load", onStyleReady);
-
-    map.on("click", EG_CLUSTER_LAYER, (event) => {
-      const features = map.queryRenderedFeatures(event.point, {
-        layers: [EG_CLUSTER_LAYER],
-      });
-      const feature = features[0];
-      const clusterId = feature?.properties?.cluster_id;
-      const source = map.getSource(EG_PLACES_SOURCE) as GeoJSONSource | undefined;
-      if (clusterId == null || !source) return;
-      void source.getClusterExpansionZoom(clusterId).then((zoom) => {
-        if (zoom == null) return;
-        const coords = (feature.geometry as GeoJSON.Point).coordinates as [
-          number,
-          number,
-        ];
-        map.easeTo({ center: coords, zoom });
-      });
-    });
-
-    map.on("click", EG_POINT_LAYER, (event: MapLayerMouseEvent) => {
-      const feature = event.features?.[0];
-      const id = feature?.properties?.id ?? feature?.id;
-      if (typeof id === "string") onPlaceClickRef.current(id);
-    });
-
-    const setHover = (feature: MapGeoJSONFeature | undefined) => {
-      const id = (feature?.properties?.id ?? feature?.id) as string | undefined;
-      if (hoverIdRef.current && hoverIdRef.current !== id) {
-        try {
-          map.setFeatureState(
-            { source: EG_PLACES_SOURCE, id: hoverIdRef.current },
-            { hover: false }
-          );
-        } catch {
-          // ignore
-        }
-        hoverIdRef.current = null;
-      }
-      if (id) {
-        try {
-          map.setFeatureState(
-            { source: EG_PLACES_SOURCE, id },
-            { hover: true }
-          );
-        } catch {
-          // ignore
-        }
-        hoverIdRef.current = id;
-        const name = feature?.properties?.name;
-        if (typeof name === "string" && feature?.geometry.type === "Point") {
-          const coords = feature.geometry.coordinates as [number, number];
-          popupRef.current
-            ?.setLngLat(coords)
-            .setHTML(
-              `<div class="eg-map-tooltip__name">${name.replace(/[<>&]/g, "")}</div>`
-            )
-            .addTo(map);
-        }
-      } else {
-        popupRef.current?.remove();
-      }
-    };
-
-    map.on("mousemove", EG_POINT_LAYER, (event) => {
-      map.getCanvas().style.cursor = "pointer";
-      setHover(event.features?.[0]);
-    });
-    map.on("mouseleave", EG_POINT_LAYER, () => {
-      map.getCanvas().style.cursor = "";
-      setHover(undefined);
-    });
-    map.on("mouseenter", EG_CLUSTER_LAYER, () => {
-      map.getCanvas().style.cursor = "pointer";
-    });
-    map.on("mouseleave", EG_CLUSTER_LAYER, () => {
-      map.getCanvas().style.cursor = "";
-    });
-
-    map.on("contextmenu", (event) => {
-      event.preventDefault();
-      onContextAddPlaceRef.current?.(event.lngLat.lng, event.lngLat.lat);
-    });
-
+    let cancelled = false;
+    let map: MapLibreMap | null = null;
+    let resizeObserver: ResizeObserver | null = null;
     let moveTimer: ReturnType<typeof setTimeout> | null = null;
-    const pushCamera = () => {
-      const center = map.getCenter();
-      onCameraChangeRef.current?.({
-        lng: center.lng,
-        lat: center.lat,
-        zoom: map.getZoom(),
-      });
-    };
-    map.on("moveend", () => {
-      if (moveTimer) clearTimeout(moveTimer);
-      moveTimer = setTimeout(pushCamera, 200);
-    });
+    let detachDebug = () => {};
 
-    const pushPlacesForZoom = () => {
-      const source = map.getSource(EG_PLACES_SOURCE) as GeoJSONSource | undefined;
-      if (!source) return;
-      const visible = filterPlacesForZoom(placesRef.current, map.getZoom());
-      const sig = visible
-        .map((p) => `${p.id}:${p.status ?? ""}`)
-        .join("|");
-      if (sig !== placesSigRef.current) {
-        placesSigRef.current = sig;
-        source.setData(placesToGeoJSON(visible));
+    const initMap = () => {
+      if (cancelled || !containerRef.current || mapRef.current) return;
+
+      const provider = getActiveMapProvider();
+      const maxZoom = provider.maxZoom;
+      const initialZoom = Math.min(
+        initialCamera?.zoom ?? JAPAN_DEFAULT_ZOOM,
+        maxZoom
+      );
+      const mapStyle = provider.inlineStyle ?? provider.styleUrl;
+
+      map = new Map({
+        container: containerRef.current,
+        style: mapStyle,
+        center: [
+          initialCamera?.lng ?? JAPAN_CENTER[0],
+          initialCamera?.lat ?? JAPAN_CENTER[1],
+        ],
+        zoom: initialZoom,
+        attributionControl: { compact: true },
+        pitchWithRotate: false,
+        touchPitch: false,
+        maxBounds: [
+          [122, 20],
+          [154, 48],
+        ],
+        minZoom: 4,
+        maxZoom,
+        localIdeographFontFamily: LOCAL_IDEOGRAPH_FONT_FAMILY,
+        cancelPendingTileRequestsWhileZooming: false,
+        collectResourceTiming: isMapDebugEnabled(),
+        fadeDuration: 0,
+      });
+
+      mapRef.current = map;
+      map.addControl(new NavigationControl({ showCompass: false }), "top-right");
+      detachDebug = attachMapDebugListeners(map);
+
+      popupRef.current = new Popup({
+        closeButton: false,
+        closeOnClick: false,
+        offset: 12,
+        className: "eg-map-tooltip",
+        maxWidth: "220px",
+      });
+
+      if (typeof ResizeObserver !== "undefined" && containerRef.current) {
+        resizeObserver = new ResizeObserver(() => {
+          map?.resize();
+        });
+        resizeObserver.observe(containerRef.current);
       }
-      requestAnimationFrame(() => {
-        syncFeatureStates(
-          map,
-          visible,
-          selectedRef.current,
-          categoryRef.current,
-          prevSelectedRef
-        );
-      });
-    };
-    map.on("zoomend", pushPlacesForZoom);
 
-    mapRef.current = map;
-    requestAnimationFrame(() => map.resize());
+      map.on("error", (event) => {
+        const message =
+          event.error instanceof Error
+            ? event.error.message
+            : String(event.error ?? "Unknown map error");
+        if (/glyph|sprite|404|Failed to fetch/i.test(message)) {
+          console.warn("[ExplorerGrid map]", message);
+          return;
+        }
+        console.error("[ExplorerGrid map]", event.error ?? event);
+        setMapError(message);
+      });
+
+      let setupPromise: Promise<void> | null = null;
+      const setupLayers = () => {
+        if (!map || cancelled || mapRef.current !== map) return;
+        if (!map.isStyleLoaded()) return;
+        if (map.getLayer(EG_PREF_FILL)) {
+          setStyleReady(true);
+          setBooting(false);
+          map.resize();
+          return;
+        }
+        if (setupPromise) return;
+
+        setupPromise = (async () => {
+          try {
+            if (cancelled || mapRef.current !== map) return;
+            if (shouldApplyExplorerStyleMute(provider)) {
+              applyExplorerBasemapStyle(map);
+            }
+            await ensurePrefectureOutlineLayers(map);
+            if (cancelled || mapRef.current !== map) return;
+            ensureConquestLayers(map);
+            ensurePlaceLayers(map);
+            movePlaceLayersToTop(map);
+            setStyleReady(true);
+            setBooting(false);
+            setMapError(null);
+            map.resize();
+            onMapReady?.(map);
+          } catch (err) {
+            console.error("[ExplorerGrid map] layer setup failed", err);
+            if (!cancelled && mapRef.current === map) {
+              setMapError(
+                err instanceof Error ? err.message : "地图图层初始化失败"
+              );
+              setBooting(false);
+            }
+          } finally {
+            setupPromise = null;
+          }
+        })();
+      };
+
+      map.once("load", setupLayers);
+      map.on("styledata", setupLayers);
+      map.once("idle", () => {
+        map?.resize();
+        setupLayers();
+      });
+      if (map.isStyleLoaded()) {
+        setupLayers();
+      }
+
+      map.on("click", EG_CLUSTER_LAYER, (event) => {
+        const features = map!.queryRenderedFeatures(event.point, {
+          layers: [EG_CLUSTER_LAYER],
+        });
+        const feature = features[0];
+        const clusterId = feature?.properties?.cluster_id;
+        const source = map!.getSource(EG_PLACES_SOURCE) as
+          | GeoJSONSource
+          | undefined;
+        if (clusterId == null || !source) return;
+        void source.getClusterExpansionZoom(clusterId).then((zoom) => {
+          if (zoom == null) return;
+          const coords = (feature.geometry as GeoJSON.Point).coordinates as [
+            number,
+            number,
+          ];
+          map!.easeTo({ center: coords, zoom });
+        });
+      });
+
+      map.on("click", EG_POINT_LAYER, (event: MapLayerMouseEvent) => {
+        const feature = event.features?.[0];
+        const id = feature?.properties?.id ?? feature?.id;
+        if (typeof id === "string") onPlaceClickRef.current(id);
+      });
+
+      const setHover = (feature: MapGeoJSONFeature | undefined) => {
+        const id = (feature?.properties?.id ?? feature?.id) as
+          | string
+          | undefined;
+        if (hoverIdRef.current && hoverIdRef.current !== id) {
+          try {
+            map!.setFeatureState(
+              { source: EG_PLACES_SOURCE, id: hoverIdRef.current },
+              { hover: false }
+            );
+          } catch {
+            // ignore
+          }
+          hoverIdRef.current = null;
+        }
+        if (id) {
+          try {
+            map!.setFeatureState(
+              { source: EG_PLACES_SOURCE, id },
+              { hover: true }
+            );
+          } catch {
+            // ignore
+          }
+          hoverIdRef.current = id;
+          const name = feature?.properties?.name;
+          if (typeof name === "string" && feature?.geometry.type === "Point") {
+            const coords = feature.geometry.coordinates as [number, number];
+            popupRef.current
+              ?.setLngLat(coords)
+              .setHTML(
+                `<div class="eg-map-tooltip__name">${name.replace(/[<>&]/g, "")}</div>`
+              )
+              .addTo(map!);
+          }
+        } else {
+          popupRef.current?.remove();
+        }
+      };
+
+      map.on("mousemove", EG_POINT_LAYER, (event) => {
+        map!.getCanvas().style.cursor = "pointer";
+        setHover(event.features?.[0]);
+      });
+      map.on("mouseleave", EG_POINT_LAYER, () => {
+        map!.getCanvas().style.cursor = "";
+        setHover(undefined);
+      });
+      map.on("mouseenter", EG_CLUSTER_LAYER, () => {
+        map!.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", EG_CLUSTER_LAYER, () => {
+        map!.getCanvas().style.cursor = "";
+      });
+
+      map.on("contextmenu", (event) => {
+        event.preventDefault();
+        onContextAddPlaceRef.current?.(event.lngLat.lng, event.lngLat.lat);
+      });
+
+      const pushCamera = () => {
+        const center = map!.getCenter();
+        onCameraChangeRef.current?.({
+          lng: center.lng,
+          lat: center.lat,
+          zoom: map!.getZoom(),
+        });
+      };
+      map.on("moveend", () => {
+        if (moveTimer) clearTimeout(moveTimer);
+        moveTimer = setTimeout(pushCamera, 200);
+      });
+
+      const pushPlacesForZoom = () => {
+        const source = map!.getSource(EG_PLACES_SOURCE) as
+          | GeoJSONSource
+          | undefined;
+        if (!source) return;
+        const visible = filterPlacesForZoom(placesRef.current, map!.getZoom());
+        const sig = visible
+          .map((p) => `${p.id}:${p.status ?? ""}`)
+          .join("|");
+        if (sig !== placesSigRef.current) {
+          placesSigRef.current = sig;
+          source.setData(placesToGeoJSON(visible));
+        }
+        requestAnimationFrame(() => {
+          syncFeatureStates(
+            map!,
+            visible,
+            selectedRef.current,
+            categoryRef.current,
+            prevSelectedRef
+          );
+        });
+      };
+      map.on("zoomend", pushPlacesForZoom);
+
+      requestAnimationFrame(() => map!.resize());
+    };
+
+    const frame = requestAnimationFrame(initMap);
 
     return () => {
+      cancelled = true;
+      cancelAnimationFrame(frame);
       detachDebug();
       resizeObserver?.disconnect();
       if (moveTimer) clearTimeout(moveTimer);
       popupRef.current?.remove();
-      map.remove();
+      map?.remove();
       mapRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -575,6 +622,15 @@ export function MapView({
 
   useEffect(() => {
     const map = mapRef.current;
+    if (!map || !styleReady || !conquestChomeGeoJSON || !conquestWardGeoJSON) {
+      return;
+    }
+    setConquestLayerData(map, conquestChomeGeoJSON, conquestWardGeoJSON);
+    movePlaceLayersToTop(map);
+  }, [conquestChomeGeoJSON, conquestWardGeoJSON, styleReady]);
+
+  useEffect(() => {
+    const map = mapRef.current;
     if (!map || !flyToBounds) return;
     const bounds = new LngLatBounds(
       [flyToBounds[0], flyToBounds[1]],
@@ -601,10 +657,10 @@ export function MapView({
   }, [flyTo, flyToKey]);
 
   return (
-    <div className="absolute inset-0 h-full w-full" style={{ background: landColor }}>
+    <div className="absolute inset-0 min-h-0 w-full">
       <div
         ref={containerRef}
-        className="eg-map-canvas absolute inset-0 h-full w-full"
+        className="eg-map-canvas absolute inset-0 min-h-0 w-full"
         style={{ background: landColor }}
       />
       {booting && (

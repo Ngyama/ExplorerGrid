@@ -46,11 +46,17 @@ function ensureDatabase() {
       latitude REAL NOT NULL,
       longitude REAL NOT NULL,
       category TEXT NOT NULL,
-      image TEXT NOT NULL,
+      image TEXT NOT NULL DEFAULT '',
       region_id TEXT,
       importance INTEGER NOT NULL DEFAULT 3,
       min_zoom REAL NOT NULL DEFAULT 10,
-      source_type TEXT NOT NULL DEFAULT 'curated'
+      source_type TEXT NOT NULL DEFAULT 'curated',
+      review_status TEXT NOT NULL DEFAULT 'pending',
+      reviewed_at TEXT,
+      review_source TEXT,
+      name_ja TEXT,
+      name_en TEXT,
+      possible_duplicate_of TEXT
     );
 
     CREATE TABLE IF NOT EXISTS place_external_references (
@@ -132,6 +138,17 @@ function ensureDatabase() {
   ensureColumn(sqlite, "places", "importance", "INTEGER NOT NULL DEFAULT 3");
   ensureColumn(sqlite, "places", "min_zoom", "REAL NOT NULL DEFAULT 10");
   ensureColumn(sqlite, "places", "source_type", "TEXT NOT NULL DEFAULT 'curated'");
+  ensureColumn(
+    sqlite,
+    "places",
+    "review_status",
+    "TEXT NOT NULL DEFAULT 'pending'"
+  );
+  ensureColumn(sqlite, "places", "reviewed_at", "TEXT");
+  ensureColumn(sqlite, "places", "review_source", "TEXT");
+  ensureColumn(sqlite, "places", "name_ja", "TEXT");
+  ensureColumn(sqlite, "places", "name_en", "TEXT");
+  ensureColumn(sqlite, "places", "possible_duplicate_of", "TEXT");
   ensureColumn(sqlite, "explore_layers", "region_id", "TEXT");
   ensureColumn(sqlite, "explore_layers", "type", "TEXT NOT NULL DEFAULT 'curated'");
   ensureColumn(
@@ -141,6 +158,16 @@ function ensureDatabase() {
     "TEXT NOT NULL DEFAULT 'public'"
   );
   ensureColumn(sqlite, "explore_layer_places", "note", "TEXT");
+
+  // Backfill: curated / custom → approved; imported stays pending if still default.
+  sqlite.exec(`
+    UPDATE places
+    SET review_status = 'approved',
+        review_source = COALESCE(review_source, 'curated'),
+        reviewed_at = COALESCE(reviewed_at, datetime('now'))
+    WHERE source_type IN ('curated', 'custom')
+      AND (review_status IS NULL OR review_status = 'pending' OR review_status = '');
+  `);
 
   return sqlite;
 }

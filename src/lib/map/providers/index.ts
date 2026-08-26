@@ -1,3 +1,4 @@
+import { createAbstractBasemapProvider } from "@/lib/map/providers/abstract";
 import { createGsiPaleProvider, GSI_PALE_STYLE_URL } from "@/lib/map/providers/gsi";
 import {
   buildMapTilerJapanStyleUrl,
@@ -16,8 +17,8 @@ const OPENFREEMAP_MAX_ZOOM = 14;
  * Resolve active basemap provider.
  * Priority:
  * 1. NEXT_PUBLIC_MAP_STYLE_URL (custom override)
- * 2. MapTiler Japan + NEXT_PUBLIC_MAPTILER_KEY
- * 3. GSI pale raster fallback
+ * 2. NEXT_PUBLIC_MAP_REALISTIC=1 → MapTiler / GSI (legacy realistic basemap)
+ * 3. Default: abstract paper map (conquest overlay carries geography)
  */
 export function resolveMapProvider(): MapProviderConfig {
   const custom = process.env.NEXT_PUBLIC_MAP_STYLE_URL?.trim();
@@ -36,24 +37,21 @@ export function resolveMapProvider(): MapProviderConfig {
     };
   }
 
-  const key = getMapTilerKey();
-  if (key) {
-    return createMapTilerJapanProvider(key);
+  const realistic = process.env.NEXT_PUBLIC_MAP_REALISTIC === "1";
+  if (realistic) {
+    const key = getMapTilerKey();
+    if (key) {
+      return createMapTilerJapanProvider(key);
+    }
+    return createGsiPaleProvider();
   }
 
-  if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-    // Client-only soft hint; avoid crashing SSR.
-    console.info(
-      "[ExplorerGrid map] MapTiler key not configured; using GSI pale fallback."
-    );
-  }
-
-  return createGsiPaleProvider();
+  return createAbstractBasemapProvider();
 }
 
 export function listDebugProviders(): MapProviderConfig[] {
   const key = getMapTilerKey();
-  const list: MapProviderConfig[] = [];
+  const list: MapProviderConfig[] = [createAbstractBasemapProvider()];
   if (key) {
     list.push(createMapTilerJapanProvider(key));
   } else {

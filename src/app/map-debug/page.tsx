@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/map/maplibreSetup";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Map, NavigationControl, type Map as MapLibreMap } from "maplibre-gl";
 import { applyExplorerBasemapStyle } from "@/features/map/applyExplorerStyle";
